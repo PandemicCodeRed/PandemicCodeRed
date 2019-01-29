@@ -8,6 +8,8 @@ import {
   Marker
 } from "react-simple-maps"
 import markers from '../constants/cities'
+import Grid from '@material-ui/core/Grid';
+import PlayerControlNavbar from '../components/PlayerControlNavbar'
 
 const wrapperStyles = {
   width: "100%",
@@ -15,9 +17,30 @@ const wrapperStyles = {
   margin: "0 auto",
 }
 
+
+
 class BasicMap extends Component {
   render() {
     return (
+      <div>
+
+
+        <Grid
+  container
+  spacing={0}
+  direction="column"
+  alignItems="left"
+  justify="left"
+  style={{ minHeight: '100vh' }}
+>
+
+  <Grid item xs={3}>
+  <PlayerControlNavbar/>
+  </Grid>
+
+
+
+
       <div style={wrapperStyles}>
         <ComposableMap
           projectionConfig={{
@@ -97,6 +120,8 @@ class BasicMap extends Component {
             </Markers>
           </ZoomableGroup>
         </ComposableMap>
+      </div>
+      </Grid>
       </div>
     )
   }

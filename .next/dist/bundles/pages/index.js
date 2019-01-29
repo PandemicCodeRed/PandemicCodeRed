@@ -72,6 +72,212 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/PlayerControlNavbar.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_next_link__ = __webpack_require__("next/link");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_next_link___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_next_link__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__("prop-types");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_styles__ = __webpack_require__("@material-ui/core/styles");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_styles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_styles__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button__ = __webpack_require__("@material-ui/core/Button");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button__);
+var _jsxFileName = '/Users/jamescnovello/Capstone/PandemicCodeRed/components/PlayerControlNavbar.js';
+/* import Link from 'next/link';
+
+const PlayerControlNavbar = () => (
+  <div>
+    <h1>Player Control</h1>
+    <ul>
+      <li><Link href="/"><a>Home</a></Link></li>
+      <li><Link href="/PlayerControlNavbar"><a>PlayerControlNavbar</a></Link></li>
+    </ul>
+  </div>
+);
+
+export default PlayerControlNavbar; */
+
+//MATERIAL UI USING REACT (not Next)
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    button: {
+      margin: theme.spacing.unit
+    },
+    input: {
+      display: 'none'
+    }
+  };
+};
+
+function PlayerControlNavbar(props) {
+  var classes = props.classes;
+
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'div',
+    {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'ul',
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 41
+        }
+      },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 42
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'secondary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 43
+            }
+          },
+          'PLAYER 1'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 47
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            }
+          },
+          'MOVE'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 52
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 53
+            }
+          },
+          'TREAT'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 57
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 58
+            }
+          },
+          'SHARE'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 63
+            }
+          },
+          'CARD'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 67
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 68
+            }
+          },
+          '4'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 72
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4__material_ui_core_Button___default.a,
+          { variant: 'contained', color: 'primary', className: classes.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          },
+          'PLAYER ROLE'
+        )
+      )
+    )
+  );
+}
+
+PlayerControlNavbar.propTypes = {
+  classes: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object.isRequired
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_styles__["withStyles"])(styles)(PlayerControlNavbar));
+
+/***/ }),
+
 /***/ "./constants/cities.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -92,7 +298,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__ = __webpack_require__("react-simple-maps");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_simple_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_simple_maps__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_cities__ = __webpack_require__("./constants/cities.js");
-var _jsxFileName = "/home/drewga/Fullstack/Capstone/PandemicCodeRed/pages/index.js";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Grid__ = __webpack_require__("@material-ui/core/Grid");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Grid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__material_ui_core_Grid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PlayerControlNavbar__ = __webpack_require__("./components/PlayerControlNavbar.js");
+var _jsxFileName = "/Users/jamescnovello/Capstone/PandemicCodeRed/pages/index.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -101,6 +310,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -126,133 +337,171 @@ var BasicMap = function (_Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        { style: wrapperStyles, __source: {
+        {
+          __source: {
             fileName: _jsxFileName,
-            lineNumber: 21
+            lineNumber: 25
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["ComposableMap"],
+          __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Grid___default.a,
           {
-            projectionConfig: {
-              scale: 205,
-              rotation: [-11, 0, 0]
-            },
-            width: 980,
-            height: 551,
-            style: {
-              width: "100%",
-              height: "auto"
-            },
+            container: true,
+            spacing: 0,
+            direction: "column",
+            alignItems: "left",
+            justify: "left",
+            style: { minHeight: '100vh' },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 22
+              lineNumber: 28
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["ZoomableGroup"],
-            { center: [0, 20], disablePanning: true, __source: {
+            __WEBPACK_IMPORTED_MODULE_3__material_ui_core_Grid___default.a,
+            { item: true, xs: 3, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 34
+                lineNumber: 37
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_PlayerControlNavbar__["a" /* default */], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 38
+              }
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { style: wrapperStyles, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 44
               }
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Geographies"],
-              { geography: "/static/world-50m.json", __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 35
-                }
-              },
-              function (geographies, projection) {
-                return geographies.map(function (geography, i) {
-                  return geography.id !== "ATA" && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Geography"], {
-                    key: i,
-                    geography: geography,
-                    projection: projection,
-                    style: {
-                      default: {
-                        fill: "#ECEFF1",
-                        stroke: "#607D8B",
-                        strokeWidth: 0.75,
-                        outline: "none"
-                      },
-                      hover: {
-                        fill: "#607D8B",
-                        stroke: "#607D8B",
-                        strokeWidth: 0.75,
-                        outline: "none"
-                      },
-                      pressed: {
-                        fill: "#FF5722",
-                        stroke: "#607D8B",
-                        strokeWidth: 0.75,
-                        outline: "none"
-                      }
-                    },
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 37
-                    }
-                  });
-                });
-              }
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Markers"],
+              __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["ComposableMap"],
               {
+                projectionConfig: {
+                  scale: 205,
+                  rotation: [-11, 0, 0]
+                },
+                width: 980,
+                height: 551,
+                style: {
+                  width: "100%",
+                  height: "auto"
+                },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 64
+                  lineNumber: 45
                 }
               },
-              __WEBPACK_IMPORTED_MODULE_2__constants_cities__["a" /* default */].map(function (marker, i) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Marker"],
-                  {
-                    key: i,
-                    marker: marker,
-                    style: {
-                      default: { fill: "#FF5722" },
-                      hover: { fill: "#FFFFFF" },
-                      pressed: { fill: "#FF5722" }
-                    },
-                    __source: {
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["ZoomableGroup"],
+                { center: [0, 20], disablePanning: true, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 57
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Geographies"],
+                  { geography: "/static/world-50m.json", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 66
+                      lineNumber: 58
                     }
                   },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", {
-                    cx: 0,
-                    cy: 0,
-                    r: 3.5,
-                    style: {
-                      stroke: "#FF5722",
-                      strokeWidth: 3,
-                      opacity: 0.9
-                    },
+                  function (geographies, projection) {
+                    return geographies.map(function (geography, i) {
+                      return geography.id !== "ATA" && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Geography"], {
+                        key: i,
+                        geography: geography,
+                        projection: projection,
+                        style: {
+                          default: {
+                            fill: "#ECEFF1",
+                            stroke: "#607D8B",
+                            strokeWidth: 0.75,
+                            outline: "none"
+                          },
+                          hover: {
+                            fill: "#607D8B",
+                            stroke: "#607D8B",
+                            strokeWidth: 0.75,
+                            outline: "none"
+                          },
+                          pressed: {
+                            fill: "#FF5722",
+                            stroke: "#607D8B",
+                            strokeWidth: 0.75,
+                            outline: "none"
+                          }
+                        },
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 60
+                        }
+                      });
+                    });
+                  }
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Markers"],
+                  {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 75
+                      lineNumber: 87
                     }
-                  }),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "text",
-                    {
-                      textAnchor: "middle",
-                      y: marker.markerOffset,
-                      style: {
-                        fontFamily: "Roboto, sans-serif",
-                        fill: "#607D8B"
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2__constants_cities__["a" /* default */].map(function (marker, i) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      __WEBPACK_IMPORTED_MODULE_1_react_simple_maps__["Marker"],
+                      {
+                        key: i,
+                        marker: marker,
+                        style: {
+                          default: { fill: "#FF5722" },
+                          hover: { fill: "#FFFFFF" },
+                          pressed: { fill: "#FF5722" }
+                        },
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 89
+                        }
                       },
-                      __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 85
-                      }
-                    },
-                    marker.name
-                  )
-                );
-              })
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", {
+                        cx: 0,
+                        cy: 0,
+                        r: 3.5,
+                        style: {
+                          stroke: "#FF5722",
+                          strokeWidth: 3,
+                          opacity: 0.9
+                        },
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 98
+                        }
+                      }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "text",
+                        {
+                          textAnchor: "middle",
+                          y: marker.markerOffset,
+                          style: {
+                            fontFamily: "Roboto, sans-serif",
+                            fill: "#607D8B"
+                          },
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 108
+                          }
+                        },
+                        marker.name
+                      )
+                    );
+                  })
+                )
+              )
             )
           )
         )
@@ -272,6 +521,41 @@ var BasicMap = function (_Component) {
 
 module.exports = __webpack_require__("./pages/index.js");
 
+
+/***/ }),
+
+/***/ "@material-ui/core/Button":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Button");
+
+/***/ }),
+
+/***/ "@material-ui/core/Grid":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Grid");
+
+/***/ }),
+
+/***/ "@material-ui/core/styles":
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/styles");
+
+/***/ }),
+
+/***/ "next/link":
+/***/ (function(module, exports) {
+
+module.exports = require("next/link");
+
+/***/ }),
+
+/***/ "prop-types":
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
 
 /***/ }),
 
