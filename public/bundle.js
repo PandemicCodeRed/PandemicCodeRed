@@ -38623,6 +38623,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_simple_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-simple-maps */ "./node_modules/react-simple-maps/lib/index.js");
 /* harmony import */ var react_simple_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _constants_cities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants/cities */ "./src/constants/cities.js");
+/* harmony import */ var _PlayerPiece__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PlayerPiece */ "./src/components/PlayerPiece/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38633,13 +38634,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -38656,14 +38658,35 @@ function (_Component) {
   _inherits(BasicMap, _Component);
 
   function BasicMap() {
+    var _this;
+
     _classCallCheck(this, BasicMap);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(BasicMap).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BasicMap).call(this));
+    _this.state = {
+      name: '',
+      translate: ''
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(BasicMap, [{
+    key: "handleClick",
+    value: function handleClick(marker, evt) {
+      console.log(marker, evt);
+      var pos = "translate(".concat(evt[0], ",").concat(evt[1], ")");
+      this.setState({
+        translate: pos
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      console.log(this.state.name);
+      console.log("adsgfas");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: wrapperStyles
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["ComposableMap"], {
@@ -38710,10 +38733,14 @@ function (_Component) {
             }
           });
         });
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerPiece__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        transform: this.state.translate,
+        fill: "#ECEFF1"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["Markers"], null, _constants_cities__WEBPACK_IMPORTED_MODULE_2__["default"].map(function (marker, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
           key: i,
           marker: marker,
+          onClick: _this2.handleClick,
           style: {
             default: {
               fill: "#FF5722"
@@ -38750,6 +38777,60 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (BasicMap);
+
+/***/ }),
+
+/***/ "./src/components/PlayerPiece/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/PlayerPiece/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var SVG = function SVG(_ref) {
+  var _ref$name = _ref.name,
+      name = _ref$name === void 0 ? '' : _ref$name,
+      _ref$style = _ref.style,
+      style = _ref$style === void 0 ? {} : _ref$style,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === void 0 ? '#000' : _ref$fill,
+      _ref$width = _ref.width,
+      width = _ref$width === void 0 ? '100%' : _ref$width,
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      _ref$height = _ref.height,
+      height = _ref$height === void 0 ? '100%' : _ref$height,
+      _ref$viewBox = _ref.viewBox,
+      viewBox = _ref$viewBox === void 0 ? '0 0 32 32' : _ref$viewBox,
+      _ref$transform = _ref.transform,
+      transform = _ref$transform === void 0 ? 'translate(200,2.5)' : _ref$transform;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: width,
+    height: height,
+    id: "svg3128",
+    version: "1",
+    transform: transform
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+    id: "layer1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M 22 9 C 19.792 9 18 10.792 18 13 C 18 13.885103 18.29397 14.712226 18.78125 15.375 C 16.829274 16.496917 15.5 18.588492 15.5 21 C 15.5 23.033947 16.442042 24.839082 17.90625 26.03125 C 14.907101 27.08912 10.5 31.578049 10.5 39.5 L 33.5 39.5 C 33.5 31.578049 29.092899 27.08912 26.09375 26.03125 C 27.557958 24.839082 28.5 23.033948 28.5 21 C 28.5 18.588492 27.170726 16.496917 25.21875 15.375 C 25.70603 14.712226 26 13.885103 26 13 C 26 10.792 24.208 9 22 9 z",
+    id: "path3194",
+    fill: fill,
+    stroke: "#000",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeDashoffset: "10"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SVG);
 
 /***/ }),
 

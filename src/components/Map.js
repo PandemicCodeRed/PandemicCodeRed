@@ -36,6 +36,8 @@ class BasicMap extends Component {
     })
   }
   render() {
+    console.log(this.state.name)
+    console.log("adsgfas")
     return (
       <div style={wrapperStyles}>
         <ComposableMap
