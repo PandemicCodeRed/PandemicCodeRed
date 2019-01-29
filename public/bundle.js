@@ -38664,6 +38664,7 @@ function (_Component) {
   _createClass(BasicMap, [{
     key: "render",
     value: function render() {
+      console.log("test");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: wrapperStyles
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["ComposableMap"], {
