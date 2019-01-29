@@ -8,6 +8,7 @@ import {
   Marker
 } from "react-simple-maps";
 import markers from "../constants/cities";
+import PlayerPiece from "./PlayerPiece"
 
 const wrapperStyles = {
   width: "100%",
@@ -16,6 +17,24 @@ const wrapperStyles = {
 };
 
 class WorldMap extends Component {
+  constructor(){
+    super()
+    this.state={
+      name: '',
+      translate: ''
+    }
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(marker, evt){
+    console.log(marker, evt)
+
+    let pos = `translate(${evt[0]},${evt[1]})`
+    this.setState({
+      translate: pos
+    })
+  }
   render() {
     return (
       <div style={wrapperStyles}>
@@ -66,6 +85,7 @@ class WorldMap extends Component {
                 )
               }
             </Geographies>
+            <PlayerPiece transform={this.state.translate} />
             <Markers>
               {markers.map((marker, i) => (
                 <Marker

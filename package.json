@@ -4,6 +4,7 @@
   "description": "Example of using react-simple-maps to create a basic world map.",
   "main": "index.js",
   "scripts": {
+    "start":"http-server",
     "build": "webpack --config webpack.config.js",
     "test": "webpack --config webpack.config.js && http-server ./public -c-1"
   },
