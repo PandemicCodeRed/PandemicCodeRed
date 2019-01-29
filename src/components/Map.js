@@ -85,12 +85,13 @@ class BasicMap extends Component {
                 )
               }
             </Geographies>
-            <PlayerPiece transform={this.state.translate} />
+            <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => (
                 <Marker
                   key={i}
                   marker={marker}
+                  onClick={this.handleClick}
                   style={{
                     default: { fill: "#FF5722" },
                     hover: { fill: "#FFFFFF" },

@@ -7,7 +7,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Madrid": true,
+        "Paris": true,
+        "Istanbul": true,
+        "Cairo": true
+      }
     },
     "Atlanta": {
       "name": "Atlanta",
@@ -16,7 +21,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Chicago": true,
+        "Washington": true,
+        "Miami": true
+      }
     },
     "Baghdad": {
       "name": "Baghdad",
@@ -25,16 +34,28 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Istanbul": true,
+        "Tehran": true,
+        "Karachi": true,
+        "Cairo": true,
+        "Riyada": true
+      }
     },
-    "Bankok": {
-      "name": "Bankok",
+    "Bangkok": {
+      "name": "Bangkok",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Chennai": true,
+        "Kolkata": true,
+        "Hong kong": true,
+        "Ho_Chi_Minh_City": true,
+        "Jakarta": true
+      }
     },
     "Beijing": {
       "name": "Beijing",
@@ -43,7 +64,10 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Seoul": true,
+        "Shanghai": true
+      }
     },
     "Bogota": {
       "name": "Bogota",
@@ -52,7 +76,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Mexico_City": true,
+        "Miami": true,
+        "Lima": true,
+        "Buenos_Aires": true,
+        "Sao_Paulo": true
+      }
     },
     "Buenos_Aires": {
       "name": "Buenos_Aires",
@@ -61,7 +91,10 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Bogota": true,
+        "Sao_Paulo": true
+      }
     },
     "Cairo": {
       "name": "Cairo",
@@ -70,7 +103,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Algiers": true,
+        "Istanbul": true,
+        "Baghdad": true,
+        "Riyadh": true,
+        "Khartoum": true
+      }
     },
     "Chennai": {
       "name": "Chennai",
@@ -79,7 +118,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Mumbai": true,
+        "Dehli": true,
+        "Kolkata": true,
+        "Bangkok": true,
+        "Jakarta": true
+      }
     },
     "Chicago": {
       "name": "Chicago",
@@ -88,7 +133,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "San_Francisco": true,
+        "Montreal": true,
+        "Los_Angeles": true,
+        "Mexico_City": true,
+        "Atlanta": true
+      }
     },
     "Dehli": {
       "name": "Dehli",
@@ -97,7 +148,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Tehran": true,
+        "Baghdad": true,
+        "Karachi": true,
+        "Kolkata": true,
+        "Chennai": true
+      }
     },
     "Essen": {
       "name": "Essen",
@@ -106,7 +163,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "London": true,
+        "Paris": true,
+        "Milan": true,
+        "St": true
+      }
     },
     "Ho_Chi_Minh_City": {
       "name": "Ho_Chi_Minh_City",
@@ -115,7 +177,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Jakarta": true,
+        "Bangkok": true,
+        "Hong_Kong": true,
+        "Manila": true
+      }
     },
     "Hong_Kong": {
       "name": "Hong_Kong",
@@ -124,7 +191,14 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Kolkata": true,
+        "Shanghai": true,
+        "Taipei": true,
+        "Manila": true,
+        "Ho_Chi_Minh_City": true,
+        "Bangkok": true
+      }
     },
     "Istanbul": {
       "name": "Istanbul",
@@ -133,7 +207,14 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "St": true,
+        "Moscow": true,
+        "Baghdad": true,
+        "Cairo": true,
+        "Algiers": true,
+        "Milan": true
+      }
     },
     "Jakarta": {
       "name": "Jakarta",
@@ -142,7 +223,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Chennai": true,
+        "Bangkok": true,
+        "Ho_Chi_Minh_City": true,
+        "Sydney": true
+      }
     },
     "Johannesburg": {
       "name": "Johannesburg",
@@ -151,7 +237,10 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Kinshasa": true,
+        "Khartoum": true
+      }
     },
     "Karachi": {
       "name": "Karachi",
@@ -160,7 +249,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Baghdad": true,
+        "Tehran": true,
+        "Dehli": true,
+        "Mumbai": true,
+        "Riyadh": true
+      }
     },
     "Khartoum": {
       "name": "Khartoum",
@@ -169,7 +264,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Johannesburg": true,
+        "Kinshasa": true,
+        "Lagos": true,
+        "Cairo": true
+      }
     },
     "Kinshasa": {
       "name": "Kinshasa",
@@ -178,7 +278,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Lagos": true,
+        "Khartoum": true,
+        "Johannesburg": true
+      }
     },
     "Kolkata": {
       "name": "Kolkata",
@@ -187,7 +291,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Dehli": true,
+        "Chennai": true,
+        "Bangkok": true,
+        "Hong_Kong": true
+      }
     },
     "Lagos": {
       "name": "Lagos",
@@ -196,7 +305,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Sao_Paulo": true,
+        "Kinshasa": true,
+        "Khartoum": true
+      }
     },
     "Lima": {
       "name": "Lima",
@@ -205,7 +318,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Mexico_City": true,
+        "Bogota": true,
+        "Santiago": true
+      }
     },
     "London": {
       "name": "London",
@@ -214,7 +331,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "New_York": true,
+        "Madrid": true,
+        "Paris": true,
+        "Essen": true
+      }
     },
     "Los_Angeles": {
       "name": "Los_Angeles",
@@ -223,7 +345,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "San_Francisco": true,
+        "Chicago": true,
+        "Mexico_City": true,
+        "Sydney": true
+      }
     },
     "Madrid": {
       "name": "Madrid",
@@ -232,7 +359,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "New_York": true,
+        "Sao_Paulo": true,
+        "London": true,
+        "Paris": true,
+        "Algiers": true
+      }
     },
     "Manila": {
       "name": "Manila",
@@ -241,16 +374,28 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Ho_Chi_Minh_City": true,
+        "Hong_Kong": true,
+        "Taipei": true,
+        "Sydney": true,
+        "San_Francisco": true
+      }
     },
-    "Mexico_city": {
-      "name": "Mexico_city",
+    "Mexico_City": {
+      "name": "Mexico_City",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Los_Angeles": true,
+        "Chicago": true,
+        "Miami": true,
+        "Bogota": true,
+        "Lima": true
+      }
     },
     "Miami": {
       "name": "Miami",
@@ -259,7 +404,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Mexico_City": true,
+        "Atlanta": true,
+        "Washington": true,
+        "Bogota": true
+      }
     },
     "Milan": {
       "name": "Milan",
@@ -268,7 +418,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Essen": true,
+        "Paris": true,
+        "Istanbul": true
+      }
     },
     "Montreal": {
       "name": "Montreal",
@@ -277,7 +431,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Chicago": true,
+        "New_York": true,
+        "Washington": true
+      }
     },
     "Moscow": {
       "name": "Moscow",
@@ -286,7 +444,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "St": true,
+        "Tehran": true,
+        "Istanbul": true
+      }
     },
     "Mumbai": {
       "name": "Mumbai",
@@ -295,16 +457,25 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Karachi": true,
+        "Dehli": true,
+        "Chennai": true
+      }
     },
-    "New_york": {
-      "name": "New_york",
+    "New_York": {
+      "name": "New_York",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Montreal": true,
+        "Washington": true,
+        "London": true,
+        "Madrid": true
+      }
     },
     "Osaka": {
       "name": "Osaka",
@@ -313,7 +484,10 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Taipei": true,
+        "Tokyo": true
+      }
     },
     "Paris": {
       "name": "Paris",
@@ -322,7 +496,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Madrid": true,
+        "London": true,
+        "Essen": true,
+        "Milan": true,
+        "Algiers": true
+      }
     },
     "Riyadh": {
       "name": "Riyadh",
@@ -331,7 +511,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Cairo": true,
+        "Baghdad": true,
+        "Karachi": true
+      }
     },
     "San_Francisco": {
       "name": "San_Francisco",
@@ -340,7 +524,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Tokyo": true,
+        "Los_Angeles": true,
+        "Chicago": true,
+        "Manila": true
+      }
     },
     "Santiago": {
       "name": "Santiago",
@@ -349,7 +538,9 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Lima": true
+      }
     },
     "Sao_paulo": {
       "name": "Sao_paulo",
@@ -358,7 +549,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Buenos_Aires": true,
+        "Bogota": true,
+        "Madrid": true,
+        "Lagos": true
+      }
     },
     "Seoul": {
       "name": "Seoul",
@@ -367,7 +563,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Beijing": true,
+        "Tokyo": true,
+        "Shanghai": true
+      }
     },
     "Shanghai": {
       "name": "Shanghai",
@@ -376,7 +576,13 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Beijing": true,
+        "Seoul": true,
+        "Tokyo": true,
+        "Taipei": true,
+        "Hong_Kong": true
+      }
     },
     "St": {
       "name": "St._Petersburg",
@@ -385,7 +591,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Essen": true,
+        "Moscow": true,
+        "Istanbul": true
+      }
     },
     "Sydney": {
       "name": "Sydney",
@@ -394,7 +604,11 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Los_Angeles": true,
+        "Jakarta": true,
+        "Manila": true
+      }
     },
     "Taipei": {
       "name": "Taipei",
@@ -403,7 +617,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Hong_Kong": true,
+        "Shanghai": true,
+        "Manila": true,
+        "Osaka": true
+      }
     },
     "Tehran": {
       "name": "Tehran",
@@ -412,7 +631,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Moscow": true,
+        "Dehli": true,
+        "Baghdad": true,
+        "Karachi": true
+      }
     },
     "Tokyo": {
       "name": "Tokyo",
@@ -421,7 +645,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "San_Francisco": true,
+        "Seoul": true,
+        "Shanghai": true,
+        "Osaka": true
+      }
     },
     "Washington": {
       "name": "Washington,_D.C.",
@@ -430,7 +659,12 @@
       "yellowCount": 0,
       "blackCount": 0,
       "station": false,
-      "neighbors": null
+      "neighbors": {
+        "Atlanta": true,
+        "Miami": true,
+        "Montreal": true,
+        "New_York": true
+      }
     }
   },
   "playerOne": {

@@ -4,7 +4,7 @@
   "description": "Example of using react-simple-maps to create a basic world map.",
   "main": "index.js",
   "scripts": {
-    "start":"http-server",
+    "start": "http-server",
     "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,7 @@
   "author": "Team-Pandemic",
   "license": "ISC",
   "dependencies": {
+    "mime": "^2.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.2.0",
     "react-simple-maps": "~0.12.0"
