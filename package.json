@@ -4,18 +4,35 @@
   "description": "Example of using react-simple-maps to create a basic world map.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Richard Zimerman <richard@zcreativelabs.com> (https://github.com/zimrick)",
+  "author": "Team-Pandemic",
   "license": "ISC",
   "dependencies": {
-    "next": "^5.1.0",
-    "react": "^16.2.0",
+    "react": "^16.7.0",
     "react-dom": "^16.2.0",
     "react-simple-maps": "~0.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.54",
+    "@babel/plugin-proposal-decorators": "7.0.0-beta.54",
+    "@babel/plugin-proposal-export-namespace-from": "7.0.0-beta.54",
+    "@babel/plugin-proposal-function-sent": "7.0.0-beta.54",
+    "@babel/plugin-proposal-json-strings": "7.0.0-beta.54",
+    "@babel/plugin-proposal-numeric-separator": "7.0.0-beta.54",
+    "@babel/plugin-proposal-throw-expressions": "7.0.0-beta.54",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.54",
+    "@babel/plugin-syntax-import-meta": "7.0.0-beta.54",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/preset-react": "^7.0.0-beta.55",
+    "@babel/register": "^7.0.0-beta.55",
+    "babel-loader": "^8.0.0-beta.4",
+    "http-server": "^0.11.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
   }
 }
