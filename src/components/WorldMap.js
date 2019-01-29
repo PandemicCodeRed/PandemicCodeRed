@@ -85,12 +85,13 @@ class WorldMap extends Component {
                 )
               }
             </Geographies>
-            <PlayerPiece transform={this.state.translate} />
+            <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => (
                 <Marker
                   key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
+                  onClick={this.handleClick}
                   style={{
                     default: { fill: "#FF5722" },
                     hover: { fill: "#FFFFFF" },
