@@ -9,6 +9,7 @@ import {
 } from "react-simple-maps";
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece"
+import { withFirebase } from './Firebase';
 
 const wrapperStyles = {
   width: "100%",
@@ -27,6 +28,14 @@ class BasicMap extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  // testing firebase database api console logging on frontend of map
+  componentDidMount(){
+    this.props.firebase.cities().on('value', snapshot => {
+      const citiesObject = snapshot.val();
+      console.log(citiesObject)
+    });
+  }
+
   handleClick(marker, evt){
     console.log(marker, evt)
 
@@ -35,9 +44,8 @@ class BasicMap extends Component {
       translate: pos
     })
   }
+
   render() {
-    console.log(this.state.name)
-    console.log("adsgfas")
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -130,4 +138,4 @@ class BasicMap extends Component {
   }
 }
 
-export default BasicMap;
+export default withFirebase(BasicMap);
