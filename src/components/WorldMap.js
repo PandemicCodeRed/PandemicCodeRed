@@ -8,6 +8,8 @@ import {
   Marker
 } from "react-simple-maps";
 import markers from "../constants/cities";
+import PlayerPiece from "./PlayerPiece"
+import { withFirebase } from './Firebase';
 
 const wrapperStyles = {
   width: "100%",
@@ -16,6 +18,33 @@ const wrapperStyles = {
 };
 
 class WorldMap extends Component {
+  constructor(){
+    super()
+    this.state={
+      name: '',
+      translate: ''
+    }
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  // testing firebase database api console logging on frontend of map
+  componentDidMount(){
+    this.props.firebase.cities().on('value', snapshot => {
+      const citiesObject = snapshot.val();
+      console.log(citiesObject)
+    });
+  }
+
+  handleClick(marker, evt){
+    console.log(marker, evt)
+
+    let pos = `translate(${evt[0]},${evt[1]})`
+    this.setState({
+      translate: pos
+    })
+  }
+
   render() {
     return (
       <div style={wrapperStyles}>
@@ -66,11 +95,13 @@ class WorldMap extends Component {
                 )
               }
             </Geographies>
+            <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => (
                 <Marker
                   key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
+                  onClick={this.handleClick}
                   style={{
                     default: { fill: "#FF5722" },
                     hover: { fill: "#FFFFFF" },
@@ -107,4 +138,4 @@ class WorldMap extends Component {
   }
 }
 
-export default WorldMap;
+export default withFirebase(WorldMap);
