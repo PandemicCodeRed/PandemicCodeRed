@@ -15,7 +15,7 @@
       "blueCount": 0,
       "yellowCount": 0,
       "blackCount": 0,
-      "station": false,
+      "station": true,
       "neighbors": null
     },
     "Baghdad": {

@@ -15,13 +15,13 @@ const wrapperStyles = {
   margin: "0 auto"
 };
 
-class BasicMap extends Component {
+class WorldMap extends Component {
   render() {
     return (
       <div style={wrapperStyles}>
         <ComposableMap
           projectionConfig={{
-            scale: 205,
+            scale: 205, //make a constant on line 17, name them large or "what you can see"
             rotation: [-11, 0, 0]
           }}
           width={980}
@@ -38,7 +38,7 @@ class BasicMap extends Component {
                   (geography, i) =>
                     geography.id !== "ATA" && (
                       <Geography
-                        key={i}
+                        key={i} // if two things swap, react won't see any differences in the key.. use ID
                         geography={geography}
                         projection={projection}
                         style={{
@@ -69,7 +69,7 @@ class BasicMap extends Component {
             <Markers>
               {markers.map((marker, i) => (
                 <Marker
-                  key={i}
+                  key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
                   style={{
                     default: { fill: "#FF5722" },
@@ -107,4 +107,4 @@ class BasicMap extends Component {
   }
 }
 
-export default BasicMap;
+export default WorldMap;
