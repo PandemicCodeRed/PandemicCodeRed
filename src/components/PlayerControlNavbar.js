@@ -9,14 +9,13 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
-  },
+  }
 });
 
 function PlayerControlNavbar(props) {
   const { classes } = props;
   return (
     <div>
-
 
       <Button variant="contained" color="secondary" className={classes.button}>
         PLAYER 1
@@ -46,7 +45,6 @@ function PlayerControlNavbar(props) {
       <Button variant="contained" color="primary" className={classes.button}>
         4
       </Button>
-
 
       <Button variant="contained" color="primary" className={classes.button}>
         PLAYER ROLE

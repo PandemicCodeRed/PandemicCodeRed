@@ -271,6 +271,23 @@ module.exports = _inherits;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/inheritsLoose.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inheritsLoose.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+module.exports = _inheritsLoose;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
@@ -23432,6 +23449,677 @@ var _ButtonBase = _interopRequireDefault(__webpack_require__(/*! ./ButtonBase */
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/FormControl/FormControlContext.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormControl/FormControlContext.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+/**
+ * @ignore - internal component.
+ */
+var FormControlContext = _react.default.createContext();
+
+var _default = FormControlContext;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormControl/formControlState.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormControl/formControlState.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formControlState;
+
+function formControlState(_ref) {
+  var props = _ref.props,
+      states = _ref.states,
+      muiFormControl = _ref.muiFormControl;
+  return states.reduce(function (acc, state) {
+    acc[state] = props[state];
+
+    if (muiFormControl) {
+      if (typeof props[state] === 'undefined') {
+        acc[state] = muiFormControl[state];
+      }
+    }
+
+    return acc;
+  }, {});
+}
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormControl/withFormControlContext.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormControl/withFormControlContext.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = withFormControlContext;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _hoistNonReactStatics = _interopRequireDefault(__webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"));
+
+var _FormControlContext = _interopRequireDefault(__webpack_require__(/*! ./FormControlContext */ "./node_modules/@material-ui/core/FormControl/FormControlContext.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+function withFormControlContext(Component) {
+  var EnhancedComponent = function EnhancedComponent(props) {
+    return _react.default.createElement(_FormControlContext.default.Consumer, null, function (context) {
+      return _react.default.createElement(Component, (0, _extends2.default)({
+        muiFormControl: context
+      }, props));
+    });
+  };
+
+  if (true) {
+    EnhancedComponent.displayName = "WithFormControlContext(".concat((0, _utils.getDisplayName)(Component), ")");
+  }
+
+  (0, _hoistNonReactStatics.default)(EnhancedComponent, Component);
+  return EnhancedComponent;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _withFormControlContext = _interopRequireDefault(__webpack_require__(/*! ../FormControl/withFormControlContext */ "./node_modules/@material-ui/core/FormControl/withFormControlContext.js"));
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _Typography = _interopRequireDefault(__webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/Typography/index.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      cursor: 'pointer',
+      // For correct alignment with the text.
+      verticalAlign: 'middle',
+      // Remove grey highlight
+      WebkitTapHighlightColor: 'transparent',
+      marginLeft: -14,
+      marginRight: 16,
+      // used for row presentation of radio/checkbox
+      '&$disabled': {
+        cursor: 'default'
+      }
+    },
+
+    /* Styles applied to the root element if `labelPlacement="start"`. */
+    labelPlacementStart: {
+      flexDirection: 'row-reverse',
+      marginLeft: 16,
+      // used for row presentation of radio/checkbox
+      marginRight: -14
+    },
+
+    /* Styles applied to the root element if `labelPlacement="top"`. */
+    labelPlacementTop: {
+      flexDirection: 'column-reverse',
+      marginLeft: 16
+    },
+
+    /* Styles applied to the root element if `labelPlacement="bottom"`. */
+    labelPlacementBottom: {
+      flexDirection: 'column',
+      marginLeft: 16
+    },
+
+    /* Styles applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the label's Typography component. */
+    label: {
+      '&$disabled': {
+        color: theme.palette.text.disabled
+      }
+    }
+  };
+};
+/**
+ * Drop in replacement of the `Radio`, `Switch` and `Checkbox` component.
+ * Use this component if you want to display an extra label.
+ */
+
+
+exports.styles = styles;
+
+function FormControlLabel(props) {
+  var _classNames;
+
+  var checked = props.checked,
+      classes = props.classes,
+      classNameProp = props.className,
+      control = props.control,
+      disabledProp = props.disabled,
+      inputRef = props.inputRef,
+      label = props.label,
+      labelPlacement = props.labelPlacement,
+      muiFormControl = props.muiFormControl,
+      name = props.name,
+      onChange = props.onChange,
+      value = props.value,
+      other = (0, _objectWithoutProperties2.default)(props, ["checked", "classes", "className", "control", "disabled", "inputRef", "label", "labelPlacement", "muiFormControl", "name", "onChange", "value"]);
+  var disabled = disabledProp;
+
+  if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
+    disabled = control.props.disabled;
+  }
+
+  if (typeof disabled === 'undefined' && muiFormControl) {
+    disabled = muiFormControl.disabled;
+  }
+
+  var controlProps = {
+    disabled: disabled
+  };
+  ['checked', 'name', 'onChange', 'value', 'inputRef'].forEach(function (key) {
+    if (typeof control.props[key] === 'undefined' && typeof props[key] !== 'undefined') {
+      controlProps[key] = props[key];
+    }
+  });
+  return _react.default.createElement("label", (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes["labelPlacement".concat((0, _helpers.capitalize)(labelPlacement))], labelPlacement !== 'end'), (0, _defineProperty2.default)(_classNames, classes.disabled, disabled), _classNames), classNameProp)
+  }, other), _react.default.cloneElement(control, controlProps), _react.default.createElement(_Typography.default, {
+    component: "span",
+    className: (0, _classnames.default)(classes.label, (0, _defineProperty2.default)({}, classes.disabled, disabled))
+  }, label));
+}
+
+ true ? FormControlLabel.propTypes = {
+  /**
+   * If `true`, the component appears selected.
+   */
+  checked: _propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.string]),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * A control element. For instance, it can be be a `Radio`, a `Switch` or a `Checkbox`.
+   */
+  control: _propTypes.default.element,
+
+  /**
+   * If `true`, the control will be disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * Use that property to pass a ref callback to the native input component.
+   */
+  inputRef: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.object]),
+
+  /**
+   * The text to be used in an enclosing label element.
+   */
+  label: _propTypes.default.node,
+
+  /**
+   * The position of the label.
+   */
+  labelPlacement: _propTypes.default.oneOf(['end', 'start', 'top', 'bottom']),
+
+  /**
+   * @ignore
+   */
+  muiFormControl: _propTypes.default.object,
+
+  /*
+   * @ignore
+   */
+  name: _propTypes.default.string,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.checked`.
+   * @param {boolean} checked The `checked` value of the switch
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * The value of the component.
+   */
+  value: _propTypes.default.string
+} : undefined;
+FormControlLabel.defaultProps = {
+  labelPlacement: 'end'
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiFormControlLabel'
+})((0, _withFormControlContext.default)(FormControlLabel));
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormControlLabel/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormControlLabel/index.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _FormControlLabel.default;
+  }
+});
+
+var _FormControlLabel = _interopRequireDefault(__webpack_require__(/*! ./FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js"));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormGroup/FormGroup.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormGroup/FormGroup.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap'
+  },
+
+  /* Styles applied to the root element if `row={true}`. */
+  row: {
+    flexDirection: 'row'
+  }
+};
+/**
+ * `FormGroup` wraps controls such as `Checkbox` and `Switch`.
+ * It provides compact row layout.
+ * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
+ */
+
+exports.styles = styles;
+
+function FormGroup(props) {
+  var classes = props.classes,
+      className = props.className,
+      children = props.children,
+      row = props.row,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "children", "row"]);
+  return _react.default.createElement("div", (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (0, _defineProperty2.default)({}, classes.row, row), className)
+  }, other), children);
+}
+
+ true ? FormGroup.propTypes = {
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * Display group of elements in a compact row.
+   */
+  row: _propTypes.default.bool
+} : undefined;
+FormGroup.defaultProps = {
+  row: false
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiFormGroup'
+})(FormGroup);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormGroup/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormGroup/index.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _FormGroup.default;
+  }
+});
+
+var _FormGroup = _interopRequireDefault(__webpack_require__(/*! ./FormGroup */ "./node_modules/@material-ui/core/FormGroup/FormGroup.js"));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormLabel/FormLabel.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormLabel/FormLabel.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _formControlState = _interopRequireDefault(__webpack_require__(/*! ../FormControl/formControlState */ "./node_modules/@material-ui/core/FormControl/formControlState.js"));
+
+var _withFormControlContext = _interopRequireDefault(__webpack_require__(/*! ../FormControl/withFormControlContext */ "./node_modules/@material-ui/core/FormControl/withFormControlContext.js"));
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      fontFamily: theme.typography.fontFamily,
+      color: theme.palette.text.secondary,
+      fontSize: theme.typography.pxToRem(16),
+      lineHeight: 1,
+      padding: 0,
+      '&$focused': {
+        color: theme.palette.primary[theme.palette.type === 'light' ? 'dark' : 'light']
+      },
+      '&$disabled': {
+        color: theme.palette.text.disabled
+      },
+      '&$error': {
+        color: theme.palette.error.main
+      }
+    },
+
+    /* Styles applied to the root element if `focused={true}`. */
+    focused: {},
+
+    /* Styles applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the root element if `error={true}`. */
+    error: {},
+
+    /* Styles applied to the root element if `filled={true}`. */
+    filled: {},
+
+    /* Styles applied to the root element if `required={true}`. */
+    required: {},
+    asterisk: {
+      '&$error': {
+        color: theme.palette.error.main
+      }
+    }
+  };
+};
+
+exports.styles = styles;
+
+function FormLabel(props) {
+  var _classNames;
+
+  var children = props.children,
+      classes = props.classes,
+      classNameProp = props.className,
+      Component = props.component,
+      disabled = props.disabled,
+      error = props.error,
+      filled = props.filled,
+      focused = props.focused,
+      muiFormControl = props.muiFormControl,
+      required = props.required,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "classes", "className", "component", "disabled", "error", "filled", "focused", "muiFormControl", "required"]);
+  var fcs = (0, _formControlState.default)({
+    props: props,
+    muiFormControl: muiFormControl,
+    states: ['required', 'focused', 'disabled', 'error', 'filled']
+  });
+  return _react.default.createElement(Component, (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes.disabled, fcs.disabled), (0, _defineProperty2.default)(_classNames, classes.error, fcs.error), (0, _defineProperty2.default)(_classNames, classes.filled, fcs.filled), (0, _defineProperty2.default)(_classNames, classes.focused, fcs.focused), (0, _defineProperty2.default)(_classNames, classes.required, fcs.required), _classNames), classNameProp)
+  }, other), children, fcs.required && _react.default.createElement("span", {
+    className: (0, _classnames.default)(classes.asterisk, (0, _defineProperty2.default)({}, classes.error, fcs.error))
+  }, "\u2009*"));
+}
+
+ true ? FormLabel.propTypes = {
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _utils.componentPropType,
+
+  /**
+   * If `true`, the label should be displayed in a disabled state.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the label should be displayed in an error state.
+   */
+  error: _propTypes.default.bool,
+
+  /**
+   * If `true`, the label should use filled classes key.
+   */
+  filled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the input of this label is focused (used by `FormGroup` components).
+   */
+  focused: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  muiFormControl: _propTypes.default.object,
+
+  /**
+   * If `true`, the label will indicate that the input is required.
+   */
+  required: _propTypes.default.bool
+} : undefined;
+FormLabel.defaultProps = {
+  component: 'label'
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiFormLabel'
+})((0, _withFormControlContext.default)(FormLabel));
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/FormLabel/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/FormLabel/index.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _FormLabel.default;
+  }
+});
+
+var _FormLabel = _interopRequireDefault(__webpack_require__(/*! ./FormLabel */ "./node_modules/@material-ui/core/FormLabel/FormLabel.js"));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/Grid/Grid.js":
 /*!*****************************************************!*\
   !*** ./node_modules/@material-ui/core/Grid/Grid.js ***!
@@ -23877,6 +24565,227 @@ var _Grid = _interopRequireDefault(__webpack_require__(/*! ./Grid */ "./node_mod
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/IconButton/IconButton.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/IconButton/IconButton.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _colorManipulator = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/styles/colorManipulator.js");
+
+var _ButtonBase = _interopRequireDefault(__webpack_require__(/*! ../ButtonBase */ "./node_modules/@material-ui/core/ButtonBase/index.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+// @inheritedComponent ButtonBase
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      textAlign: 'center',
+      flex: '0 0 auto',
+      fontSize: theme.typography.pxToRem(24),
+      padding: 12,
+      borderRadius: '50%',
+      overflow: 'visible',
+      // Explicitly set the default value to solve a bug on IE 11.
+      color: theme.palette.action.active,
+      transition: theme.transitions.create('background-color', {
+        duration: theme.transitions.duration.shortest
+      }),
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.action.active, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        },
+        '&$disabled': {
+          backgroundColor: 'transparent'
+        }
+      },
+      '&$disabled': {
+        color: theme.palette.action.disabled
+      }
+    },
+
+    /* Styles applied to the root element if `color="inherit"`. */
+    colorInherit: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main,
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        }
+      }
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main,
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        }
+      }
+    },
+
+    /* Styles applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the children container element. */
+    label: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'inherit',
+      justifyContent: 'inherit'
+    }
+  };
+};
+/**
+ * Refer to the [Icons](/style/icons/) section of the documentation
+ * regarding the available icon options.
+ */
+
+
+exports.styles = styles;
+
+function IconButton(props) {
+  var _classNames;
+
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      color = props.color,
+      disabled = props.disabled,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "classes", "className", "color", "disabled"]);
+  return _react.default.createElement(_ButtonBase.default, (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes["color".concat((0, _helpers.capitalize)(color))], color !== 'default'), (0, _defineProperty2.default)(_classNames, classes.disabled, disabled), _classNames), className),
+    centerRipple: true,
+    focusRipple: true,
+    disabled: disabled
+  }, other), _react.default.createElement("span", {
+    className: classes.label
+  }, children));
+}
+
+ true ? IconButton.propTypes = {
+  /**
+   * The icon element.
+   */
+  children: (0, _utils.chainPropTypes)(_propTypes.default.node, function (props) {
+    var found = _react.default.Children.toArray(props.children).some(function (child) {
+      return _react.default.isValidElement(child) && child.props.onClick;
+    });
+
+    if (found) {
+      return new Error(['Material-UI: you are providing an onClick event listener ' + 'to a child of a button element.', 'Firefox will never trigger the event.', 'You should move the onClick listener to the parent button element.', 'https://github.com/mui-org/material-ui/issues/13957', // Change error message slightly on every check to prevent caching when testing
+      // which would not trigger console errors on subsequent fails
+       false ? undefined : ''].join('\n'));
+    }
+
+    return null;
+  }),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: _propTypes.default.oneOf(['default', 'inherit', 'primary', 'secondary']),
+
+  /**
+   * If `true`, the button will be disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the ripple will be disabled.
+   */
+  disableRipple: _propTypes.default.bool
+} : undefined;
+IconButton.defaultProps = {
+  color: 'default',
+  disabled: false
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiIconButton'
+})(IconButton);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/IconButton/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/core/IconButton/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _IconButton.default;
+  }
+});
+
+var _IconButton = _interopRequireDefault(__webpack_require__(/*! ./IconButton */ "./node_modules/@material-ui/core/IconButton/IconButton.js"));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/NoSsr/NoSsr.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@material-ui/core/NoSsr/NoSsr.js ***!
@@ -24192,6 +25101,1035 @@ var _Paper = _interopRequireDefault(__webpack_require__(/*! ./Paper */ "./node_m
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/Radio/Radio.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Radio/Radio.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _SwitchBase = _interopRequireDefault(__webpack_require__(/*! ../internal/SwitchBase */ "./node_modules/@material-ui/core/internal/SwitchBase.js"));
+
+var _RadioButtonUnchecked = _interopRequireDefault(__webpack_require__(/*! ../internal/svg-icons/RadioButtonUnchecked */ "./node_modules/@material-ui/core/internal/svg-icons/RadioButtonUnchecked.js"));
+
+var _RadioButtonChecked = _interopRequireDefault(__webpack_require__(/*! ../internal/svg-icons/RadioButtonChecked */ "./node_modules/@material-ui/core/internal/svg-icons/RadioButtonChecked.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      color: theme.palette.text.secondary
+    },
+
+    /* Styles applied to the root element if `checked={true}`. */
+    checked: {},
+
+    /* Styles applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      '&$checked': {
+        color: theme.palette.primary.main
+      },
+      '&$disabled': {
+        color: theme.palette.action.disabled
+      }
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      '&$checked': {
+        color: theme.palette.secondary.main
+      },
+      '&$disabled': {
+        color: theme.palette.action.disabled
+      }
+    }
+  };
+};
+
+exports.styles = styles;
+
+var _ref = _react.default.createElement(_RadioButtonUnchecked.default, null);
+
+var _ref2 = _react.default.createElement(_RadioButtonChecked.default, null);
+
+function Radio(props) {
+  var classes = props.classes,
+      color = props.color,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "color"]);
+  return _react.default.createElement(_SwitchBase.default, (0, _extends2.default)({
+    type: "radio",
+    icon: _ref,
+    checkedIcon: _ref2,
+    classes: {
+      root: (0, _classnames.default)(classes.root, classes["color".concat((0, _helpers.capitalize)(color))]),
+      checked: classes.checked,
+      disabled: classes.disabled
+    }
+  }, other));
+}
+
+ true ? Radio.propTypes = {
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: _propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.string]),
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: _propTypes.default.oneOf(['primary', 'secondary', 'default']),
+
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: _propTypes.default.bool,
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: _propTypes.default.node,
+
+  /**
+   * The id of the `input` element.
+   */
+  id: _propTypes.default.string,
+
+  /**
+   * Attributes applied to the `input` element.
+   */
+  inputProps: _propTypes.default.object,
+
+  /**
+   * Use that property to pass a ref callback to the native input component.
+   */
+  inputRef: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.object]),
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value`.
+   * @param {boolean} checked The `checked` value of the switch
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * The input component property `type`.
+   */
+  type: _propTypes.default.string,
+
+  /**
+   * The value of the component.
+   */
+  value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.bool])
+} : undefined;
+Radio.defaultProps = {
+  color: 'secondary'
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiRadio'
+})(Radio);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Radio/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Radio/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _Radio.default;
+  }
+});
+
+var _Radio = _interopRequireDefault(__webpack_require__(/*! ./Radio */ "./node_modules/@material-ui/core/Radio/Radio.js"));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/RadioGroup/RadioGroup.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/RadioGroup/RadioGroup.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _warning = _interopRequireDefault(__webpack_require__(/*! warning */ "./node_modules/warning/warning.js"));
+
+var _FormGroup = _interopRequireDefault(__webpack_require__(/*! ../FormGroup */ "./node_modules/@material-ui/core/FormGroup/index.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+// @inheritedComponent FormGroup
+var RadioGroup =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2.default)(RadioGroup, _React$Component);
+
+  function RadioGroup(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, RadioGroup);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(RadioGroup).call(this));
+    _this.radios = [];
+
+    _this.focus = function () {
+      if (!_this.radios || !_this.radios.length) {
+        return;
+      }
+
+      var focusRadios = _this.radios.filter(function (n) {
+        return !n.disabled;
+      });
+
+      if (!focusRadios.length) {
+        return;
+      }
+
+      var selectedRadio = (0, _helpers.find)(focusRadios, function (n) {
+        return n.checked;
+      });
+
+      if (selectedRadio) {
+        selectedRadio.focus();
+        return;
+      }
+
+      focusRadios[0].focus();
+    };
+
+    _this.handleChange = function (event) {
+      if (!_this.isControlled) {
+        _this.setState({
+          value: event.target.value
+        });
+      }
+
+      if (_this.props.onChange) {
+        _this.props.onChange(event, event.target.value);
+      }
+    };
+
+    _this.isControlled = props.value != null;
+
+    if (!_this.isControlled) {
+      _this.state = {
+        value: props.defaultValue
+      };
+    }
+
+    return _this;
+  }
+
+  (0, _createClass2.default)(RadioGroup, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          children = _this$props.children,
+          name = _this$props.name,
+          valueProp = _this$props.value,
+          onChange = _this$props.onChange,
+          other = (0, _objectWithoutProperties2.default)(_this$props, ["children", "name", "value", "onChange"]);
+      var value = this.isControlled ? valueProp : this.state.value;
+      this.radios = [];
+      return _react.default.createElement(_FormGroup.default, (0, _extends2.default)({
+        role: "radiogroup"
+      }, other), _react.default.Children.map(children, function (child) {
+        if (!_react.default.isValidElement(child)) {
+          return null;
+        }
+
+         true ? (0, _warning.default)(child.type !== _react.default.Fragment, ["Material-UI: the RadioGroup component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n')) : undefined;
+        return _react.default.cloneElement(child, {
+          name: name,
+          inputRef: function inputRef(node) {
+            if (node) {
+              _this2.radios.push(node);
+            }
+          },
+          checked: value === child.props.value,
+          onChange: (0, _helpers.createChainedFunction)(child.props.onChange, _this2.handleChange)
+        });
+      }));
+    }
+  }]);
+  return RadioGroup;
+}(_react.default.Component);
+
+ true ? RadioGroup.propTypes = {
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * The default input value, useful when not controlling the component.
+   */
+  defaultValue: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.bool]),
+
+  /**
+   * The name used to reference the value of the control.
+   */
+  name: _propTypes.default.string,
+
+  /**
+   * @ignore
+   */
+  onBlur: _propTypes.default.func,
+
+  /**
+   * Callback fired when a radio button is selected.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value`.
+   * @param {string} value The `value` of the selected radio button
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onKeyDown: _propTypes.default.func,
+
+  /**
+   * Value of the selected radio button.
+   */
+  value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.bool])
+} : undefined;
+var _default = RadioGroup;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/RadioGroup/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/core/RadioGroup/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _RadioGroup.default;
+  }
+});
+
+var _RadioGroup = _interopRequireDefault(__webpack_require__(/*! ./RadioGroup */ "./node_modules/@material-ui/core/RadioGroup/RadioGroup.js"));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/SvgIcon/SvgIcon.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/SvgIcon/SvgIcon.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      userSelect: 'none',
+      width: '1em',
+      height: '1em',
+      display: 'inline-block',
+      fill: 'currentColor',
+      flexShrink: 0,
+      fontSize: 24,
+      transition: theme.transitions.create('fill', {
+        duration: theme.transitions.duration.shorter
+      })
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main
+    },
+
+    /* Styles applied to the root element if `color="action"`. */
+    colorAction: {
+      color: theme.palette.action.active
+    },
+
+    /* Styles applied to the root element if `color="error"`. */
+    colorError: {
+      color: theme.palette.error.main
+    },
+
+    /* Styles applied to the root element if `color="disabled"`. */
+    colorDisabled: {
+      color: theme.palette.action.disabled
+    },
+
+    /* Styles applied to the root element if `fontSize="inherit"`. */
+    fontSizeInherit: {
+      fontSize: 'inherit'
+    },
+
+    /* Styles applied to the root element if `fontSize="small"`. */
+    fontSizeSmall: {
+      fontSize: 20
+    },
+
+    /* Styles applied to the root element if `fontSize="large"`. */
+    fontSizeLarge: {
+      fontSize: 35
+    }
+  };
+};
+
+exports.styles = styles;
+
+function SvgIcon(props) {
+  var _classNames;
+
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      color = props.color,
+      Component = props.component,
+      fontSize = props.fontSize,
+      nativeColor = props.nativeColor,
+      titleAccess = props.titleAccess,
+      viewBox = props.viewBox,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "classes", "className", "color", "component", "fontSize", "nativeColor", "titleAccess", "viewBox"]);
+  return _react.default.createElement(Component, (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes["color".concat((0, _helpers.capitalize)(color))], color !== 'inherit'), (0, _defineProperty2.default)(_classNames, classes["fontSize".concat((0, _helpers.capitalize)(fontSize))], fontSize !== 'default'), _classNames), className),
+    focusable: "false",
+    viewBox: viewBox,
+    color: nativeColor,
+    "aria-hidden": titleAccess ? 'false' : 'true',
+    role: titleAccess ? 'img' : 'presentation'
+  }, other), children, titleAccess ? _react.default.createElement("title", null, titleAccess) : null);
+}
+
+ true ? SvgIcon.propTypes = {
+  /**
+   * Node passed into the SVG element.
+   */
+  children: _propTypes.default.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * You can use the `nativeColor` property to apply a color attribute to the SVG element.
+   */
+  color: _propTypes.default.oneOf(['inherit', 'primary', 'secondary', 'action', 'error', 'disabled']),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _utils.componentPropType,
+
+  /**
+   * The fontSize applied to the icon. Defaults to 24px, but can be configure to inherit font size.
+   */
+  fontSize: _propTypes.default.oneOf(['inherit', 'default', 'small', 'large']),
+
+  /**
+   * Applies a color attribute to the SVG element.
+   */
+  nativeColor: _propTypes.default.string,
+
+  /**
+   * The shape-rendering attribute. The behavior of the different options is described on the
+   * [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering).
+   * If you are having issues with blurry icons you should investigate this property.
+   */
+  shapeRendering: _propTypes.default.string,
+
+  /**
+   * Provides a human-readable title for the element that contains it.
+   * https://www.w3.org/TR/SVG-access/#Equivalent
+   */
+  titleAccess: _propTypes.default.string,
+
+  /**
+   * Allows you to redefine what the coordinates without units mean inside an SVG element.
+   * For example, if the SVG element is 500 (width) by 200 (height),
+   * and you pass viewBox="0 0 50 20",
+   * this means that the coordinates inside the SVG will go from the top left corner (0,0)
+   * to bottom right (50,20) and each unit will be worth 10px.
+   */
+  viewBox: _propTypes.default.string
+} : undefined;
+SvgIcon.defaultProps = {
+  color: 'inherit',
+  component: 'svg',
+  fontSize: 'default',
+  viewBox: '0 0 24 24'
+};
+SvgIcon.muiName = 'SvgIcon';
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiSvgIcon'
+})(SvgIcon);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/SvgIcon/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/SvgIcon/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _SvgIcon.default;
+  }
+});
+
+var _SvgIcon = _interopRequireDefault(__webpack_require__(/*! ./SvgIcon */ "./node_modules/@material-ui/core/SvgIcon/SvgIcon.js"));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Typography/Typography.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Typography/Typography.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'block',
+      margin: 0
+    },
+
+    /* Styles applied to the root element if `variant="display4"`. */
+    display4: theme.typography.display4,
+
+    /* Styles applied to the root element if `variant="display3"`. */
+    display3: theme.typography.display3,
+
+    /* Styles applied to the root element if `variant="display2"`. */
+    display2: theme.typography.display2,
+
+    /* Styles applied to the root element if `variant="display1"`. */
+    display1: theme.typography.display1,
+
+    /* Styles applied to the root element if `variant="headline"`. */
+    headline: theme.typography.headline,
+
+    /* Styles applied to the root element if `variant="title"`. */
+    title: theme.typography.title,
+
+    /* Styles applied to the root element if `variant="subheading"`. */
+    subheading: theme.typography.subheading,
+
+    /* Styles applied to the root element if `variant="body2"`. */
+    body2: theme.typography.body2,
+
+    /* Styles applied to the root element if `variant="body1"`. */
+    body1: theme.typography.body1,
+
+    /* Styles applied to the root element if `variant="caption"`. */
+    caption: theme.typography.caption,
+
+    /* Styles applied to the root element if `variant="button"`. */
+    button: theme.typography.button,
+
+    /* Styles applied to the root element if `variant="h1"`. */
+    h1: theme.typography.h1,
+
+    /* Styles applied to the root element if `variant="h2"`. */
+    h2: theme.typography.h2,
+
+    /* Styles applied to the root element if `variant="h3"`. */
+    h3: theme.typography.h3,
+
+    /* Styles applied to the root element if `variant="h4"`. */
+    h4: theme.typography.h4,
+
+    /* Styles applied to the root element if `variant="h5"`. */
+    h5: theme.typography.h5,
+
+    /* Styles applied to the root element if `variant="h6"`. */
+    h6: theme.typography.h6,
+
+    /* Styles applied to the root element if `variant="subtitle1"`. */
+    subtitle1: theme.typography.subtitle1,
+
+    /* Styles applied to the root element if `variant="subtitle2"`. */
+    subtitle2: theme.typography.subtitle2,
+
+    /* Styles applied to the root element if `variant="overline"`. */
+    overline: theme.typography.overline,
+
+    /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */
+    srOnly: {
+      position: 'absolute',
+      height: 1,
+      width: 1,
+      overflow: 'hidden'
+    },
+
+    /* Styles applied to the root element if `align="left"`. */
+    alignLeft: {
+      textAlign: 'left'
+    },
+
+    /* Styles applied to the root element if `align="center"`. */
+    alignCenter: {
+      textAlign: 'center'
+    },
+
+    /* Styles applied to the root element if `align="right"`. */
+    alignRight: {
+      textAlign: 'right'
+    },
+
+    /* Styles applied to the root element if `align="justify"`. */
+    alignJustify: {
+      textAlign: 'justify'
+    },
+
+    /* Styles applied to the root element if `align="nowrap"`. */
+    noWrap: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    },
+
+    /* Styles applied to the root element if `gutterBottom={true}`. */
+    gutterBottom: {
+      marginBottom: '0.35em'
+    },
+
+    /* Styles applied to the root element if `paragraph={true}`. */
+    paragraph: {
+      marginBottom: 16
+    },
+
+    /* Styles applied to the root element if `color="inherit"`. */
+    colorInherit: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main
+    },
+
+    /* Styles applied to the root element if `color="textPrimary"`. */
+    colorTextPrimary: {
+      color: theme.palette.text.primary
+    },
+
+    /* Styles applied to the root element if `color="textSecondary"`. */
+    colorTextSecondary: {
+      color: theme.palette.text.secondary
+    },
+
+    /* Styles applied to the root element if `color="error"`. */
+    colorError: {
+      color: theme.palette.error.main
+    },
+
+    /* Styles applied to the root element if `inline={true}`. */
+    inline: {
+      display: 'inline'
+    }
+  };
+};
+
+exports.styles = styles;
+var nextVariants = {
+  display4: 'h1',
+  display3: 'h2',
+  display2: 'h3',
+  display1: 'h4',
+  headline: 'h5',
+  title: 'h6',
+  subheading: 'subtitle1'
+};
+
+function getVariant(theme, variantProp) {
+  var typography = theme.typography;
+  var variant = variantProp;
+
+  if (!variant) {
+    variant = typography.useNextVariants ? 'body2' : 'body1';
+  } // complete v2 switch
+
+
+  if (typography.useNextVariants) {
+    variant = nextVariants[variant] || variant;
+  }
+
+  return variant;
+}
+
+var defaultHeadlineMapping = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
+  subtitle1: 'h6',
+  subtitle2: 'h6',
+  body1: 'p',
+  body2: 'p',
+  // deprecated
+  display4: 'h1',
+  display3: 'h1',
+  display2: 'h1',
+  display1: 'h1',
+  headline: 'h1',
+  title: 'h2',
+  subheading: 'h3'
+};
+
+function Typography(props) {
+  var _classNames;
+
+  var align = props.align,
+      classes = props.classes,
+      classNameProp = props.className,
+      color = props.color,
+      componentProp = props.component,
+      gutterBottom = props.gutterBottom,
+      headlineMapping = props.headlineMapping,
+      inline = props.inline,
+      internalDeprecatedVariant = props.internalDeprecatedVariant,
+      noWrap = props.noWrap,
+      paragraph = props.paragraph,
+      theme = props.theme,
+      variantProp = props.variant,
+      other = (0, _objectWithoutProperties2.default)(props, ["align", "classes", "className", "color", "component", "gutterBottom", "headlineMapping", "inline", "internalDeprecatedVariant", "noWrap", "paragraph", "theme", "variant"]);
+  var variant = getVariant(theme, variantProp);
+  var className = (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes[variant], variant !== 'inherit'), (0, _defineProperty2.default)(_classNames, classes["color".concat((0, _helpers.capitalize)(color))], color !== 'default'), (0, _defineProperty2.default)(_classNames, classes.noWrap, noWrap), (0, _defineProperty2.default)(_classNames, classes.gutterBottom, gutterBottom), (0, _defineProperty2.default)(_classNames, classes.paragraph, paragraph), (0, _defineProperty2.default)(_classNames, classes["align".concat((0, _helpers.capitalize)(align))], align !== 'inherit'), (0, _defineProperty2.default)(_classNames, classes.inline, inline), _classNames), classNameProp);
+  var Component = componentProp || (paragraph ? 'p' : headlineMapping[variant] || defaultHeadlineMapping[variant]) || 'span';
+  return _react.default.createElement(Component, (0, _extends2.default)({
+    className: className
+  }, other));
+}
+
+ true ? Typography.propTypes = {
+  /**
+   * Set the text-align on the component.
+   */
+  align: _propTypes.default.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
+
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: _propTypes.default.oneOf(['default', 'error', 'inherit', 'primary', 'secondary', 'textPrimary', 'textSecondary']),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   * By default, it maps the variant to a good default headline component.
+   */
+  component: _utils.componentPropType,
+
+  /**
+   * If `true`, the text will have a bottom margin.
+   */
+  gutterBottom: _propTypes.default.bool,
+
+  /**
+   * We are empirically mapping the variant property to a range of different DOM element types.
+   * For instance, subtitle1 to `<h6>`.
+   * If you wish to change that mapping, you can provide your own.
+   * Alternatively, you can use the `component` property.
+   * The default mapping is the following:
+   */
+  headlineMapping: _propTypes.default.object,
+
+  /**
+   *  Controls whether the Typography is inline or not.
+   */
+  inline: _propTypes.default.bool,
+
+  /**
+   * A deprecated variant is used from an internal component. Users don't need
+   * a deprecation warning here if they switched to the v2 theme. They already
+   * get the mapping that will be applied in the next major release.
+   *
+   * @internal
+   */
+  internalDeprecatedVariant: _propTypes.default.bool,
+
+  /**
+   * If `true`, the text will not wrap, but instead will truncate with an ellipsis.
+   */
+  noWrap: _propTypes.default.bool,
+
+  /**
+   * If `true`, the text will have a bottom margin.
+   */
+  paragraph: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  theme: _propTypes.default.object.isRequired,
+
+  /**
+   * Applies the theme typography styles.
+   * Use `body1` as the default value with the legacy implementation and `body2` with the new one.
+   */
+  variant: (0, _utils.chainPropTypes)(_propTypes.default.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'button', 'overline', 'srOnly', 'inherit', // deprecated
+  'display4', 'display3', 'display2', 'display1', 'headline', 'title', 'subheading']), function (props) {
+    var deprecatedVariants = ['display4', 'display3', 'display2', 'display1', 'headline', 'title', 'subheading'];
+
+    if (props.theme.typography.useNextVariants && !props.internalDeprecatedVariant && deprecatedVariants.indexOf(props.variant) !== -1) {
+      return new Error('Material-UI: you are using a deprecated typography variant: ' + "`".concat(props.variant, "` that will be removed in the next major release.\n") + 'Please read the migration guide under https://material-ui.com/style/typography#migration-to-typography-v2.');
+    }
+
+    return null;
+  })
+} : undefined;
+Typography.defaultProps = {
+  align: 'inherit',
+  color: 'default',
+  gutterBottom: false,
+  headlineMapping: defaultHeadlineMapping,
+  inline: false,
+  noWrap: false,
+  paragraph: false
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTypography',
+  withTheme: true
+})(Typography);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Typography/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Typography/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _Typography.default;
+  }
+});
+
+var _Typography = _interopRequireDefault(__webpack_require__(/*! ./Typography */ "./node_modules/@material-ui/core/Typography/Typography.js"));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/colors/common.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@material-ui/core/colors/common.js ***!
@@ -24421,6 +26359,419 @@ var yellow = {
   A700: '#ffd600'
 };
 var _default = yellow;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/internal/SwitchBase.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@material-ui/core/internal/SwitchBase.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _withFormControlContext = _interopRequireDefault(__webpack_require__(/*! ../FormControl/withFormControlContext */ "./node_modules/@material-ui/core/FormControl/withFormControlContext.js"));
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _IconButton = _interopRequireDefault(__webpack_require__(/*! ../IconButton */ "./node_modules/@material-ui/core/IconButton/index.js"));
+
+// @inheritedComponent IconButton
+var styles = {
+  root: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    transition: 'none',
+    '&:hover': {
+      // Disable the hover effect for the IconButton.
+      backgroundColor: 'transparent'
+    }
+  },
+  checked: {},
+  disabled: {},
+  input: {
+    cursor: 'inherit',
+    position: 'absolute',
+    opacity: 0,
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
+    margin: 0,
+    padding: 0
+  }
+};
+/**
+ * @ignore - internal component.
+ */
+
+exports.styles = styles;
+
+var SwitchBase =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2.default)(SwitchBase, _React$Component);
+
+  function SwitchBase(props) {
+    var _this;
+
+    (0, _classCallCheck2.default)(this, SwitchBase);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(SwitchBase).call(this));
+
+    _this.handleFocus = function (event) {
+      if (_this.props.onFocus) {
+        _this.props.onFocus(event);
+      }
+
+      var muiFormControl = _this.props.muiFormControl;
+
+      if (muiFormControl && muiFormControl.onFocus) {
+        muiFormControl.onFocus(event);
+      }
+    };
+
+    _this.handleBlur = function (event) {
+      if (_this.props.onBlur) {
+        _this.props.onBlur(event);
+      }
+
+      var muiFormControl = _this.props.muiFormControl;
+
+      if (muiFormControl && muiFormControl.onBlur) {
+        muiFormControl.onBlur(event);
+      }
+    };
+
+    _this.handleInputChange = function (event) {
+      var checked = event.target.checked;
+
+      if (!_this.isControlled) {
+        _this.setState({
+          checked: checked
+        });
+      }
+
+      if (_this.props.onChange) {
+        _this.props.onChange(event, checked);
+      }
+    };
+
+    _this.isControlled = props.checked != null;
+    _this.state = {};
+
+    if (!_this.isControlled) {
+      // not controlled, use internal state
+      _this.state.checked = props.defaultChecked !== undefined ? props.defaultChecked : false;
+    }
+
+    return _this;
+  }
+
+  (0, _createClass2.default)(SwitchBase, [{
+    key: "render",
+    value: function render() {
+      var _classNames;
+
+      var _this$props = this.props,
+          autoFocus = _this$props.autoFocus,
+          checkedProp = _this$props.checked,
+          checkedIcon = _this$props.checkedIcon,
+          classes = _this$props.classes,
+          classNameProp = _this$props.className,
+          defaultChecked = _this$props.defaultChecked,
+          disabledProp = _this$props.disabled,
+          icon = _this$props.icon,
+          id = _this$props.id,
+          inputProps = _this$props.inputProps,
+          inputRef = _this$props.inputRef,
+          muiFormControl = _this$props.muiFormControl,
+          name = _this$props.name,
+          onBlur = _this$props.onBlur,
+          onChange = _this$props.onChange,
+          onFocus = _this$props.onFocus,
+          readOnly = _this$props.readOnly,
+          required = _this$props.required,
+          tabIndex = _this$props.tabIndex,
+          type = _this$props.type,
+          value = _this$props.value,
+          other = (0, _objectWithoutProperties2.default)(_this$props, ["autoFocus", "checked", "checkedIcon", "classes", "className", "defaultChecked", "disabled", "icon", "id", "inputProps", "inputRef", "muiFormControl", "name", "onBlur", "onChange", "onFocus", "readOnly", "required", "tabIndex", "type", "value"]);
+      var disabled = disabledProp;
+
+      if (muiFormControl) {
+        if (typeof disabled === 'undefined') {
+          disabled = muiFormControl.disabled;
+        }
+      }
+
+      var checked = this.isControlled ? checkedProp : this.state.checked;
+      var hasLabelFor = type === 'checkbox' || type === 'radio';
+      return _react.default.createElement(_IconButton.default, (0, _extends2.default)({
+        component: "span",
+        className: (0, _classnames.default)(classes.root, (_classNames = {}, (0, _defineProperty2.default)(_classNames, classes.checked, checked), (0, _defineProperty2.default)(_classNames, classes.disabled, disabled), _classNames), classNameProp),
+        disabled: disabled,
+        tabIndex: null,
+        role: undefined,
+        onFocus: this.handleFocus,
+        onBlur: this.handleBlur
+      }, other), checked ? checkedIcon : icon, _react.default.createElement("input", (0, _extends2.default)({
+        autoFocus: autoFocus,
+        checked: checkedProp,
+        defaultChecked: defaultChecked,
+        className: classes.input,
+        disabled: disabled,
+        id: hasLabelFor && id,
+        name: name,
+        onChange: this.handleInputChange,
+        readOnly: readOnly,
+        ref: inputRef,
+        required: required,
+        tabIndex: tabIndex,
+        type: type,
+        value: value
+      }, inputProps)));
+    }
+  }]);
+  return SwitchBase;
+}(_react.default.Component); // NB: If changed, please update Checkbox, Switch and Radio
+// so that the API documentation is updated.
+
+
+ true ? SwitchBase.propTypes = {
+  /**
+   * If `true`, the input will be focused during the first mount.
+   */
+  autoFocus: _propTypes.default.bool,
+
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: _propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.string]),
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: _propTypes.default.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * @ignore
+   */
+  defaultChecked: _propTypes.default.bool,
+
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: _propTypes.default.bool,
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: _propTypes.default.node.isRequired,
+
+  /**
+   * The id of the `input` element.
+   */
+  id: _propTypes.default.string,
+
+  /**
+   * Attributes applied to the `input` element.
+   */
+  inputProps: _propTypes.default.object,
+
+  /**
+   * Use that property to pass a ref callback to the native input component.
+   */
+  inputRef: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.object]),
+
+  /**
+   * @ignore
+   */
+  muiFormControl: _propTypes.default.object,
+
+  /*
+   * @ignore
+   */
+  name: _propTypes.default.string,
+
+  /**
+   * @ignore
+   */
+  onBlur: _propTypes.default.func,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.checked`.
+   * @param {boolean} checked The `checked` value of the switch
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onFocus: _propTypes.default.func,
+
+  /**
+   * It prevents the user from changing the value of the field
+   * (not from interacting with the field).
+   */
+  readOnly: _propTypes.default.bool,
+
+  /**
+   * If `true`, the input will be required.
+   */
+  required: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  tabIndex: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+
+  /**
+   * The input component property `type`.
+   */
+  type: _propTypes.default.string.isRequired,
+
+  /**
+   * The value of the component.
+   */
+  value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.bool])
+} : undefined;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiPrivateSwitchBase'
+})((0, _withFormControlContext.default)(SwitchBase));
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/internal/svg-icons/RadioButtonChecked.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/internal/svg-icons/RadioButtonChecked.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _pure = _interopRequireDefault(__webpack_require__(/*! recompose/pure */ "./node_modules/recompose/pure.js"));
+
+var _SvgIcon = _interopRequireDefault(__webpack_require__(/*! ../../SvgIcon */ "./node_modules/@material-ui/core/SvgIcon/index.js"));
+
+var _ref = _react.default.createElement("path", {
+  d: "M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+});
+
+/**
+ * @ignore - internal component.
+ */
+var RadioButtonChecked = function RadioButtonChecked(props) {
+  return _react.default.createElement(_SvgIcon.default, props, _ref);
+};
+
+RadioButtonChecked = (0, _pure.default)(RadioButtonChecked);
+RadioButtonChecked.muiName = 'SvgIcon';
+var _default = RadioButtonChecked;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/internal/svg-icons/RadioButtonUnchecked.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/internal/svg-icons/RadioButtonUnchecked.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _pure = _interopRequireDefault(__webpack_require__(/*! recompose/pure */ "./node_modules/recompose/pure.js"));
+
+var _SvgIcon = _interopRequireDefault(__webpack_require__(/*! ../../SvgIcon */ "./node_modules/@material-ui/core/SvgIcon/index.js"));
+
+var _ref = _react.default.createElement("path", {
+  d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+});
+
+/**
+ * @ignore - internal component.
+ */
+var RadioButtonUnchecked = function RadioButtonUnchecked(props) {
+  return _react.default.createElement(_SvgIcon.default, props, _ref);
+};
+
+RadioButtonUnchecked = (0, _pure.default)(RadioButtonUnchecked);
+RadioButtonUnchecked.muiName = 'SvgIcon';
+var _default = RadioButtonUnchecked;
 exports.default = _default;
 
 /***/ }),
@@ -39613,6 +41964,82 @@ return deepmerge_1;
 
 })));
 
+
+/***/ }),
+
+/***/ "./node_modules/fbjs/lib/shallowEqual.js":
+/*!***********************************************!*\
+  !*** ./node_modules/fbjs/lib/shallowEqual.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ * 
+ */
+
+/*eslint-disable no-self-compare */
+
+
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    // Added the nonzero y check to make Flow happy, but it is redundant
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    // Step 6.a: NaN == NaN
+    return x !== x && y !== y;
+  }
+}
+
+/**
+ * Performs equality by iterating through keys on an object and returning false
+ * when any key has values which are not strictly equal between the arguments.
+ * Returns true when the values of all keys are strictly equal.
+ */
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  // Test for A's keys different from B.
+  for (var i = 0; i < keysA.length; i++) {
+    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+module.exports = shallowEqual;
 
 /***/ }),
 
@@ -71190,6 +73617,240 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/recompose/getDisplayName.js":
+/*!**************************************************!*\
+  !*** ./node_modules/recompose/getDisplayName.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var getDisplayName = function getDisplayName(Component) {
+  if (typeof Component === 'string') {
+    return Component;
+  }
+
+  if (!Component) {
+    return undefined;
+  }
+
+  return Component.displayName || Component.name || 'Component';
+};
+
+var _default = getDisplayName;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/pure.js":
+/*!****************************************!*\
+  !*** ./node_modules/recompose/pure.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _shouldUpdate = _interopRequireDefault(__webpack_require__(/*! ./shouldUpdate */ "./node_modules/recompose/shouldUpdate.js"));
+
+var _shallowEqual = _interopRequireDefault(__webpack_require__(/*! ./shallowEqual */ "./node_modules/recompose/shallowEqual.js"));
+
+var _setDisplayName = _interopRequireDefault(__webpack_require__(/*! ./setDisplayName */ "./node_modules/recompose/setDisplayName.js"));
+
+var _wrapDisplayName = _interopRequireDefault(__webpack_require__(/*! ./wrapDisplayName */ "./node_modules/recompose/wrapDisplayName.js"));
+
+var pure = function pure(BaseComponent) {
+  var hoc = (0, _shouldUpdate.default)(function (props, nextProps) {
+    return !(0, _shallowEqual.default)(props, nextProps);
+  });
+
+  if (true) {
+    return (0, _setDisplayName.default)((0, _wrapDisplayName.default)(BaseComponent, 'pure'))(hoc(BaseComponent));
+  }
+
+  return hoc(BaseComponent);
+};
+
+var _default = pure;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/setDisplayName.js":
+/*!**************************************************!*\
+  !*** ./node_modules/recompose/setDisplayName.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _setStatic = _interopRequireDefault(__webpack_require__(/*! ./setStatic */ "./node_modules/recompose/setStatic.js"));
+
+var setDisplayName = function setDisplayName(displayName) {
+  return (0, _setStatic.default)('displayName', displayName);
+};
+
+var _default = setDisplayName;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/setStatic.js":
+/*!*********************************************!*\
+  !*** ./node_modules/recompose/setStatic.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var setStatic = function setStatic(key, value) {
+  return function (BaseComponent) {
+    /* eslint-disable no-param-reassign */
+    BaseComponent[key] = value;
+    /* eslint-enable no-param-reassign */
+
+    return BaseComponent;
+  };
+};
+
+var _default = setStatic;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/shallowEqual.js":
+/*!************************************************!*\
+  !*** ./node_modules/recompose/shallowEqual.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _shallowEqual = _interopRequireDefault(__webpack_require__(/*! fbjs/lib/shallowEqual */ "./node_modules/fbjs/lib/shallowEqual.js"));
+
+var _default = _shallowEqual.default;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/shouldUpdate.js":
+/*!************************************************!*\
+  !*** ./node_modules/recompose/shouldUpdate.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _inheritsLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js"));
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _setDisplayName = _interopRequireDefault(__webpack_require__(/*! ./setDisplayName */ "./node_modules/recompose/setDisplayName.js"));
+
+var _wrapDisplayName = _interopRequireDefault(__webpack_require__(/*! ./wrapDisplayName */ "./node_modules/recompose/wrapDisplayName.js"));
+
+var shouldUpdate = function shouldUpdate(test) {
+  return function (BaseComponent) {
+    var factory = (0, _react.createFactory)(BaseComponent);
+
+    var ShouldUpdate =
+    /*#__PURE__*/
+    function (_Component) {
+      (0, _inheritsLoose2.default)(ShouldUpdate, _Component);
+
+      function ShouldUpdate() {
+        return _Component.apply(this, arguments) || this;
+      }
+
+      var _proto = ShouldUpdate.prototype;
+
+      _proto.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
+        return test(this.props, nextProps);
+      };
+
+      _proto.render = function render() {
+        return factory(this.props);
+      };
+
+      return ShouldUpdate;
+    }(_react.Component);
+
+    if (true) {
+      return (0, _setDisplayName.default)((0, _wrapDisplayName.default)(BaseComponent, 'shouldUpdate'))(ShouldUpdate);
+    }
+
+    return ShouldUpdate;
+  };
+};
+
+var _default = shouldUpdate;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/recompose/wrapDisplayName.js":
+/*!***************************************************!*\
+  !*** ./node_modules/recompose/wrapDisplayName.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _getDisplayName = _interopRequireDefault(__webpack_require__(/*! ./getDisplayName */ "./node_modules/recompose/getDisplayName.js"));
+
+var wrapDisplayName = function wrapDisplayName(BaseComponent, hocName) {
+  return hocName + "(" + (0, _getDisplayName.default)(BaseComponent) + ")";
+};
+
+var _default = wrapDisplayName;
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
@@ -73833,6 +76494,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _WorldMap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WorldMap */ "./src/components/WorldMap.js");
 /* harmony import */ var _PlayerControlNavbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PlayerControlNavbar */ "./src/components/PlayerControlNavbar.js");
+/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormLabel */ "./node_modules/@material-ui/core/FormLabel/index.js");
+/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "./node_modules/@material-ui/core/RadioGroup/index.js");
+/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/Radio/index.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_10__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -73840,6 +76528,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+/* const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}); */
 
 var styles = function styles(theme) {
   return {
@@ -73847,46 +76550,116 @@ var styles = function styles(theme) {
       flexGrow: 1
     },
     paper: {
-      padding: theme.spacing.unit * 2,
-      textAlign: 'center',
-      color: theme.palette.text.secondary
+      height: 540,
+      width: 1100
+    },
+    control: {
+      padding: theme.spacing.unit * 2
+    },
+    navbar: {
+      height: 540,
+      width: 100
     }
   };
 };
 
-function Root(props) {
-  //#grid-with-breakpoints
-  var classes = props.classes;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.root
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    container: true,
-    spacing: 24
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    item: true,
-    xs: 6,
-    sm: 2
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: classes.paper
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerControlNavbar__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    item: true,
-    xs: 12,
-    sm: 6
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: classes.paper
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorldMap__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    item: true,
-    xs: 6,
-    sm: 3
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    className: classes.paper
-  }, "xs=6 sm=3"))));
-}
+var Root =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Root, _React$Component);
+
+  function Root() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, Root);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Root)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      spacing: '40'
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (key) {
+      return function (event, value) {
+        _this.setState(_defineProperty({}, key, value));
+      };
+    });
+
+    return _this;
+  }
+
+  _createClass(Root, [{
+    key: "render",
+    value: function render() {
+      var classes = this.props.classes;
+      var spacing = this.state.spacing;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        container: true,
+        className: classes.root,
+        spacing: 40
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        item: true,
+        xs: 12
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        container: true,
+        className: classes.demo,
+        justify: "center",
+        spacing: Number(spacing)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        className: classes.navbar
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerControlNavbar__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        className: classes.paper
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorldMap__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        className: classes.navbar
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerControlNavbar__WEBPACK_IMPORTED_MODULE_6__["default"], null))))));
+    }
+  }]);
+
+  return Root;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 Root.propTypes = {
   classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(styles)(Root));
+/* function Root(props) { //#grid-with-breakpoints
+  const { classes } = props;
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={6} sm={2}>
+          <Paper className={classes.paper}><PlayerControlNavbar /></Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper}><WorldMap /></Paper>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
+
+Root.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Root);
+ */
 
 /***/ }),
 
@@ -73981,9 +76754,9 @@ function (_Component) {
         style: wrapperStyles
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["ComposableMap"], {
         projectionConfig: {
-          scale: 205,
+          scale: 270,
           //make a constant on line 17, name them large or "what you can see"
-          rotation: [-11, 0, 0]
+          rotation: [-15, 0, 0]
         },
         width: 980,
         height: 551,
@@ -73992,7 +76765,7 @@ function (_Component) {
           height: "auto"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["ZoomableGroup"], {
-        center: [0, 20],
+        center: [15, 0],
         disablePanning: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_maps__WEBPACK_IMPORTED_MODULE_1__["Geographies"], {
         geography: "/world-50m.json"
@@ -74059,6 +76832,7 @@ function (_Component) {
           y: marker.markerOffset,
           style: {
             fontFamily: "Roboto, sans-serif",
+            fontSize: 12,
             fill: "#607D8B"
           }
         }, marker.name));

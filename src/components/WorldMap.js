@@ -50,8 +50,9 @@ class WorldMap extends Component {
       <div style={wrapperStyles}>
         <ComposableMap
           projectionConfig={{
-            scale: 205, //make a constant on line 17, name them large or "what you can see"
-            rotation: [-11, 0, 0]
+            scale: 270,
+             //make a constant on line 17, name them large or "what you can see"
+            rotation: [-15, 0, 0]
           }}
           width={980}
           height={551}
@@ -60,7 +61,7 @@ class WorldMap extends Component {
             height: "auto"
           }}
         >
-          <ZoomableGroup center={[0, 20]} disablePanning>
+          <ZoomableGroup center={[15, 0]} disablePanning>
             <Geographies geography="/world-50m.json">
               {(geographies, projection) =>
                 geographies.map(
@@ -123,6 +124,7 @@ class WorldMap extends Component {
                     y={marker.markerOffset}
                     style={{
                       fontFamily: "Roboto, sans-serif",
+                      fontSize: 12,
                       fill: "#607D8B"
                     }}
                   >
