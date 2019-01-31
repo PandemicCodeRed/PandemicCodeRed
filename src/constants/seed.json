@@ -167,7 +167,7 @@
         "London": true,
         "Paris": true,
         "Milan": true,
-        "St": true
+        "St_Petersburg": true
       }
     },
     "Ho_Chi_Minh_City": {
@@ -208,7 +208,7 @@
       "blackCount": 0,
       "station": false,
       "neighbors": {
-        "St": true,
+        "St_Petersburg": true,
         "Moscow": true,
         "Baghdad": true,
         "Cairo": true,
@@ -542,8 +542,8 @@
         "Lima": true
       }
     },
-    "Sao_paulo": {
-      "name": "Sao_paulo",
+    "Sao_Paulo": {
+      "name": "Sao_Paulo",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
@@ -584,7 +584,7 @@
         "Hong_Kong": true
       }
     },
-    "St": {
+    "St_Petersburg": {
       "name": "St._Petersburg",
       "redCount": 0,
       "blueCount": 0,
@@ -668,28 +668,28 @@
     }
   },
   "playerOne": {
-    "Name": "test",
-    "Role": "test",
-    "Location": "Atlanta",
-    "Hand": []
+    "name": "test",
+    "role": "test",
+    "location": "Atlanta",
+    "hand": []
   },
   "playerTwo": {
-    "Name": "test",
-    "Role": "test",
-    "Location": "Atlanta",
-    "Hand": []
+    "name": "test",
+    "role": "test",
+    "location": "Atlanta",
+    "hand": []
   },
   "playerThree": {
-    "Name": "test",
-    "Role": "test",
-    "Location": "Atlanta",
-    "Hand": []
+    "name": "test",
+    "role": "test",
+    "location": "Atlanta",
+    "hand": []
   },
   "playerFour": {
-    "Name": "test",
-    "Role": "test",
-    "Location": "Atlanta",
-    "Hand": []
+    "name": "test",
+    "role": "test",
+    "location": "Atlanta",
+    "hand": []
   },
   "infectionDeck": [
     {
@@ -1165,13 +1165,14 @@
   "remainingBlue": 24,
   "remainingYellow": 24,
   "remainingBlack": 24,
-  "redStatus": null,
-  "blueStatus": null,
-  "yellowStatus": null,
-  "blackStatus": null,
+  "redStatus": "active",
+  "blueStatus": "active",
+  "yellowStatus": "active",
+  "blackStatus": "active",
   "infectionRate": 2,
   "outbreaks": 0,
   "playerTurn": "playerOne",
   "stationTotal": 1,
-  "gameStatus": null
+  "gameStatus": "inProgress",
+  "selectedAction": "none"
 }

@@ -16,7 +16,7 @@ const styles = theme => ({
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { actionCount: 4 };
   }
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
