@@ -50,7 +50,7 @@ class WorldMap extends Component {
     this.props.firebase.cities().on("value", snapshot => {
       const cities = snapshot.val();
       this.setState({ cities }, () => {
-        console.log(this.state.cities.Atlanta);
+        // console.log(this.state.cities.Atlanta);
       });
     });
   }
@@ -134,7 +134,10 @@ class WorldMap extends Component {
                 let m;
                 let curCity = marker.name
                 // handles if infectioin is present in city
-                // this.state.cities[curCity].blackCount
+                // console.log(this.state.cities[curCity])
+                if(this.state.cities[curCity] === undefined){
+                  console.log(curCity)
+                }
                 if(this.state.test >0){
                   m = <BiohazardMarker />
                 }else{
