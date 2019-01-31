@@ -9,6 +9,7 @@ import {
 } from "react-simple-maps";
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
+import BiohazardMarker from "./BioharzardMarker"
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 
@@ -129,7 +130,27 @@ class WorldMap extends Component {
             </Geographies>
             <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
-              {markers.map((marker, i) => (
+              {markers.map((marker, i) => {
+                let m;
+                let curCity = marker.name
+                // handles if infectioin is present in city
+                // this.state.cities[curCity].blackCount
+                if(this.state.test >0){
+                  m = <BiohazardMarker />
+                }else{
+                  m =
+                  `<circle
+                  cx={0}
+                  cy={0}
+                  r={3.5}
+                  style={{
+                    stroke: "#FF5722",
+                    strokeWidth: 3,
+                    opacity: 0.9
+                  }}
+                />`
+                }
+                return(
                 <Marker
                   key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
@@ -140,7 +161,8 @@ class WorldMap extends Component {
                     pressed: { fill: "#FF5722" }
                   }}
                 >
-                  <circle
+                {m}
+                  {/* <circle
                     cx={0}
                     cy={0}
                     r={3.5}
@@ -149,7 +171,7 @@ class WorldMap extends Component {
                       strokeWidth: 3,
                       opacity: 0.9
                     }}
-                  />
+                  /> */}
                   <text
                     textAnchor="middle"
                     y={marker.markerOffset}
@@ -162,7 +184,7 @@ class WorldMap extends Component {
                     {marker.name}
                   </text>
                 </Marker>
-              ))}
+              )})}
             </Markers>
           </ZoomableGroup>
         </ComposableMap>
