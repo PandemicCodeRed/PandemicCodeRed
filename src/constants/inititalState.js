@@ -25,7 +25,7 @@ const initialState = {
       station: true,
       neighbors: {
         Chicago: true,
-        Washington: true,
+        "Washington_D.C.": true,
         Miami: true
       }
     },
@@ -409,7 +409,7 @@ const initialState = {
       neighbors: {
         Mexico_City: true,
         Atlanta: true,
-        Washington: true,
+        "Washington_D.C.": true,
         Bogota: true
       }
     },
@@ -436,7 +436,7 @@ const initialState = {
       neighbors: {
         Chicago: true,
         New_York: true,
-        Washington: true
+        "Washington_D.C.": true
       }
     },
     Moscow: {
@@ -474,7 +474,7 @@ const initialState = {
       station: false,
       neighbors: {
         Montreal: true,
-        Washington: true,
+        "Washington_D.C.": true,
         London: true,
         Madrid: true
       }

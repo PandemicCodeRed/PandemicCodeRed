@@ -23,7 +23,7 @@
       "station": true,
       "neighbors": {
         "Chicago": true,
-        "Washington": true,
+        "Washington_D.C.": true,
         "Miami": true
       }
     },
@@ -407,7 +407,7 @@
       "neighbors": {
         "Mexico_City": true,
         "Atlanta": true,
-        "Washington": true,
+        "Washington_D.C.": true,
         "Bogota": true
       }
     },
@@ -434,7 +434,7 @@
       "neighbors": {
         "Chicago": true,
         "New_York": true,
-        "Washington": true
+        "Washington_D.C.": true
       }
     },
     "Moscow": {
@@ -472,7 +472,7 @@
       "station": false,
       "neighbors": {
         "Montreal": true,
-        "Washington": true,
+        "Washington_D.C.": true,
         "London": true,
         "Madrid": true
       }
@@ -652,8 +652,8 @@
         "Osaka": true
       }
     },
-    "Washington": {
-      "name": "Washington,_D.C.",
+    "Washington_D.C.": {
+      "name": "Washington_D.C.",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
