@@ -1,25 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
-import purple from '@material-ui/core/colors/purple';
-import yellow from '@material-ui/core/colors/yellow';
+import Blue from '@material-ui/core/colors/blue';
+import Indigo from '@material-ui/core/colors/indigo';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Firebase, {FirebaseContext} from './components/Firebase'
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: purple[700],
+      main: Blue[300],
     },
     secondary: {
-      main: yellow[50],
+      main: Indigo[900],
     },
   },
   typography: {
     useNextVariants: true,
     fontFamily: [],
   },
+  overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        color: 'white',
+        fontWeight: 'bold'
+      },
+    },
+  }
 });
+
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>

@@ -12,13 +12,13 @@ const styles = theme => ({
   }
 });
 
-function PlayerControlNavbar(props) {
+function InfectionBoardNavbar(props) {
   const { classes } = props;
   return (
     <div>
 
       <Button variant="contained" color="primary" className={classes.button}>
-        PLAYER 1
+        Infection Deck
       </Button>
 
 
@@ -55,9 +55,9 @@ function PlayerControlNavbar(props) {
   );
 } //use a button group? rather than div and ul
 
-PlayerControlNavbar.propTypes = {
+InfectionBoardNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PlayerControlNavbar);
+export default withStyles(styles)(InfectionBoardNavbar);
 

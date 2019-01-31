@@ -78,7 +78,7 @@ class WorldMap extends Component {
                         projection={projection}
                         style={{
                           default: {
-                            fill: "#ECEFF1",
+                            fill: "#64B5F6",
                             stroke: "#607D8B",
                             strokeWidth: 0.75,
                             outline: "none"
@@ -130,7 +130,7 @@ class WorldMap extends Component {
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: 12,
-                      fill: "#607D8B"
+                      fill: "white"
                     }}
                   >
                     {marker.name}
