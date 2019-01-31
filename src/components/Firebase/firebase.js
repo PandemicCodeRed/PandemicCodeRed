@@ -31,6 +31,7 @@ class Firebase {
 
   // *** User API ***
 
+  database = () => this.db.ref();
   cities = () => this.db.ref("cities");
   playerOne = () => this.db.ref("playerOne");
 }

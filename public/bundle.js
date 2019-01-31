@@ -76309,6 +76309,10 @@ var Firebase = function Firebase() {
 
   _classCallCheck(this, Firebase);
 
+  _defineProperty(this, "database", function () {
+    return _this.db.ref();
+  });
+
   _defineProperty(this, "cities", function () {
     return _this.db.ref("cities");
   });
@@ -76685,6 +76689,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Firebase */ "./src/components/Firebase/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -76723,11 +76731,7 @@ function (_Component) {
     _classCallCheck(this, WorldMap);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WorldMap).call(this));
-    _this.state = {
-      name: "",
-      translate: "",
-      playerOneLocation: ""
-    };
+    _this.state = {};
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   } // testing firebase database api console logging on frontend of map
@@ -76738,14 +76742,18 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.firebase.cities().on("value", function (snapshot) {
-        var citiesObject = snapshot.val();
+      this.props.firebase.database().once("value", function (snapshot) {
+        var db = snapshot.val();
+
+        _this2.setState(db);
       });
       this.props.firebase.playerOne().on("value", function (snapshot) {
         var playerOne = snapshot.val();
 
         _this2.setState({
-          playerOneLocation: playerOne.Location
+          playerOne: _objectSpread({}, playerOne, {
+            Location: playerOne.Location
+          })
         });
       });
     }
