@@ -25,7 +25,7 @@ class WorldMap extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // testing firebase database api console logging on frontend of map
+  //updates local state with database and listens for changes
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
@@ -44,7 +44,6 @@ class WorldMap extends Component {
     this.setState({
       translate: pos
     });
-    console.log(evt);
     this.props.firebase.playerOne().update({
       Location: marker.name
     });
