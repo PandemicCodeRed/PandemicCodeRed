@@ -35,6 +35,7 @@ class Firebase {
   cities = () => this.db.ref("cities");
   playerOne = () => this.db.ref("playerOne");
   blackStatus = () => this.db.ref('blackStatus')
+  actionCount = () => this.db.ref("actionCount");
 
 }
 

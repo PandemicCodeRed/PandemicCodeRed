@@ -25,7 +25,8 @@ class WorldMap extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.treat = this.treat.bind(this)
   }
-
+  
+  //updates local state with database and listens for changes
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
