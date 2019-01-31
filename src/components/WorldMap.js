@@ -44,6 +44,7 @@ class WorldMap extends Component {
     this.setState({
       translate: pos
     });
+    console.log(evt);
     this.props.firebase.playerOne().update({
       Location: marker.name
     });
