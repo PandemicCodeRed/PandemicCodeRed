@@ -46,7 +46,7 @@ const markers = [
   {markerOffset: 0, name: "Taipei", coordinates: [121.5654, 25.0330]},
   {markerOffset: 0, name: "Tehran", coordinates: [51.3890, 35.6892]},
   {markerOffset: 0, name: "Tokyo", coordinates: [139.6917,35.6895]},
-  {markerOffset: 0, name: "Washington_D.C.", coordinates: [-77.0369,38.9072]}
+  {markerOffset: 0, name: "Washington", coordinates: [-77.0369,38.9072]}
 ]
 
 export default markers

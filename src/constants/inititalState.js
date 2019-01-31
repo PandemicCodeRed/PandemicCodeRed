@@ -1,5 +1,5 @@
 import React from "react";
-
+// If making any initial changes to seed.json make same changes in initialState.js
 const initialState = {
   cities: {
     Algiers: {
@@ -25,7 +25,7 @@ const initialState = {
       station: true,
       neighbors: {
         Chicago: true,
-        "Washington_D.C.": true,
+        "Washington": true,
         Miami: true
       }
     },
@@ -409,7 +409,7 @@ const initialState = {
       neighbors: {
         Mexico_City: true,
         Atlanta: true,
-        "Washington_D.C.": true,
+        "Washington": true,
         Bogota: true
       }
     },
@@ -436,7 +436,7 @@ const initialState = {
       neighbors: {
         Chicago: true,
         New_York: true,
-        "Washington_D.C.": true
+        "Washington": true
       }
     },
     Moscow: {
@@ -474,7 +474,7 @@ const initialState = {
       station: false,
       neighbors: {
         Montreal: true,
-        "Washington_D.C.": true,
+        "Washington": true,
         London: true,
         Madrid: true
       }
@@ -654,8 +654,8 @@ const initialState = {
         Osaka: true
       }
     },
-    "Washington_D.C.": {
-      name: "Washington_D.C.",
+    Washington: {
+      name: "Washington",
       redCount: 0,
       blueCount: 0,
       yellowCount: 0,

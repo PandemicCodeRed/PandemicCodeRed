@@ -78,6 +78,7 @@ class WorldMap extends Component {
   }
 
   render() {
+    const {cities} = this.state
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -131,18 +132,17 @@ class WorldMap extends Component {
             <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => {
-                let m;
+                let cityMarker;
                 let curCity = marker.name
-                // handles if infectioin is present in city
-                // console.log(this.state.cities[curCity])
-                if(this.state.cities[curCity] === undefined){
-                  console.log(curCity)
-                }
-                if(this.state.test >0){
-                  m = <BiohazardMarker />
+                // marker is switched to biohazard if any amount of disease count is in city
+                if(
+                  cities[curCity].blackCount >0 ||
+                   cities[curCity].blueCount >0 ||
+                   cities[curCity].redCount >0 ||
+                   cities[curCity].yellowCount >0){
+                  cityMarker = <BiohazardMarker />
                 }else{
-                  m =
-                  `<circle
+                  cityMarker =<circle
                   cx={0}
                   cy={0}
                   r={3.5}
@@ -151,7 +151,7 @@ class WorldMap extends Component {
                     strokeWidth: 3,
                     opacity: 0.9
                   }}
-                />`
+                />
                 }
                 return(
                 <Marker
@@ -164,17 +164,7 @@ class WorldMap extends Component {
                     pressed: { fill: "#FF5722" }
                   }}
                 >
-                {m}
-                  {/* <circle
-                    cx={0}
-                    cy={0}
-                    r={3.5}
-                    style={{
-                      stroke: "#FF5722",
-                      strokeWidth: 3,
-                      opacity: 0.9
-                    }}
-                  /> */}
+                {cityMarker}
                   <text
                     textAnchor="middle"
                     y={marker.markerOffset}
