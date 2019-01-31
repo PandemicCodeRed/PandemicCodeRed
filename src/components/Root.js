@@ -3,24 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import WorldMap from './WorldMap'
-import PlayerControlNavbar from './PlayerControlNavbar'
+import WorldMap from './WorldMap';
+import PlayerControlNavbar from './PlayerControlNavbar';
+import InfectionBoardNavbar from './InfectionBoardNavbar';
 
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-
-/* const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}); */
 
 const styles = theme => ({
   root: {
@@ -29,13 +15,15 @@ const styles = theme => ({
   paper: {
     height: 540,
     width: 1100,
+    backgroundColor: '#1A237E'
   },
   control: {
     padding: theme.spacing.unit * 2,
   },
   navbar: {
     height: 540,
-    width: 100
+    width: 120,
+    backgroundColor: '#1A237E'
   }
 });
 
@@ -43,7 +31,7 @@ const styles = theme => ({
 
 class Root extends React.Component {
   state = {
-    spacing: '40',
+    spacing: '16',
   };
 
   handleChange = key => (event, value) => {
@@ -59,7 +47,7 @@ class Root extends React.Component {
 
 
     return (
-      <Grid container className={classes.root} spacing={40}>
+      <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
           <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
 
@@ -78,7 +66,7 @@ class Root extends React.Component {
 
               <Grid item>
                 <Paper className={classes.navbar} >
-                <PlayerControlNavbar />
+                <InfectionBoardNavbar />
                 </Paper>
               </Grid>
 
@@ -94,31 +82,3 @@ Root.propTypes = {
 };
 
 export default withStyles(styles)(Root);
-
-
-/* function Root(props) { //#grid-with-breakpoints
-  const { classes } = props;
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={6} sm={2}>
-          <Paper className={classes.paper}><PlayerControlNavbar /></Paper>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}><WorldMap /></Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
-}
-
-Root.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Root);
- */
