@@ -20,23 +20,22 @@ const wrapperStyles = {
 class WorldMap extends Component {
   constructor() {
     super();
-    this.state = {
-      name: "",
-      translate: "",
-      playerOneLocation: ""
-    };
+    this.state = {};
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   // testing firebase database api console logging on frontend of map
   componentDidMount() {
-    this.props.firebase.cities().on("value", snapshot => {
-      const citiesObject = snapshot.val();
+    this.props.firebase.database().once("value", snapshot => {
+      const db = snapshot.val();
+      this.setState(db);
     });
     this.props.firebase.playerOne().on("value", snapshot => {
       const playerOne = snapshot.val();
-      this.setState({ playerOneLocation: playerOne.Location });
+      this.setState({
+        playerOne: { ...playerOne, Location: playerOne.Location }
+      });
     });
   }
 
@@ -45,6 +44,7 @@ class WorldMap extends Component {
     this.setState({
       translate: pos
     });
+    console.log(evt);
     this.props.firebase.playerOne().update({
       Location: marker.name
     });
