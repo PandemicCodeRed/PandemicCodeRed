@@ -23,19 +23,31 @@ class WorldMap extends Component {
     this.state = {};
 
     this.handleClick = this.handleClick.bind(this);
+    this.treat = this.treat.bind(this)
   }
-
+  
   //updates local state with database and listens for changes
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db);
+      this.setState(db) //, () => {console.dir(this.state)});
     });
+
     this.props.firebase.playerOne().on("value", snapshot => {
       const playerOne = snapshot.val();
       this.setState({
         playerOne: { ...playerOne, Location: playerOne.Location }
       });
+    });
+
+    this.props.firebase.blackStatus().on('value', snapshot => {
+      const blackStatus = snapshot.val()
+      this.setState({blackStatus});
+    })
+
+    this.props.firebase.cities().on('value', snapshot => {
+      const cities = snapshot.val();
+      this.setState({cities}, () => {console.log(this.state.cities.Atlanta)})
     });
   }
 
@@ -47,6 +59,16 @@ class WorldMap extends Component {
     this.props.firebase.playerOne().update({
       Location: marker.name
     });
+  }
+
+  treat () {
+    const {cities, playerOne, blackStatus} = this.state;
+    const {blackCount} = cities[playerOne.Location]
+    const currentCityRef = this.props.firebase.cities().child(playerOne.Location)
+
+    if (cities[playerOne.Location].blackCount > 0) {
+      currentCityRef.update({blackCount: blackCount - 1})
+    }
   }
 
   render() {
@@ -106,7 +128,7 @@ class WorldMap extends Component {
                 <Marker
                   key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
-                  onClick={this.handleClick}
+                  onClick={this.treat}
                   style={{
                     default: { fill: "#FF5722" },
                     hover: { fill: "#FFFFFF" },
