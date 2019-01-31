@@ -76287,20 +76287,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var prodConfig = {
-  apiKey: 'AIzaSyC5MueShoA7ir8IbGtBrY9xgikEUcO2-rg',
-  authDomain: 'pandemic-cr.firebaseapp.com',
-  databaseURL: 'https://pandemic-cr.firebaseio.com',
-  projectId: 'pandemic-cr',
-  storageBucket: 'pandemic-cr.appspot.com',
-  messagingSenderId: '101783012584'
+  apiKey: "AIzaSyC5MueShoA7ir8IbGtBrY9xgikEUcO2-rg",
+  authDomain: "pandemic-cr.firebaseapp.com",
+  databaseURL: "https://pandemic-cr.firebaseio.com",
+  projectId: "pandemic-cr",
+  storageBucket: "pandemic-cr.appspot.com",
+  messagingSenderId: "101783012584"
 };
 var devConfig = {
-  apiKey: 'AIzaSyBCo4W6yWle1FH8jZhe8yhIENUuuGCi5nQ',
-  authDomain: 'dev-pandemic.firebaseapp.com',
-  databaseURL: 'https://dev-pandemic.firebaseio.com',
-  projectId: 'dev-pandemic',
-  storageBucket: 'dev-pandemic.appspot.com',
-  messagingSenderId: '881104490800'
+  apiKey: "AIzaSyBCo4W6yWle1FH8jZhe8yhIENUuuGCi5nQ",
+  authDomain: "dev-pandemic.firebaseapp.com",
+  databaseURL: "https://dev-pandemic.firebaseio.com",
+  projectId: "dev-pandemic",
+  storageBucket: "dev-pandemic.appspot.com",
+  messagingSenderId: "881104490800"
 };
 var config =  false ? undefined : devConfig;
 
@@ -76310,7 +76310,11 @@ var Firebase = function Firebase() {
   _classCallCheck(this, Firebase);
 
   _defineProperty(this, "cities", function () {
-    return _this.db.ref('cities');
+    return _this.db.ref("cities");
+  });
+
+  _defineProperty(this, "playerOne", function () {
+    return _this.db.ref("playerOne");
   });
 
   firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(config);
@@ -76720,8 +76724,9 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WorldMap).call(this));
     _this.state = {
-      name: '',
-      translate: ''
+      name: "",
+      translate: "",
+      playerOneLocation: ""
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -76731,24 +76736,34 @@ function (_Component) {
   _createClass(WorldMap, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.firebase.cities().on('value', function (snapshot) {
+      var _this2 = this;
+
+      this.props.firebase.cities().on("value", function (snapshot) {
         var citiesObject = snapshot.val();
-        console.log(citiesObject);
+      });
+      this.props.firebase.playerOne().on("value", function (snapshot) {
+        var playerOne = snapshot.val();
+
+        _this2.setState({
+          playerOneLocation: playerOne.Location
+        });
       });
     }
   }, {
     key: "handleClick",
     value: function handleClick(marker, evt) {
-      console.log(marker, evt);
       var pos = "translate(".concat(evt[0], ",").concat(evt[1], ")");
       this.setState({
         translate: pos
+      });
+      this.props.firebase.playerOne().update({
+        Location: marker.name
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: wrapperStyles
@@ -76806,7 +76821,7 @@ function (_Component) {
           key: i // if two things swap, react won't see any differences in the key.. use ID
           ,
           marker: marker,
-          onClick: _this2.handleClick,
+          onClick: _this3.handleClick,
           style: {
             default: {
               fill: "#FF5722"

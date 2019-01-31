@@ -8,8 +8,8 @@ import {
   Marker
 } from "react-simple-maps";
 import markers from "../constants/cities";
-import PlayerPiece from "./PlayerPiece"
-import { withFirebase } from './Firebase';
+import PlayerPiece from "./PlayerPiece";
+import { withFirebase } from "./Firebase";
 
 const wrapperStyles = {
   width: "100%",
@@ -18,31 +18,36 @@ const wrapperStyles = {
 };
 
 class WorldMap extends Component {
-  constructor(){
-    super()
-    this.state={
-      name: '',
-      translate: ''
-    }
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      translate: "",
+      playerOneLocation: ""
+    };
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   // testing firebase database api console logging on frontend of map
-  componentDidMount(){
-    this.props.firebase.cities().on('value', snapshot => {
+  componentDidMount() {
+    this.props.firebase.cities().on("value", snapshot => {
       const citiesObject = snapshot.val();
-      console.log(citiesObject)
+    });
+    this.props.firebase.playerOne().on("value", snapshot => {
+      const playerOne = snapshot.val();
+      this.setState({ playerOneLocation: playerOne.Location });
     });
   }
 
-  handleClick(marker, evt){
-    console.log(marker, evt)
-
-    let pos = `translate(${evt[0]},${evt[1]})`
+  handleClick(marker, evt) {
+    let pos = `translate(${evt[0]},${evt[1]})`;
     this.setState({
       translate: pos
-    })
+    });
+    this.props.firebase.playerOne().update({
+      Location: marker.name
+    });
   }
 
   render() {
@@ -51,7 +56,7 @@ class WorldMap extends Component {
         <ComposableMap
           projectionConfig={{
             scale: 270,
-             //make a constant on line 17, name them large or "what you can see"
+            //make a constant on line 17, name them large or "what you can see"
             rotation: [-15, 0, 0]
           }}
           width={980}
