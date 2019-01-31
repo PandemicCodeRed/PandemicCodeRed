@@ -654,8 +654,8 @@ const initialState = {
         Osaka: true
       }
     },
-    Washington: {
-      name: "Washington,_D.C.",
+    "Washington_D.C.": {
+      name: "Washington_D.C.",
       redCount: 0,
       blueCount: 0,
       yellowCount: 0,
