@@ -10,6 +10,7 @@ import {
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
 import { withFirebase } from "./Firebase";
+import initialState from "../constants/inititalState";
 
 const wrapperStyles = {
   width: "100%",
@@ -20,17 +21,17 @@ const wrapperStyles = {
 class WorldMap extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = initialState;
 
     this.handleClick = this.handleClick.bind(this);
-    this.treat = this.treat.bind(this)
+    this.treat = this.treat.bind(this);
   }
-  
+
   //updates local state with database and listens for changes
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db) //, () => {console.dir(this.state)});
+      this.setState(db); //, () => {console.dir(this.state)});
     });
 
     this.props.firebase.playerOne().on("value", snapshot => {
@@ -40,14 +41,16 @@ class WorldMap extends Component {
       });
     });
 
-    this.props.firebase.blackStatus().on('value', snapshot => {
-      const blackStatus = snapshot.val()
-      this.setState({blackStatus});
-    })
+    this.props.firebase.blackStatus().on("value", snapshot => {
+      const blackStatus = snapshot.val();
+      this.setState({ blackStatus });
+    });
 
-    this.props.firebase.cities().on('value', snapshot => {
+    this.props.firebase.cities().on("value", snapshot => {
       const cities = snapshot.val();
-      this.setState({cities}, () => {console.log(this.state.cities.Atlanta)})
+      this.setState({ cities }, () => {
+        console.log(this.state.cities.Atlanta);
+      });
     });
   }
 
@@ -61,13 +64,15 @@ class WorldMap extends Component {
     });
   }
 
-  treat () {
-    const {cities, playerOne, blackStatus} = this.state;
-    const {blackCount} = cities[playerOne.Location]
-    const currentCityRef = this.props.firebase.cities().child(playerOne.Location)
+  treat() {
+    const { cities, playerOne, blackStatus } = this.state;
+    const { blackCount } = cities[playerOne.Location];
+    const currentCityRef = this.props.firebase
+      .cities()
+      .child(playerOne.Location);
 
     if (cities[playerOne.Location].blackCount > 0) {
-      currentCityRef.update({blackCount: blackCount - 1})
+      currentCityRef.update({ blackCount: blackCount - 1 });
     }
   }
 

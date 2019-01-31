@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { withFirebase } from "./Firebase";
+import initialState from "../constants/inititalState";
 
 const styles = theme => ({
   button: {
@@ -16,7 +17,7 @@ const styles = theme => ({
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { actionCount: 4 };
+    this.state = initialState;
   }
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
@@ -33,7 +34,6 @@ class PlayerControlNavbar extends Component {
   }
   render() {
     let { classes } = this.props;
-    console.log(this.state);
     return (
       <div>
         <Button variant="contained" color="primary" className={classes.button}>
