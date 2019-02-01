@@ -47,13 +47,6 @@ class WorldMap extends Component {
       const blackStatus = snapshot.val();
       this.setState({ blackStatus });
     });
-
-    this.props.firebase.cities().on("value", snapshot => {
-      const cities = snapshot.val();
-      this.setState({ cities }, () => {
-        // console.log(this.state.cities.Atlanta);
-      });
-    });
   }
 
   handleClick(marker, evt) {
