@@ -671,25 +671,25 @@
     "name": "test",
     "role": "test",
     "location": "Atlanta",
-    "hand": []
+    "hand": ["empty"]
   },
   "playerTwo": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
-    "hand": []
+    "hand": ["empty"]
   },
   "playerThree": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
-    "hand": []
+    "hand": ["empty"]
   },
   "playerFour": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
-    "hand": []
+    "hand": ["empty"]
   },
   "infectionDeck": [
     {
@@ -1183,5 +1183,6 @@
   "playerTurn": "playerOne",
   "stationTotal": 1,
   "gameStatus": "inProgress",
-  "selectedAction": "none"
+  "selectedAction": "none",
+  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"]
 }

@@ -41,7 +41,13 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    this.playerDeckShuffle()
+    let infectionDeck = this.infectionDeckShuffle();
+    let cityCards = this.cityCardShuffle();
+    this.deal(cityCards)
+    let playerDeck = this.playerDeckShuffle(cityCards)
+    this.props.firebase.database().update({playerDeck, infectionDeck}, () => {
+      this.setState({playerDeck, infectionDeck})
+    })
   }
 
   handleChange = key => (event, value) => {
@@ -50,23 +56,45 @@ class Root extends React.Component {
     });
   };
 
-  playerDeckShuffle() {
-    const {playerDeck} = this.state;
-    const citiesOffset = DECK_SIZE - (EPIDEMIC_COUNT + EVENT_COUNT)
-    let cityCards = shuffle(playerDeck.slice(0, citiesOffset))
-    let quarterDecks = chunk(cityCards, 12).map(deck => [...deck, {type: "epidemic"}])
+  playerDeckShuffle(cityCards) {
+    let quarterDecks = chunk(cityCards, 10).map(deck => [...deck, {type: "epidemic"}])
     let shuffledDeck = quarterDecks.reduce((acc, deck) => {
       let shuffledQuarter = shuffle(deck)
       return [...acc, ...shuffledQuarter]
     }, [])
-    this.props.firebase.database().update({playerDeck: shuffledDeck})
+    return shuffledDeck
   }
+
+  cityCardShuffle() {
+    const {playerDeck} = this.state;
+    const citiesOffset = DECK_SIZE - (EPIDEMIC_COUNT + EVENT_COUNT)
+    let cityCards = shuffle(playerDeck.slice(0, citiesOffset))
+    return cityCards
+  }
+
+  infectionDeckShuffle() {
+    const {infectionDeck} = this.state;
+    const shuffledDeck = shuffle(infectionDeck)
+    return shuffledDeck
+  }
+
+  deal(cityCards) {
+    const {players} = this.state
+    const startingHands = players.reduce((hands, player) => {
+      hands[`/${player}/hand`] = [cityCards.pop(), cityCards.pop()]
+      return hands
+    }, {})
+    this.props.firebase.database().update(startingHands, () => {
+      players.forEach(player => this.setState({
+        [player]: {...this.state[player], hand: startingHands[`/${player}/hand`]}
+      }))
+    })
+    return cityCards
+   }
 
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
-
-
 
     return (
       <Grid container className={classes.root} spacing={16}>
