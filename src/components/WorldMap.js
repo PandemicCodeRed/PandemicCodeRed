@@ -13,6 +13,9 @@ import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
+import Tippy from '@tippy.js/react'
+import 'tippy.js/dist/tippy.css'
+
 
 const wrapperStyles = {
   width: "100%",
@@ -208,6 +211,7 @@ class WorldMap extends Component {
                   >
                     {researchMarker}
                     {cityMarker}
+                    <Tippy content={`City:${cities[curCity].name} Cubes: Black ${cities[curCity].blackCount} Red ${cities[curCity].redCount} Yellow ${cities[curCity].yellowCount} Blue ${cities[curCity].blueCount}- Station: ${cities[curCity].station}`}>
                     <text
                       textAnchor="middle"
                       y={marker.markerOffset}
@@ -219,6 +223,7 @@ class WorldMap extends Component {
                     >
                       {marker.name}
                     </text>
+                    </Tippy>
                   </Marker>
                 );
               })}
