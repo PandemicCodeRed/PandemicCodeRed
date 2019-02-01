@@ -11,20 +11,20 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     "&$buttonDisabled": {
       color: theme.palette.grey[500]
-  }
+    }
   },
   buttonDisabled: {},
   input: {
     display: "none"
   }
 });
-let disablePlayer1 = false;  //To disable, set to true
-let disableMove = false;  //To disable, set to true
-let disableTreat = false;  //To disable, set to true
-let disableShare = false;  //To disable, set to true
-let disableCard = false;  //To disable, set to true
-let disableActionCount = false;  //To disable, set to true
-let disablePlayerRole = false;  //To disable, set to true
+let disablePlayer1 = false; //To disable, set to true
+let disableMove = false; //To disable, set to true
+let disableTreat = false; //To disable, set to true
+let disableShare = false; //To disable, set to true
+let disableCard = false; //To disable, set to true
+let disableActionCount = false; //To disable, set to true
+let disablePlayerRole = false; //To disable, set to true
 
 class PlayerControlNavbar extends Component {
   constructor() {
@@ -34,11 +34,11 @@ class PlayerControlNavbar extends Component {
     this.handleMove = this.handleMove.bind(this);
   }
   componentDidMount() {
-    this.props.firebase.actionCount().on("value", snapshot => {
-      const actionCount = snapshot.val();
+    this.props.firebase.database().on("value", snapshot => {
+      const db = snapshot.val();
       this.setState({
         ...this.state,
-        actionCount: actionCount
+        ...db
       });
     });
   }
@@ -63,11 +63,11 @@ class PlayerControlNavbar extends Component {
     return (
       <div>
         <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        disabled={disablePlayer1}
-        classes={{ root: classes.button, disabled: classes.buttonDisabled }}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={disablePlayer1}
+          classes={{ root: classes.button, disabled: classes.buttonDisabled }}
         >
           PLAYER 1
         </Button>
@@ -79,7 +79,6 @@ class PlayerControlNavbar extends Component {
           disabled={disableMove}
           onClick={this.handleMove}
         >
-
           MOVE
         </Button>
 
@@ -99,34 +98,38 @@ class PlayerControlNavbar extends Component {
         />
 
         <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        disabled={disableShare}>
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={disableShare}
+        >
           SHARE
         </Button>
 
         <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        disabled={disableCard}>
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={disableCard}
+        >
           CARD
         </Button>
 
         <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        disabled={disableActionCount}>
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={disableActionCount}
+        >
           {this.state.actionCount}
         </Button>
 
         <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        disabled={disablePlayerRole}>
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={disablePlayerRole}
+        >
           PLAYER ROLE
         </Button>
       </div>

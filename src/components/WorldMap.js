@@ -36,24 +36,29 @@ class WorldMap extends Component {
       this.setState(db); //, () => {console.dir(this.state)});
     });
 
-    this.props.firebase.playerOne().on("value", snapshot => {
-      const playerOne = snapshot.val();
-      this.setState({
-        playerOne: { ...playerOne, location: playerOne.location }
-      });
+    this.props.firebase.database().on("value", snapshot => {
+      const db = snapshot.val();
+      this.setState(db);
     });
 
-    this.props.firebase.selectedAction().on("value", snapshot => {
-      const selectedAction = snapshot.val();
-      this.setState({
-        selectedAction: selectedAction
-      });
-    });
+    // this.props.firebase.playerOne().on("value", snapshot => {
+    //   const playerOne = snapshot.val();
+    //   this.setState({
+    //     playerOne: { ...playerOne, location: playerOne.location }
+    //   });
+    // });
 
-    this.props.firebase.blackStatus().on("value", snapshot => {
-      const blackStatus = snapshot.val();
-      this.setState({ blackStatus });
-    });
+    // this.props.firebase.selectedAction().on("value", snapshot => {
+    //   const selectedAction = snapshot.val();
+    //   this.setState({
+    //     selectedAction: selectedAction
+    //   });
+    // });
+
+    // this.props.firebase.blackStatus().on("value", snapshot => {
+    //   const blackStatus = snapshot.val();
+    //   this.setState({ blackStatus });
+    // });
   }
 
   handleClick(marker, evt) {
