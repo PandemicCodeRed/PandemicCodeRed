@@ -1184,5 +1184,6 @@
   "stationTotal": 1,
   "gameStatus": "inProgress",
   "selectedAction": "none",
-  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"]
+  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
+  "actionCount: 4"
 }
