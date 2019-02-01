@@ -31,6 +31,7 @@ class PlayerControlNavbar extends Component {
     super();
     this.state = { ...initialState, treatOpen: false, selectedType: "none" };
     this.handleTreat = this.handleTreat.bind(this);
+    this.handleMove = this.handleMove.bind(this);
   }
   componentDidMount() {
     this.props.firebase.actionCount().on("value", snapshot => {
@@ -39,6 +40,13 @@ class PlayerControlNavbar extends Component {
         ...this.state,
         actionCount: actionCount
       });
+    });
+  }
+
+  //toggles move action
+  handleMove() {
+    this.props.firebase.database().update({
+      selectedAction: "move"
     });
   }
 
@@ -68,7 +76,10 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableMove}>
+          disabled={disableMove}
+          onClick={this.handleMove}
+        >
+
           MOVE
         </Button>
 
