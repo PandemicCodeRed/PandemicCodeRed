@@ -10,6 +10,7 @@ import {
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
 import BiohazardMarker from "./BioharzardMarker"
+import ResearchLab from "./ResearchLab"
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 
@@ -133,7 +134,12 @@ class WorldMap extends Component {
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker;
+                let researchMarker = null;
                 let curCity = marker.name
+                //research lab also appears if true
+                if(cities[curCity].station === true){
+                  researchMarker = <ResearchLab />
+                }
                 // marker is switched to biohazard if any amount of disease count is in city
                 if(
                   cities[curCity].blackCount >0 ||
@@ -164,6 +170,7 @@ class WorldMap extends Component {
                     pressed: { fill: "#FF5722" }
                   }}
                 >
+                {researchMarker}
                 {cityMarker}
                   <text
                     textAnchor="middle"
