@@ -6,6 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import WorldMap from './WorldMap';
 import PlayerControlNavbar from './PlayerControlNavbar';
 import InfectionBoardNavbar from './InfectionBoardNavbar';
+import initialState from "../constants/inititalState";
+import {DECK_SIZE, EPIDEMIC_COUNT, EVENT_COUNT} from "../constants/deck";
+
+const shuffle = require('lodash.shuffle');
+const chunk = require('lodash.chunk');
 
 
 const styles = theme => ({
@@ -30,15 +35,32 @@ const styles = theme => ({
 
 
 class Root extends React.Component {
-  state = {
-    spacing: '16',
-  };
+  constructor(){
+    super()
+    this.state = {...initialState, spacing: '16',}
+  }
+
+  componentDidMount() {
+    this.playerDeckShuffle()
+  }
 
   handleChange = key => (event, value) => {
     this.setState({
       [key]: value,
     });
   };
+
+  playerDeckShuffle() {
+    const {playerDeck} = this.state;
+    const citiesOffset = playerDeck.length - (EPIDEMIC_COUNT + EVENT_COUNT)
+    let cityCards = playerDeck.slice(0, citiesOffset)
+    let quarterDecks = chunk(cityCards, 12).map(deck => [...deck, {type: "epidemic"}])
+    let shuffledDeck = quarterDecks.reduce((acc, deck) => {
+      let shuffledQuarter = shuffle(deck)
+      return [...acc, ...shuffledQuarter]
+    }, [])
+    return shuffledDeck
+  }
 
   render() {
     const { classes } = this.props;

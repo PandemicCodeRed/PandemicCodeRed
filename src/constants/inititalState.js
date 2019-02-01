@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from "react";
 // If making any initial changes to seed.json make same changes in initialState.js
 const initialState = {
