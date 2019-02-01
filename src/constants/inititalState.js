@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from "react";
 // If making any initial changes to seed.json make same changes in initialState.js
 const initialState = {
@@ -447,7 +448,7 @@ const initialState = {
       blackCount: 0,
       station: false,
       neighbors: {
-        St: true,
+        St_Petersburg: true,
         Tehran: true,
         Istanbul: true
       }
@@ -587,7 +588,7 @@ const initialState = {
       }
     },
     St_Petersburg: {
-      name: "St._Petersburg",
+      name: "St_Petersburg",
       redCount: 0,
       blueCount: 0,
       yellowCount: 0,
@@ -673,25 +674,25 @@ const initialState = {
     name: "test",
     role: "test",
     location: "Atlanta",
-    hand: []
+    hand: ["empty"]
   },
   playerTwo: {
     name: "test",
     role: "test",
     location: "Atlanta",
-    hand: []
+    hand: ["empty"]
   },
   playerThree: {
     name: "test",
     role: "test",
     location: "Atlanta",
-    hand: []
+    hand: ["empty"]
   },
   playerFour: {
     name: "test",
     role: "test",
     location: "Atlanta",
-    hand: []
+    hand: ["empty"]
   },
   infectionDeck: [
     {
@@ -736,6 +737,10 @@ const initialState = {
     },
     {
       name: "Milan",
+      color: "blue"
+    },
+    {
+      name: "St_Petersburg",
       color: "blue"
     },
     {
@@ -936,6 +941,11 @@ const initialState = {
     },
     {
       name: "Milan",
+      type: "city",
+      color: "blue"
+    },
+    {
+      name: "St_Petersburg",
       type: "city",
       color: "blue"
     },
@@ -1177,7 +1187,8 @@ const initialState = {
   stationTotal: 1,
   gameStatus: "inProgress",
   selectedAction: "none",
-  actionCount: 4
+  actionCount: 4,
+  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"]
 };
 
 export default initialState;

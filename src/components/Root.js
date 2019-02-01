@@ -6,6 +6,13 @@ import Grid from '@material-ui/core/Grid';
 import WorldMap from './WorldMap';
 import PlayerControlNavbar from './PlayerControlNavbar';
 import InfectionBoardNavbar from './InfectionBoardNavbar';
+import { withFirebase } from "./Firebase";
+
+import initialState from "../constants/inititalState";
+import {DECK_SIZE, EPIDEMIC_COUNT, EVENT_COUNT} from "../constants/deck";
+
+const shuffle = require('lodash.shuffle');
+const chunk = require('lodash.chunk');
 
 
 const styles = theme => ({
@@ -27,12 +34,21 @@ const styles = theme => ({
   }
 });
 
-
-
 class Root extends React.Component {
-  state = {
-    spacing: '16',
-  };
+  constructor(){
+    super()
+    this.state = {...initialState, spacing: '16',}
+  }
+
+  componentDidMount() {
+    let infectionDeck = this.infectionDeckShuffle();
+    let cityCards = this.cityCardShuffle();
+    this.deal(cityCards)
+    let playerDeck = this.playerDeckShuffle(cityCards)
+    this.props.firebase.database().update({playerDeck, infectionDeck}, () => {
+      this.setState({playerDeck, infectionDeck})
+    })
+  }
 
   handleChange = key => (event, value) => {
     this.setState({
@@ -40,11 +56,45 @@ class Root extends React.Component {
     });
   };
 
+  playerDeckShuffle(cityCards) {
+    let quarterDecks = chunk(cityCards, 10).map(deck => [...deck, {type: "epidemic"}])
+    let shuffledDeck = quarterDecks.reduce((acc, deck) => {
+      let shuffledQuarter = shuffle(deck)
+      return [...acc, ...shuffledQuarter]
+    }, [])
+    return shuffledDeck
+  }
+
+  cityCardShuffle() {
+    const {playerDeck} = this.state;
+    const citiesOffset = DECK_SIZE - (EPIDEMIC_COUNT + EVENT_COUNT)
+    let cityCards = shuffle(playerDeck.slice(0, citiesOffset))
+    return cityCards
+  }
+
+  infectionDeckShuffle() {
+    const {infectionDeck} = this.state;
+    const shuffledDeck = shuffle(infectionDeck)
+    return shuffledDeck
+  }
+
+  deal(cityCards) {
+    const {players} = this.state
+    const startingHands = players.reduce((hands, player) => {
+      hands[`/${player}/hand`] = [cityCards.pop(), cityCards.pop()]
+      return hands
+    }, {})
+    this.props.firebase.database().update(startingHands, () => {
+      players.forEach(player => this.setState({
+        [player]: {...this.state[player], hand: startingHands[`/${player}/hand`]}
+      }))
+    })
+    return cityCards
+   }
+
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
-
-
 
     return (
       <Grid container className={classes.root} spacing={16}>
@@ -81,4 +131,4 @@ Root.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Root);
+export default withStyles(styles)(withFirebase(Root));
