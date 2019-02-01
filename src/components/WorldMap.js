@@ -9,6 +9,8 @@ import {
 } from "react-simple-maps";
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
+import BiohazardMarker from "./BioharzardMarker"
+import ResearchLab from "./ResearchLab"
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 
@@ -70,6 +72,7 @@ class WorldMap extends Component {
   }
 
   render() {
+    const {cities} = this.state
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -122,7 +125,36 @@ class WorldMap extends Component {
             </Geographies>
             <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
-              {markers.map((marker, i) => (
+              {markers.map((marker, i) => {
+                let cityMarker =null;
+                let researchMarker = null;
+                let curCity = marker.name
+                //research lab also appears if true
+                if(cities[curCity].station === true){
+                  researchMarker = <ResearchLab />
+                }
+                // marker is switched to biohazard if any amount of disease count is in city
+                if(
+                  cities[curCity].blackCount >0 ||
+                   cities[curCity].blueCount >0 ||
+                   cities[curCity].redCount >0 ||
+                   cities[curCity].yellowCount >0){
+                  cityMarker = <BiohazardMarker />
+                }
+                // Dont want red marker to show up when research marker is present either
+                else if(!researchMarker){
+                  cityMarker =<circle
+                  cx={0}
+                  cy={0}
+                  r={3.5}
+                  style={{
+                    stroke: "#FF5722",
+                    strokeWidth: 3,
+                    opacity: 0.9
+                  }}
+                />
+                }
+                return(
                 <Marker
                   key={i} // if two things swap, react won't see any differences in the key.. use ID
                   marker={marker}
@@ -133,16 +165,8 @@ class WorldMap extends Component {
                     pressed: { fill: "#FF5722" }
                   }}
                 >
-                  <circle
-                    cx={0}
-                    cy={0}
-                    r={3.5}
-                    style={{
-                      stroke: "#FF5722",
-                      strokeWidth: 3,
-                      opacity: 0.9
-                    }}
-                  />
+                {researchMarker}
+                {cityMarker}
                   <text
                     textAnchor="middle"
                     y={marker.markerOffset}
@@ -155,7 +179,7 @@ class WorldMap extends Component {
                     {marker.name}
                   </text>
                 </Marker>
-              ))}
+              )})}
             </Markers>
           </ZoomableGroup>
         </ComposableMap>
