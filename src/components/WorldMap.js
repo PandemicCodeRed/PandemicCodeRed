@@ -9,8 +9,8 @@ import {
 } from "react-simple-maps";
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
-import BiohazardMarker from "./BioharzardMarker"
-import ResearchLab from "./ResearchLab"
+import BiohazardMarker from "./BioharzardMarker";
+import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 
@@ -39,7 +39,14 @@ class WorldMap extends Component {
     this.props.firebase.playerOne().on("value", snapshot => {
       const playerOne = snapshot.val();
       this.setState({
-        playerOne: { ...playerOne, Location: playerOne.Location }
+        playerOne: { ...playerOne, location: playerOne.location }
+      });
+    });
+
+    this.props.firebase.selectedAction().on("value", snapshot => {
+      const selectedAction = snapshot.val();
+      this.setState({
+        selectedAction: selectedAction
       });
     });
 
@@ -51,12 +58,24 @@ class WorldMap extends Component {
 
   handleClick(marker, evt) {
     let pos = `translate(${evt[0]},${evt[1]})`;
-    this.setState({
-      translate: pos
-    });
-    this.props.firebase.playerOne().update({
-      Location: marker.name
-    });
+    // this.setState({
+    //   translate: pos
+    // });
+    if (this.state.selectedAction == "move") {
+      let target = marker.name;
+      let currentLocation = this.state.playerOne.location;
+      let adjacents = this.state.cities[currentLocation].neighbors;
+      if (adjacents.hasOwnProperty(target)) {
+        this.props.firebase.playerOne().update({
+          location: marker.name
+        });
+        this.props.firebase.database().update({
+          selectedAction: "none"
+        });
+      } else {
+        alert("Invalid Move");
+      }
+    }
   }
 
   treat() {
@@ -64,7 +83,7 @@ class WorldMap extends Component {
     const { blackCount } = cities[playerOne.Location];
     const currentCityRef = this.props.firebase
       .cities()
-      .child(playerOne.Location);
+      .child(playerOne.location);
 
     if (cities[playerOne.Location].blackCount > 0) {
       currentCityRef.update({ blackCount: blackCount - 1 });
@@ -72,7 +91,7 @@ class WorldMap extends Component {
   }
 
   render() {
-    const {cities} = this.state
+    const { cities } = this.state;
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -126,60 +145,64 @@ class WorldMap extends Component {
             <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => {
-                let cityMarker =null;
+                let cityMarker = null;
                 let researchMarker = null;
-                let curCity = marker.name
+                let curCity = marker.name;
                 //research lab also appears if true
-                if(cities[curCity].station === true){
-                  researchMarker = <ResearchLab />
+                if (cities[curCity].station === true) {
+                  researchMarker = <ResearchLab />;
                 }
                 // marker is switched to biohazard if any amount of disease count is in city
-                if(
-                  cities[curCity].blackCount >0 ||
-                   cities[curCity].blueCount >0 ||
-                   cities[curCity].redCount >0 ||
-                   cities[curCity].yellowCount >0){
-                  cityMarker = <BiohazardMarker />
+                if (
+                  cities[curCity].blackCount > 0 ||
+                  cities[curCity].blueCount > 0 ||
+                  cities[curCity].redCount > 0 ||
+                  cities[curCity].yellowCount > 0
+                ) {
+                  cityMarker = <BiohazardMarker />;
                 }
                 // Dont want red marker to show up when research marker is present either
-                else if(!researchMarker){
-                  cityMarker =<circle
-                  cx={0}
-                  cy={0}
-                  r={3.5}
-                  style={{
-                    stroke: "#FF5722",
-                    strokeWidth: 3,
-                    opacity: 0.9
-                  }}
-                />
+                else if (!researchMarker) {
+                  cityMarker = (
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={3.5}
+                      style={{
+                        stroke: "#FF5722",
+                        strokeWidth: 3,
+                        opacity: 0.9
+                      }}
+                    />
+                  );
                 }
-                return(
-                <Marker
-                  key={i} // if two things swap, react won't see any differences in the key.. use ID
-                  marker={marker}
-                  onClick={this.treat}
-                  style={{
-                    default: { fill: "#FF5722" },
-                    hover: { fill: "#FFFFFF" },
-                    pressed: { fill: "#FF5722" }
-                  }}
-                >
-                {researchMarker}
-                {cityMarker}
-                  <text
-                    textAnchor="middle"
-                    y={marker.markerOffset}
+                return (
+                  <Marker
+                    key={i} // if two things swap, react won't see any differences in the key.. use ID
+                    marker={marker}
+                    onClick={this.handleClick}
                     style={{
-                      fontFamily: "Roboto, sans-serif",
-                      fontSize: 12,
-                      fill: "white"
+                      default: { fill: "#FF5722" },
+                      hover: { fill: "#FFFFFF" },
+                      pressed: { fill: "#FF5722" }
                     }}
                   >
-                    {marker.name}
-                  </text>
-                </Marker>
-              )})}
+                    {researchMarker}
+                    {cityMarker}
+                    <text
+                      textAnchor="middle"
+                      y={marker.markerOffset}
+                      style={{
+                        fontFamily: "Roboto, sans-serif",
+                        fontSize: 12,
+                        fill: "white"
+                      }}
+                    >
+                      {marker.name}
+                    </text>
+                  </Marker>
+                );
+              })}
             </Markers>
           </ZoomableGroup>
         </ComposableMap>
