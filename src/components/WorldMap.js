@@ -133,7 +133,7 @@ class WorldMap extends Component {
             <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
             <Markers>
               {markers.map((marker, i) => {
-                let cityMarker;
+                let cityMarker =null;
                 let researchMarker = null;
                 let curCity = marker.name
                 //research lab also appears if true
@@ -147,7 +147,9 @@ class WorldMap extends Component {
                    cities[curCity].redCount >0 ||
                    cities[curCity].yellowCount >0){
                   cityMarker = <BiohazardMarker />
-                }else{
+                }
+                // Dont want red marker to show up when research marker is present either
+                else if(!researchMarker){
                   cityMarker =<circle
                   cx={0}
                   cy={0}
