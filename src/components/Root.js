@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import WorldMap from './WorldMap';
 import PlayerControlNavbar from './PlayerControlNavbar';
 import InfectionBoardNavbar from './InfectionBoardNavbar';
+import { withFirebase } from "./Firebase";
+
 import initialState from "../constants/inititalState";
 import {DECK_SIZE, EPIDEMIC_COUNT, EVENT_COUNT} from "../constants/deck";
 
@@ -32,8 +34,6 @@ const styles = theme => ({
   }
 });
 
-
-
 class Root extends React.Component {
   constructor(){
     super()
@@ -53,13 +53,14 @@ class Root extends React.Component {
   playerDeckShuffle() {
     const {playerDeck} = this.state;
     const citiesOffset = playerDeck.length - (EPIDEMIC_COUNT + EVENT_COUNT)
-    let cityCards = playerDeck.slice(0, citiesOffset)
+    let cityCards = shuffle(playerDeck.slice(0, citiesOffset))
     let quarterDecks = chunk(cityCards, 12).map(deck => [...deck, {type: "epidemic"}])
     let shuffledDeck = quarterDecks.reduce((acc, deck) => {
       let shuffledQuarter = shuffle(deck)
       return [...acc, ...shuffledQuarter]
     }, [])
-    return shuffledDeck
+    this.props.firebase.database().update({playerDeck: shuffledDeck})
+    // return shuffledDeck
   }
 
   render() {
@@ -103,4 +104,4 @@ Root.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Root);
+export default withStyles(styles)(withFirebase(Root));
