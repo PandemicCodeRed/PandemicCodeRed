@@ -70,7 +70,8 @@ class WorldMap extends Component {
           location: marker.name
         });
         this.props.firebase.database().update({
-          selectedAction: "none"
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1
         });
       } else {
         alert("Invalid Move");
