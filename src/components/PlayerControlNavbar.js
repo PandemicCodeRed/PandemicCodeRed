@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
+import TreatDialog from "./treatDialogue";
 
 const styles = theme => ({
   button: {
@@ -17,13 +18,10 @@ const styles = theme => ({
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = initialState;
+    this.state = { ...initialState, treatOpen: false, selectedType: "none" };
+    this.handleTreat = this.handleTreat.bind(this);
   }
   componentDidMount() {
-    this.props.firebase.database().once("value", snapshot => {
-      const db = snapshot.val();
-      this.setState(db);
-    });
     this.props.firebase.actionCount().on("value", snapshot => {
       const actionCount = snapshot.val();
       this.setState({
@@ -32,6 +30,15 @@ class PlayerControlNavbar extends Component {
       });
     });
   }
+
+  //triggers treat dialogue
+  handleTreat() {
+    this.setState({ ...this.state, treatOpen: true });
+  }
+  handleTreatClose = type => {
+    this.setState({ ...this.state, treatOpen: false, selectedType: type });
+  };
+
   render() {
     let { classes } = this.props;
     return (
@@ -44,9 +51,19 @@ class PlayerControlNavbar extends Component {
           MOVE
         </Button>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleTreat}
+        >
           TREAT
         </Button>
+
+        <TreatDialog
+          open={this.state.treatOpen}
+          onClose={this.handleTreatClose}
+        />
 
         <Button variant="contained" color="primary" className={classes.button}>
           SHARE
