@@ -8,12 +8,23 @@ import TreatDialog from "./treatDialogue";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    "&$buttonDisabled": {
+      color: theme.palette.grey[500]
+  }
   },
+  buttonDisabled: {},
   input: {
     display: "none"
   }
 });
+let disablePlayer1 = false;  //To disable, set to true
+let disableMove = false;  //To disable, set to true
+let disableTreat = false;  //To disable, set to true
+let disableShare = false;  //To disable, set to true
+let disableCard = false;  //To disable, set to true
+let disableActionCount = false;  //To disable, set to true
+let disablePlayerRole = false;  //To disable, set to true
 
 class PlayerControlNavbar extends Component {
   constructor() {
@@ -51,7 +62,13 @@ class PlayerControlNavbar extends Component {
     let { classes } = this.props;
     return (
       <div>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={disablePlayer1}
+        classes={{ root: classes.button, disabled: classes.buttonDisabled }}
+        >
           PLAYER 1
         </Button>
 
@@ -59,8 +76,10 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
+          disabled={disableMove}
           onClick={this.handleMove}
         >
+
           MOVE
         </Button>
 
@@ -69,6 +88,7 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleTreat}
+          disabled={disableTreat}
         >
           TREAT
         </Button>
@@ -78,19 +98,35 @@ class PlayerControlNavbar extends Component {
           onClose={this.handleTreatClose}
         />
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={disableShare}>
           SHARE
         </Button>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={disableCard}>
           CARD
         </Button>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={disableActionCount}>
           {this.state.actionCount}
         </Button>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        disabled={disablePlayerRole}>
           PLAYER ROLE
         </Button>
       </div>
