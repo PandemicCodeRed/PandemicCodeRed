@@ -65,7 +65,20 @@ class WorldMap extends Component {
       let target = marker.name;
       let currentLocation = this.state.playerOne.location;
       let adjacents = this.state.cities[currentLocation].neighbors;
+      //neighbor move
       if (adjacents.hasOwnProperty(target)) {
+        this.props.firebase.playerOne().update({
+          location: marker.name
+        });
+        this.props.firebase.database().update({
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1
+        });
+        //station move
+      } else if (
+        this.state.cities[currentLocation].station &&
+        this.state.cities[target].station
+      ) {
         this.props.firebase.playerOne().update({
           location: marker.name
         });
