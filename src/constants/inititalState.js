@@ -448,7 +448,7 @@ const initialState = {
       blackCount: 0,
       station: false,
       neighbors: {
-        St: true,
+        St_Petersburg: true,
         Tehran: true,
         Istanbul: true
       }
@@ -588,7 +588,7 @@ const initialState = {
       }
     },
     St_Petersburg: {
-      name: "St._Petersburg",
+      name: "St_Petersburg",
       redCount: 0,
       blueCount: 0,
       yellowCount: 0,
@@ -737,6 +737,10 @@ const initialState = {
     },
     {
       name: "Milan",
+      color: "blue"
+    },
+    {
+      name: "St_Petersburg",
       color: "blue"
     },
     {
@@ -937,6 +941,11 @@ const initialState = {
     },
     {
       name: "Milan",
+      type: "city",
+      color: "blue"
+    },
+    {
+      name: "St_Petersburg",
       type: "city",
       color: "blue"
     },

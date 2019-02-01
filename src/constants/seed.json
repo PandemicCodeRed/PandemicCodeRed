@@ -737,6 +737,10 @@
       "color": "blue"
     },
     {
+      "name": "St_Petersburg",
+      "color": "blue"
+    },
+    {
       "name": "Los Angeles",
       "color": "yellow"
     },
@@ -934,6 +938,11 @@
     },
     {
       "name": "Milan",
+      "type": "city",
+      "color": "blue"
+    },
+    {
+      "name": "St_Petersburg",
       "type": "city",
       "color": "blue"
     },
