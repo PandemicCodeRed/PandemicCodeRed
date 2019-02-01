@@ -52,7 +52,7 @@ class Root extends React.Component {
 
   playerDeckShuffle() {
     const {playerDeck} = this.state;
-    const citiesOffset = playerDeck.length - (EPIDEMIC_COUNT + EVENT_COUNT)
+    const citiesOffset = DECK_SIZE - (EPIDEMIC_COUNT + EVENT_COUNT)
     let cityCards = shuffle(playerDeck.slice(0, citiesOffset))
     let quarterDecks = chunk(cityCards, 12).map(deck => [...deck, {type: "epidemic"}])
     let shuffledDeck = quarterDecks.reduce((acc, deck) => {
@@ -60,7 +60,6 @@ class Root extends React.Component {
       return [...acc, ...shuffledQuarter]
     }, [])
     this.props.firebase.database().update({playerDeck: shuffledDeck})
-    // return shuffledDeck
   }
 
   render() {
