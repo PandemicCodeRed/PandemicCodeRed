@@ -211,7 +211,7 @@ class WorldMap extends Component {
                   >
                     {researchMarker}
                     {cityMarker}
-                    <Tippy content={`City:${cities[curCity].name} Cubes: Black ${cities[curCity].blackCount} Red ${cities[curCity].redCount} Yellow ${cities[curCity].yellowCount} Blue ${cities[curCity].blueCount}- Station: ${cities[curCity].station}`}>
+                    <Tippy content={`Disease Cubes: Black ${cities[curCity].blackCount} Red ${cities[curCity].redCount} Yellow ${cities[curCity].yellowCount} Blue ${cities[curCity].blueCount}- Research Station: ${cities[curCity].station}`}>
                     <text
                       textAnchor="middle"
                       y={marker.markerOffset}
