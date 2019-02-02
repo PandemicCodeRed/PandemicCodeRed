@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import WorldMap from './WorldMap';
 import PlayerControlNavbar from './PlayerControlNavbar';
 import InfectionBoardNavbar from './InfectionBoardNavbar';
+import PlayerHand from './PlayerHand';
 import { withFirebase } from "./Firebase";
 
 import initialState from "../constants/inititalState";
@@ -123,6 +124,7 @@ class Root extends React.Component {
 
           </Grid>
         </Grid>
+        <PlayerHand />
       </Grid>
 
     );
