@@ -42,13 +42,19 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
+    this.props.firebase.database().on("value", snapshot => {
+      const db = snapshot.val();
+      this.setState((state) => ({
+        ...state,
+        ...db
+      }));
+    });
+
     let infectionDeck = this.infectionDeckShuffle();
     let cityCards = this.cityCardShuffle();
     this.deal(cityCards)
     let playerDeck = this.playerDeckShuffle(cityCards)
-    this.props.firebase.database().update({playerDeck, infectionDeck}, () => {
-      this.setState({playerDeck, infectionDeck})
-    })
+    this.props.firebase.database().update({playerDeck, infectionDeck})
   }
 
   handleChange = key => (event, value) => {
@@ -85,12 +91,7 @@ class Root extends React.Component {
       hands[`/${player}/hand`] = [cityCards.pop(), cityCards.pop()]
       return hands
     }, {})
-    this.props.firebase.database().update(startingHands, () => {
-      players.forEach(player => this.setState({
-        [player]: {...this.state[player], hand: startingHands[`/${player}/hand`]}
-      }))
-    })
-    return cityCards
+    this.props.firebase.database().update(startingHands)
    }
 
   render() {
