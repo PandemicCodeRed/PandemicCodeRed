@@ -1173,10 +1173,10 @@ const initialState = {
       description: "cooldescription"
     }
   ],
-  remainingRed: 24,
-  remainingBlue: 24,
-  remainingYellow: 24,
-  remainingBlack: 24,
+  "redRemaining": 24,
+  "blueRemaining": 24,
+  "yellowRemaining": 24,
+  "blackRemaining": 24,
   redStatus: "active",
   blueStatus: "active",
   yellowStatus: "active",
