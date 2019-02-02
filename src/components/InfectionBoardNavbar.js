@@ -184,7 +184,7 @@ function InfectionBoardNavbar(props) {
           />
         </GridListTile>
         <GridListTile>
-          <WarningSource
+          <WarningIcon
             className={classes.icon}
             color="primary"
             fontSize="large"
