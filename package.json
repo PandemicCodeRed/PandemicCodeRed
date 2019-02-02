@@ -16,6 +16,7 @@
     "firebase": "^5.8.1",
     "lodash.chunk": "^4.2.0",
     "lodash.shuffle": "^4.2.0",
+    "material-design-icons": "^3.0.1",
     "mime": "^2.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.2.0",
