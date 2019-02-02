@@ -4,8 +4,8 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 
 class TreatDialog extends React.Component {
-  handleVirusClick(type) {
-    this.props.onClose(type);
+  handleVirusClick(color) {
+    this.props.onClose(color);
   }
 
   render() {

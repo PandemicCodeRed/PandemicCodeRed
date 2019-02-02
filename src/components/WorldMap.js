@@ -29,7 +29,6 @@ class WorldMap extends Component {
     this.state = initialState;
 
     this.handleClick = this.handleClick.bind(this);
-    this.treat = this.treat.bind(this);
   }
 
   //updates local state with database and listens for changes
@@ -97,18 +96,6 @@ class WorldMap extends Component {
       } else {
         alert("Invalid Move");
       }
-    }
-  }
-
-  treat() {
-    const { cities, playerOne, blackStatus } = this.state;
-    const { blackCount } = cities[playerOne.Location];
-    const currentCityRef = this.props.firebase
-      .cities()
-      .child(playerOne.location);
-
-    if (cities[playerOne.Location].blackCount > 0) {
-      currentCityRef.update({ blackCount: blackCount - 1 });
     }
   }
 

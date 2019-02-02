@@ -52,11 +52,32 @@ class PlayerControlNavbar extends Component {
 
   //triggers treat dialogue
   handleTreat() {
-    this.setState({ ...this.state, treatOpen: true });
+    this.setState({treatOpen: true });
   }
-  handleTreatClose = type => {
-    this.setState({ ...this.state, treatOpen: false, selectedType: type });
-  };
+
+  handleTreatClose = color => {
+    const { cities, playerTurn } = this.state;
+    const selectedVirusStatus = this.state[`${color}Status`]
+    const selectedVirusTotal = this.state[`${color}Remaining`]
+    const player = this.state[playerTurn];
+    const currentCity = player.location
+    const selectedVirusCount = cities[currentCity][`${color}Count`]
+
+    if (selectedVirusCount > 0) {
+      let updates = {};
+      if (selectedVirusStatus === 'eradicated') {
+        updates[`/cities/${currentCity}/${color}Count`] = 0;
+        updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
+      }
+      else {
+        updates[`/cities/${currentCity}/${color}Count`] = selectedVirusCount - 1;
+        updates[`/${color}Remaining`] = selectedVirusTotal + 1;
+      }
+      this.props.firebase.database().update(updates, () => {
+        this.setState({treatOpen: false, selectedType: color})
+      });
+    }
+  }
 
   render() {
     let { classes } = this.props;
