@@ -14,8 +14,10 @@ import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
-import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
+import Tippy from '@tippy.js/react'
+import 'tippy.js/dist/tippy.css'
+
+import BioLab from "./BioLab"
 
 const wrapperStyles = {
   width: "100%",
@@ -162,14 +164,19 @@ class WorldMap extends Component {
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;
-                let researchMarker = null;
+                // let researchMarker = null;
                 let curCity = marker.name;
                 //research lab also appears if true
-                if (cities[curCity].station === true) {
-                  researchMarker = <ResearchLab />;
+                if (cities[curCity].station === true &&
+                  (cities[curCity].blackCount > 0 ||
+                  cities[curCity].blueCount > 0 ||
+                  cities[curCity].redCount > 0 ||
+                  cities[curCity].yellowCount > 0)) {
+                  cityMarker = <BioLab />;
                 }
+
                 // marker is switched to biohazard if any amount of disease count is in city
-                if (
+               else if (
                   cities[curCity].blackCount > 0 ||
                   cities[curCity].blueCount > 0 ||
                   cities[curCity].redCount > 0 ||
@@ -177,8 +184,13 @@ class WorldMap extends Component {
                 ) {
                   cityMarker = <BiohazardMarker />;
                 }
+                // checking if research station is true because it means both station and virus count
+                else if(cities[curCity].station === true){
+                  cityMarker = <ResearchLab />
+                }
+
                 // Dont want red marker to show up when research marker is present either
-                else if (!researchMarker) {
+                else if (!cityMarker) {
                   cityMarker = (
                     <circle
                       cx={0}
@@ -192,6 +204,7 @@ class WorldMap extends Component {
                     />
                   );
                 }
+
                 return (
                   <Marker
                     key={i} // if two things swap, react won't see any differences in the key.. use ID
@@ -203,7 +216,7 @@ class WorldMap extends Component {
                       pressed: { fill: "#FF5722" }
                     }}
                   >
-                    {researchMarker}
+
                     {cityMarker}
                     <Tippy
                       content={`Disease Cubes: Black ${
