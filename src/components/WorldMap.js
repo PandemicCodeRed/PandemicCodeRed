@@ -73,6 +73,7 @@ class WorldMap extends Component {
     // this.setState({
     //   translate: pos
     // });
+    console.log(evt.currentLocation)
     if (this.state.selectedAction == "move") {
       let target = marker.name;
       let currentLocation = this.state.playerOne.location;

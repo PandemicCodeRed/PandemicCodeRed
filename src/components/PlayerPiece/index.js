@@ -4,11 +4,11 @@ const SVG = ({
   name = "",
   style = {},
   fill = "#000",
-  width = "100%",
+  width = "500px",
   className = "",
-  height = "100%",
+  height = "205px",
   viewBox = "0 0 32 32",
-  transform = "translate(200,2.5)"
+  transform = "translate(200, 2.5)"
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,7 @@ const SVG = ({
     id="svg3128"
     version="1"
     transform={transform}
+    viewBox="0 0 500 200"
   >
     <g id="layer1">
       <path
