@@ -8,7 +8,7 @@ const SVG = ({
   className = "",
   height = "205px",
   viewBox = "0 0 32 32",
-  transform = "translate(200, 2.5)"
+  transform = "translate(150.18181775792004, 135.68592999457962)"
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
