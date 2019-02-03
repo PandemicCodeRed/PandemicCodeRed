@@ -157,9 +157,8 @@ class WorldMap extends Component {
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;
-                // let researchMarker = null;
                 let curCity = marker.name;
-                //research lab also appears if true
+                //both station and disease present marker is research with biohazard logo
                 if (cities[curCity].station === true &&
                   (cities[curCity].blackCount > 0 ||
                   cities[curCity].blueCount > 0 ||
@@ -168,7 +167,7 @@ class WorldMap extends Component {
                   cityMarker = <BioLab />;
                 }
 
-                // marker is switched to biohazard if any amount of disease count is in city
+                // if only disease count is present only biohazard marker appears
                else if (
                   cities[curCity].blackCount > 0 ||
                   cities[curCity].blueCount > 0 ||
@@ -177,7 +176,7 @@ class WorldMap extends Component {
                 ) {
                   cityMarker = <BiohazardMarker />;
                 }
-                // checking if research station is true because it means both station and virus count
+                // checking if only research station is present
                 else if(cities[curCity].station === true){
                   cityMarker = <ResearchLab />
                 }
