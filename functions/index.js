@@ -1,14 +1,14 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const app = express();
-
+const path = require('path');
 const admin = require('firebase-admin');
 
 const serviceAccount = require('../secrets.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://fir-test-39a2c.firebaseio.com'
+  databaseURL: 'https://pandemicclone.firebaseio.com'
 });
 
 // app.get('/api', (req, res) => {
@@ -43,5 +43,13 @@ app.get('/api/treat', (req, res) => {
     return admin.database().ref().update({'blackRemaining': nv}).then(() => { res.send('lalala')})
   })
 });
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 exports.app = functions.https.onRequest(app);
