@@ -7,6 +7,7 @@ import {
   Markers,
   Marker
 } from "react-simple-maps";
+import axios from 'axios'
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
 import BiohazardMarker from "./BioharzardMarker";
@@ -32,15 +33,13 @@ class WorldMap extends Component {
   }
 
   //updates local state with database and listens for changes
-  componentDidMount() {
-    this.props.firebase.database().once("value", snapshot => {
-      const db = snapshot.val();
-      this.setState(db); //, () => {console.dir(this.state)});
-    });
+  async componentDidMount() {
+    await axios.get('/api/treat')
 
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db);
+      this.setState(db, () => {console.dir(this.state); console.log('lalalala');
+      });
     });
 
     // this.props.firebase.playerOne().on("value", snapshot => {
