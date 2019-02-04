@@ -27,6 +27,7 @@ const wrapperStyles = {
 class WorldMap extends Component {
   constructor() {
     super();
+    // translate default is atlanta
     this.state = initialState;
 
     this.handleClick = this.handleClick.bind(this);
@@ -65,17 +66,19 @@ class WorldMap extends Component {
   }
 
   handleClick(marker, evt) {
-    let pos = `translate(${evt[0]},${evt[1]})`;
-    // this.setState({
-    //   translate: pos
-    // });
-    console.log(evt.currentLocation)
+    // this generates translate number of where city is
+    let pos = `translate(${evt[0]-30},${evt[1]})`;
+
     if (this.state.selectedAction == "move") {
       let target = marker.name;
       let currentLocation = this.state.playerOne.location;
       let adjacents = this.state.cities[currentLocation].neighbors;
       //neighbor move
       if (adjacents.hasOwnProperty(target)) {
+        // moves player piece based on translate attribute sets state
+        this.setState({
+          translate: pos
+        });
         this.props.firebase.playerOne().update({
           location: marker.name
         });
