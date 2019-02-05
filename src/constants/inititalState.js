@@ -26,7 +26,7 @@ const initialState = {
       station: true,
       neighbors: {
         Chicago: true,
-        "Washington": true,
+        Washington: true,
         Miami: true
       }
     },
@@ -55,7 +55,7 @@ const initialState = {
       neighbors: {
         Chennai: true,
         Kolkata: true,
-        "Hong kong": true,
+        "Hong_kong": true,
         Ho_Chi_Minh_City: true,
         Jakarta: true
       }
@@ -410,7 +410,7 @@ const initialState = {
       neighbors: {
         Mexico_City: true,
         Atlanta: true,
-        "Washington": true,
+        Washington: true,
         Bogota: true
       }
     },
@@ -437,7 +437,7 @@ const initialState = {
       neighbors: {
         Chicago: true,
         New_York: true,
-        "Washington": true
+        Washington: true
       }
     },
     Moscow: {
@@ -475,7 +475,7 @@ const initialState = {
       station: false,
       neighbors: {
         Montreal: true,
-        "Washington": true,
+        Washington: true,
         London: true,
         Madrid: true
       }
@@ -674,29 +674,33 @@ const initialState = {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerTwo: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerThree: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerFour: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   infectionDeck: [
     {
-      name: "San Francisco",
+      name: "San_Francisco",
       color: "blue"
     },
     {
@@ -712,7 +716,7 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "New York",
+      name: "New_York",
       color: "blue"
     },
     {
@@ -744,11 +748,11 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "Los Angeles",
+      name: "Los_Angeles",
       color: "yellow"
     },
     {
-      name: "Mexico City",
+      name: "Mexico_City",
       color: "yellow"
     },
     {
@@ -768,11 +772,11 @@ const initialState = {
       color: "yellow"
     },
     {
-      name: "Sao Paulo",
+      name: "Sao_Paulo",
       color: "yellow"
     },
     {
-      name: "Buenos Aires",
+      name: "Buenos_Aires",
       color: "yellow"
     },
     {
@@ -856,11 +860,11 @@ const initialState = {
       color: "red"
     },
     {
-      name: "Hong Kong",
+      name: "Hong_Kong",
       color: "red"
     },
     {
-      name: "Ho Chi Minh City",
+      name: "Ho_Chi_Minh_City",
       color: "red"
     },
     {
@@ -890,7 +894,7 @@ const initialState = {
   ],
   playerDeck: [
     {
-      name: "San Francisco",
+      name: "San_Francisco",
       type: "city",
       color: "blue"
     },
@@ -910,7 +914,7 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "New York",
+      name: "New_York",
       type: "city",
       color: "blue"
     },
@@ -950,12 +954,12 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "Los Angeles",
+      name: "Los_Angeles",
       type: "city",
       color: "yellow"
     },
     {
-      name: "Mexico City",
+      name: "Mexico_City",
       type: "city",
       color: "yellow"
     },
@@ -980,12 +984,12 @@ const initialState = {
       color: "yellow"
     },
     {
-      name: "Sao Paulo",
+      name: "Sao_Paulo",
       type: "city",
       color: "yellow"
     },
     {
-      name: "Buenos Aires",
+      name: "Buenos_Aires",
       type: "city",
       color: "yellow"
     },
@@ -1090,12 +1094,12 @@ const initialState = {
       color: "red"
     },
     {
-      name: "Hong Kong",
+      name: "Hong_Kong",
       type: "city",
       color: "red"
     },
     {
-      name: "Ho Chi Minh City",
+      name: "Ho_Chi_Minh_City",
       type: "city",
       color: "red"
     },
@@ -1173,10 +1177,10 @@ const initialState = {
       description: "cooldescription"
     }
   ],
-  "redRemaining": 24,
-  "blueRemaining": 24,
-  "yellowRemaining": 24,
-  "blackRemaining": 24,
+  redRemaining: 24,
+  blueRemaining: 24,
+  yellowRemaining: 24,
+  blackRemaining: 24,
   redStatus: "active",
   blueStatus: "active",
   yellowStatus: "active",
@@ -1188,7 +1192,7 @@ const initialState = {
   gameStatus: "inProgress",
   selectedAction: "none",
   actionCount: 4,
-  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"]
+  players: ["playerOne", "playerTwo", "playerThree", "playerFour"]
 };
 
 export default initialState;

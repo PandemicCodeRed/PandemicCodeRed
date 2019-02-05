@@ -14,9 +14,8 @@ import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
-import Tippy from '@tippy.js/react'
-import 'tippy.js/dist/tippy.css'
-
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 const wrapperStyles = {
   width: "100%",
@@ -33,21 +32,24 @@ class WorldMap extends Component {
   }
 
   //updates local state with database and listens for changes
-  async componentDidMount() {
-    await axios.get('/api/treat')
-
+  componentDidMount() {
+    this.props.firebase.database().once("value", snapshot => {
+      const db = snapshot.val();
+      this.setState(db);
+    });
+    
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
       this.setState(db, () => {console.dir(this.state); console.log('lalalala');
       });
     });
 
-    // this.props.firebase.playerOne().on("value", snapshot => {
-    //   const playerOne = snapshot.val();
-    //   this.setState({
-    //     playerOne: { ...playerOne, location: playerOne.location }
-    //   });
-    // });
+    this.props.firebase.playerOne().on("value", snapshot => {
+      const playerOne = snapshot.val();
+      this.setState({
+        playerOne: { ...playerOne, location: playerOne.location }
+      });
+    });
 
     // this.props.firebase.selectedAction().on("value", snapshot => {
     //   const selectedAction = snapshot.val();
@@ -197,18 +199,26 @@ class WorldMap extends Component {
                   >
                     {researchMarker}
                     {cityMarker}
-                    <Tippy content={`Disease Cubes: Black ${cities[curCity].blackCount} Red ${cities[curCity].redCount} Yellow ${cities[curCity].yellowCount} Blue ${cities[curCity].blueCount}- Research Station: ${cities[curCity].station}`}>
-                    <text
-                      textAnchor="middle"
-                      y={marker.markerOffset}
-                      style={{
-                        fontFamily: "Roboto, sans-serif",
-                        fontSize: 12,
-                        fill: "white"
-                      }}
+                    <Tippy
+                      content={`Disease Cubes: Black ${
+                        cities[curCity].blackCount
+                      } Red ${cities[curCity].redCount} Yellow ${
+                        cities[curCity].yellowCount
+                      } Blue ${cities[curCity].blueCount}- Research Station: ${
+                        cities[curCity].station
+                      }`}
                     >
-                      {marker.name}
-                    </text>
+                      <text
+                        textAnchor="middle"
+                        y={marker.markerOffset}
+                        style={{
+                          fontFamily: "Roboto, sans-serif",
+                          fontSize: 12,
+                          fill: "white"
+                        }}
+                      >
+                        {marker.name}
+                      </text>
                     </Tippy>
                   </Marker>
                 );
