@@ -32,7 +32,8 @@ const styles = theme => ({
     height: 540,
     width: 120,
     backgroundColor: "#1A237E"
-}});
+  }
+});
 
 class Root extends React.Component {
   constructor() {
@@ -45,18 +46,23 @@ class Root extends React.Component {
       const db = snapshot.val();
       this.setState(state => ({
         ...state,
-        ...db,
+        ...db
       }));
     });
-    const snapshot = await this.props.firebase.database().child('/gameStart').once('value');
+    const snapshot = await this.props.firebase
+      .database()
+      .child("/gameStart")
+      .once("value");
     const gameStart = snapshot.val();
     if (gameStart) {
       let infectionDeck = this.infectionDeckShuffle();
       let cityCards = this.cityCardShuffle();
-      this.deal(cityCards)
-      let playerDeck = this.playerDeckShuffle(cityCards)
-      infectionDeck = this.infectCities(infectionDeck)
-      this.props.firebase.database().update({playerDeck, infectionDeck, gameStart: false})
+      this.deal(cityCards);
+      let playerDeck = this.playerDeckShuffle(cityCards);
+      infectionDeck = this.infectCities(infectionDeck);
+      this.props.firebase
+        .database()
+        .update({ playerDeck, infectionDeck, gameStart: false });
     }
   }
 
@@ -89,24 +95,33 @@ class Root extends React.Component {
     const { infectionDeck } = this.state;
     const shuffledDeck = shuffle(infectionDeck);
     return shuffledDeck;
-
   }
 
   infectCities(infectionDeck) {
-    let {blackRemaining, redRemaining, yellowRemaining, blueRemaining} = this.state;
-    let updates = {}
-    let virusesRemaining = {blackRemaining, redRemaining, yellowRemaining, blueRemaining}
+    let {
+      blackRemaining,
+      redRemaining,
+      yellowRemaining,
+      blueRemaining
+    } = this.state;
+    let updates = {};
+    let virusesRemaining = {
+      blackRemaining,
+      redRemaining,
+      yellowRemaining,
+      blueRemaining
+    };
     for (let i = 3; i > 0; i--) {
       for (let j = 3; j > 0; j--) {
         const virusCount = i;
-        const {name, color} = infectionDeck.pop()
+        const { name, color } = infectionDeck.pop();
         updates[`/cities/${name}/${color}Count`] = virusCount;
         virusesRemaining[`${color}Remaining`] -= virusCount;
-        updates[`${color}Remaining`] = virusesRemaining[`${color}Remaining`]
+        updates[`${color}Remaining`] = virusesRemaining[`${color}Remaining`];
       }
     }
-    this.props.firebase.database().update(updates)
-    return infectionDeck
+    this.props.firebase.database().update(updates);
+    return infectionDeck;
   }
 
   deal(cityCards) {
