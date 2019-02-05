@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withFirebase } from "./Firebase";
 import { withRouter, Route, Switch } from "react-router-dom";
 import Root from "./Root";
+import Lobby from "./Lobby";
 
 class Routes extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route path="/" render={() => <Root />} />
+        <Route path="/lobby" render={() => <Lobby />} />
       </Switch>
     );
   }
