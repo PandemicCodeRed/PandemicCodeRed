@@ -44,6 +44,27 @@ class CureBoard extends Component {
             >
               <img src="/assets/redCure.png" />
             </ButtonBase>
+            <ButtonBase
+              onClick={() => {
+                this.handleCure("blue");
+              }}
+            >
+              <img src="/assets/blueCure.png" />
+            </ButtonBase>
+            <ButtonBase
+              onClick={() => {
+                this.handleCure("black");
+              }}
+            >
+              <img src="/assets/blackCure.png" />
+            </ButtonBase>
+            <ButtonBase
+              onClick={() => {
+                this.handleCure("yellow");
+              }}
+            >
+              <img src="/assets/yellowCure.png" />
+            </ButtonBase>
           </Grid>
           <Grid item />
           <Grid item />
