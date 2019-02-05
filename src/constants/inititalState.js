@@ -55,7 +55,7 @@ const initialState = {
       neighbors: {
         Chennai: true,
         Kolkata: true,
-        "Hong kong": true,
+        "Hong_kong": true,
         Ho_Chi_Minh_City: true,
         Jakarta: true
       }
@@ -696,7 +696,7 @@ const initialState = {
   },
   infectionDeck: [
     {
-      name: "San Francisco",
+      name: "San_Francisco",
       color: "blue"
     },
     {
@@ -712,7 +712,7 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "New York",
+      name: "New_York",
       color: "blue"
     },
     {
@@ -744,11 +744,11 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "Los Angeles",
+      name: "Los_Angeles",
       color: "yellow"
     },
     {
-      name: "Mexico City",
+      name: "Mexico_City",
       color: "yellow"
     },
     {
@@ -768,11 +768,11 @@ const initialState = {
       color: "yellow"
     },
     {
-      name: "Sao Paulo",
+      name: "Sao_Paulo",
       color: "yellow"
     },
     {
-      name: "Buenos Aires",
+      name: "Buenos_Aires",
       color: "yellow"
     },
     {
@@ -856,11 +856,11 @@ const initialState = {
       color: "red"
     },
     {
-      name: "Hong Kong",
+      name: "Hong_Kong",
       color: "red"
     },
     {
-      name: "Ho Chi Minh City",
+      name: "Ho_Chi_Minh_City",
       color: "red"
     },
     {
@@ -890,7 +890,7 @@ const initialState = {
   ],
   playerDeck: [
     {
-      name: "San Francisco",
+      name: "San_Francisco",
       type: "city",
       color: "blue"
     },
@@ -910,7 +910,7 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "New York",
+      name: "New_York",
       type: "city",
       color: "blue"
     },
@@ -950,12 +950,12 @@ const initialState = {
       color: "blue"
     },
     {
-      name: "Los Angeles",
+      name: "Los_Angeles",
       type: "city",
       color: "yellow"
     },
     {
-      name: "Mexico City",
+      name: "Mexico_City",
       type: "city",
       color: "yellow"
     },
@@ -980,12 +980,12 @@ const initialState = {
       color: "yellow"
     },
     {
-      name: "Sao Paulo",
+      name: "Sao_Paulo",
       type: "city",
       color: "yellow"
     },
     {
-      name: "Buenos Aires",
+      name: "Buenos_Aires",
       type: "city",
       color: "yellow"
     },
@@ -1090,12 +1090,12 @@ const initialState = {
       color: "red"
     },
     {
-      name: "Hong Kong",
+      name: "Hong_Kong",
       type: "city",
       color: "red"
     },
     {
-      name: "Ho Chi Minh City",
+      name: "Ho_Chi_Minh_City",
       type: "city",
       color: "red"
     },
@@ -1188,7 +1188,7 @@ const initialState = {
   gameStatus: "inProgress",
   selectedAction: "none",
   actionCount: 4,
-  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"]
+  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
 };
 
 export default initialState;

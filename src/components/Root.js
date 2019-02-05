@@ -41,7 +41,7 @@ class Root extends React.Component {
     this.state = {...initialState, spacing: '16',}
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
       this.setState((state) => ({
@@ -49,12 +49,16 @@ class Root extends React.Component {
         ...db
       }));
     });
-
-    let infectionDeck = this.infectionDeckShuffle();
-    let cityCards = this.cityCardShuffle();
-    this.deal(cityCards)
-    let playerDeck = this.playerDeckShuffle(cityCards)
-    this.props.firebase.database().update({playerDeck, infectionDeck})
+    const snapshot = await this.props.firebase.database().child('/gameStart').once('value');
+    const gameStart = snapshot.val();
+    if (gameStart) {
+      let infectionDeck = this.infectionDeckShuffle();
+      let cityCards = this.cityCardShuffle();
+      this.deal(cityCards)
+      let playerDeck = this.playerDeckShuffle(cityCards)
+      infectionDeck = this.infectCities(infectionDeck)
+      this.props.firebase.database().update({playerDeck, infectionDeck, gameStart: false})
+    }
   }
 
   handleChange = key => (event, value) => {
@@ -83,6 +87,23 @@ class Root extends React.Component {
     const {infectionDeck} = this.state;
     const shuffledDeck = shuffle(infectionDeck)
     return shuffledDeck
+  }
+
+  infectCities(infectionDeck) {
+    let {blackRemaining, redRemaining, yellowRemaining, blueRemaining} = this.state;
+    let updates = {}
+    let virusesRemaining = {blackRemaining, redRemaining, yellowRemaining, blueRemaining}
+    for (let i = 3; i > 0; i--) {
+      for (let j = 3; j > 0; j--) {
+        const virusCount = i;
+        const {name, color} = infectionDeck.pop()
+        updates[`/cities/${name}/${color}Count`] = virusCount;
+        virusesRemaining[`${color}Remaining`] -= virusCount;
+        updates[`${color}Remaining`] = virusesRemaining[`${color}Remaining`]
+      }
+    }
+    this.props.firebase.database().update(updates)
+    return infectionDeck
   }
 
   deal(cityCards) {
