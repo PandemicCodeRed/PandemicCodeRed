@@ -671,24 +671,28 @@
     "name": "test",
     "role": "test",
     "location": "Atlanta",
+    "assigned": false,
     "hand": ["empty"]
   },
   "playerTwo": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
+    "assigned": false,
     "hand": ["empty"]
   },
   "playerThree": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
+    "assigned": false,
     "hand": ["empty"]
   },
   "playerFour": {
     "name": "test",
     "role": "test",
     "location": "Atlanta",
+    "assigned": false,
     "hand": ["empty"]
   },
   "infectionDeck": [

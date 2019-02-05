@@ -34,7 +34,7 @@ class WorldMap extends Component {
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db); //, () => {console.dir(this.state)});
+      this.setState(db);
     });
 
     this.props.firebase.database().on("value", snapshot => {

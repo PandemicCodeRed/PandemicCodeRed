@@ -26,7 +26,7 @@ const initialState = {
       station: true,
       neighbors: {
         Chicago: true,
-        "Washington": true,
+        Washington: true,
         Miami: true
       }
     },
@@ -410,7 +410,7 @@ const initialState = {
       neighbors: {
         Mexico_City: true,
         Atlanta: true,
-        "Washington": true,
+        Washington: true,
         Bogota: true
       }
     },
@@ -437,7 +437,7 @@ const initialState = {
       neighbors: {
         Chicago: true,
         New_York: true,
-        "Washington": true
+        Washington: true
       }
     },
     Moscow: {
@@ -475,7 +475,7 @@ const initialState = {
       station: false,
       neighbors: {
         Montreal: true,
-        "Washington": true,
+        Washington: true,
         London: true,
         Madrid: true
       }
@@ -674,24 +674,28 @@ const initialState = {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerTwo: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerThree: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   playerFour: {
     name: "test",
     role: "test",
     location: "Atlanta",
+    assigned: false,
     hand: ["empty"]
   },
   infectionDeck: [
@@ -1173,10 +1177,10 @@ const initialState = {
       description: "cooldescription"
     }
   ],
-  "redRemaining": 24,
-  "blueRemaining": 24,
-  "yellowRemaining": 24,
-  "blackRemaining": 24,
+  redRemaining: 24,
+  blueRemaining: 24,
+  yellowRemaining: 24,
+  blackRemaining: 24,
   redStatus: "active",
   blueStatus: "active",
   yellowStatus: "active",
@@ -1188,7 +1192,7 @@ const initialState = {
   gameStatus: "inProgress",
   selectedAction: "none",
   actionCount: 4,
-  "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
+  players: ["playerOne", "playerTwo", "playerThree", "playerFour"]
 };
 
 export default initialState;
