@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-import { withStyles } from '@material-ui/core/styles';
-import { SignUpLink } from '../SignUp';
-import { withFirebase } from './Firebase';
-import * as ROUTES from '../constants/routes';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import { withStyles } from "@material-ui/core/styles";
+import { SignUpLink } from "./SignUp";
+import { withFirebase } from "./Firebase";
+import * as ROUTES from "../constants/routes";
 
 const SignIn = () => (
   <div>
@@ -16,27 +16,27 @@ const SignIn = () => (
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     height: 540,
     width: 1100,
-    backgroundColor: '#1A237E',
+    backgroundColor: "#1A237E"
   },
   control: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2
   },
   navbar: {
     height: 540,
     width: 120,
-    backgroundColor: '#1A237E',
-  },
+    backgroundColor: "#1A237E"
+  }
 });
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null,
+  email: "",
+  password: "",
+  error: null
 };
 
 class SignInFormBase extends Component {
@@ -69,7 +69,7 @@ class SignInFormBase extends Component {
   render() {
     const { email, password, error } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === "" || email === "";
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -99,7 +99,7 @@ class SignInFormBase extends Component {
 
 const SignInForm = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInFormBase);
 
 export default withStyles(styles)(withFirebase(SignIn));
