@@ -1,7 +1,7 @@
 module.exports = {
   mode: "development",
   entry: [
-    //'@babel/polyfill', // enables async-await
+    '@babel/polyfill', // enables async-await
     "./src/index.js"
   ],
   output: {
