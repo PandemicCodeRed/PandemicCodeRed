@@ -32,7 +32,7 @@ const styles = theme => ({
     height: 540,
     width: 120,
     backgroundColor: "#1A237E"
-});
+}});
 
 class Root extends React.Component {
   constructor() {
