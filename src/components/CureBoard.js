@@ -8,26 +8,25 @@ class CureBoard extends Component {
   constructor() {
     super();
     this.state = initialState;
-    this.handleRedCure = this.handleRedCure.bind(this);
+    this.handleCure = this.handleCure.bind(this);
   }
   componentDidMount() {
     this.props.firebase.database().once("value", snapshot => {
       const db = snapshot.val();
       this.setState(db);
     });
-    this.props.firebase.playerOne().on("value", snapshot => {
-      const playerOne = snapshot.val();
-      this.setState({
-        playerOne: { ...playerOne, location: playerOne.location }
-      });
+    this.props.firebase.database().on("value", snapshot => {
+      const db = snapshot.val();
+      this.setState(db);
     });
   }
-  handleRedCure() {
-    let hand = this.state.playerOne.hand;
-    let reds = hand.filter(card => card.color === "red");
+  handleCure(color) {
+    let activePlayer = this.state.activePlayer;
+    let hand = this.state[activePlayer].hand;
+    let colorCards = hand.filter(card => card.color === color);
     let updates = {};
-    updates["/redStatus"] = "cured";
-    if (reds.length >= 4) {
+    updates[`/${color}Status`] = "cured";
+    if (colorCards.length >= 4) {
       this.props.firebase.database().update(updates);
     } else {
       alert("Not enough Red Cards");
@@ -38,7 +37,11 @@ class CureBoard extends Component {
       <Card>
         <Grid>
           <Grid item>
-            <ButtonBase onClick={this.handleRedCure}>
+            <ButtonBase
+              onClick={() => {
+                this.handleCure("red");
+              }}
+            >
               <img src="/assets/redCure.png" />
             </ButtonBase>
           </Grid>
