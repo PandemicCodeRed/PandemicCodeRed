@@ -32,7 +32,6 @@ const styles = theme => ({
     height: 540,
     width: 120,
     backgroundColor: "#1A237E"
-  }
 });
 
 class Root extends React.Component {
@@ -46,7 +45,7 @@ class Root extends React.Component {
       const db = snapshot.val();
       this.setState(state => ({
         ...state,
-        ...db
+        ...db,
       }));
     });
     const snapshot = await this.props.firebase.database().child('/gameStart').once('value');
@@ -90,6 +89,7 @@ class Root extends React.Component {
     const { infectionDeck } = this.state;
     const shuffledDeck = shuffle(infectionDeck);
     return shuffledDeck;
+
   }
 
   infectCities(infectionDeck) {
