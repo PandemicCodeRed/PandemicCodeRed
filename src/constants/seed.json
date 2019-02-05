@@ -1190,5 +1190,6 @@
   "selectedAction": "none",
   "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
   "actionCount": 4,
-  "gameStart": true
+  "gameStart": true,
+  "activePlayer": "playerOne"
 }

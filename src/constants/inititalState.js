@@ -1192,7 +1192,8 @@ const initialState = {
   gameStatus: "inProgress",
   selectedAction: "none",
   actionCount: 4,
-  players: ["playerOne", "playerTwo", "playerThree", "playerFour"]
+  players: ["playerOne", "playerTwo", "playerThree", "playerFour"],
+  activePlayer: "playerOne"
 };
 
 export default initialState;
