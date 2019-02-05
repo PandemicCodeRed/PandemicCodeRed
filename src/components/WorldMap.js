@@ -72,7 +72,7 @@ class WorldMap extends Component {
   }
 
   handleClick(marker, evt) {
-    // this generates translate number of where city is
+    // this generates translate number of where city is and will be given to the player piece transform to move it to the correct position
     let pos = `translate(${evt[0]-30},${evt[1]})`;
 
     if (this.state.selectedAction == "move") {
@@ -86,7 +86,8 @@ class WorldMap extends Component {
           translate: pos
         });
         this.props.firebase.playerOne().update({
-          location: marker.name
+          location: marker.name,
+          translate: pos
         });
         this.props.firebase.database().update({
           selectedAction: "none",
@@ -111,7 +112,13 @@ class WorldMap extends Component {
   }
 
   render() {
-    const { cities } = this.state;
+    const { cities, playerOne } = this.state;
+    // let pieceOne = <PlayerPiece
+    // name="playerOne"
+    // transform={playerOne.translate} fill="#ECEFF1"
+    // location={playerOne.location} />
+
+
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -163,7 +170,10 @@ class WorldMap extends Component {
                 )
               }
             </Geographies>
-            <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
+            <PlayerPiece
+              name="playerOne"
+              transform={this.state.playerOne.translate} fill="#ECEFF1"
+              location={this.state.playerOne.location} />
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;

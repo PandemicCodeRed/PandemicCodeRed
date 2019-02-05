@@ -3,6 +3,7 @@ import React from "react";
 const SVG = ({
   name = "",
   style = {},
+  location = "Atlanta",
   fill = "#000",
   width = "100px",
   className = "",
@@ -17,6 +18,8 @@ const SVG = ({
     id="svg3128"
     version="1"
     transform={transform}
+    name={name}
+    location={location}
     viewBox="0 0 150 90"
   >
     <g id="layer1">
