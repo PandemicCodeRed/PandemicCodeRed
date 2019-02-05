@@ -1189,7 +1189,6 @@ const initialState = {
   selectedAction: "none",
   actionCount: 4,
   "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
-  "gameStart": true
 };
 
 export default initialState;
