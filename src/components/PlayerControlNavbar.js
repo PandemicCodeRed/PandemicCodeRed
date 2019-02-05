@@ -109,8 +109,8 @@ class PlayerControlNavbar extends Component {
     this.props.firebase.database().update({
       selectedAction: "city"
     });
+    // lists cities availble to move to based on city cards in hand
     let k = playerOne.hand.reduce((acc, cur)=>{
-      console.log(cur)
       acc += cur.name
       acc += ' '
       return acc
