@@ -109,6 +109,20 @@ class WorldMap extends Component {
         alert("Invalid Move");
       }
     }
+    // handles if card button was clicked cities also discards hand/city clicked
+    else if(this.state.selectedAction == "city"){
+      this.setState({
+        translate: pos
+      });
+      this.props.firebase.playerOne().update({
+        location: marker.name,
+        translate: pos
+      });
+      this.props.firebase.database().update({
+        selectedAction: "none",
+        actionCount: this.state.actionCount - 1
+      });
+    }
   }
 
   render() {

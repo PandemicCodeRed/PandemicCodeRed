@@ -29,10 +29,11 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none" };
+    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false};
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
+    this.handleCityCard = this.handleCityCard.bind(this)
   }
 
   //unsubsribe this in component did unmount
@@ -103,6 +104,21 @@ class PlayerControlNavbar extends Component {
     return Object.values(virusCounts).some(count => count > 0);
   }
 
+  handleCityCard(){
+    const {playerOne} = this.state
+    this.props.firebase.database().update({
+      selectedAction: "city"
+    });
+    let k = playerOne.hand.reduce((acc, cur)=>{
+      console.log(cur)
+      acc += cur.name
+      acc += ' '
+      return acc
+    },'')
+    alert(`City from hand: ${k}`)
+  }
+
+
   render() {
     const { classes } = this.props;
     const virusCounts = this.playerLocationVirusCounts(this.state)
@@ -159,9 +175,11 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           disabled={disableCard}
+          onClick={this.handleCityCard}
         >
           CARD
         </Button>
+
 
         <Button
           variant="contained"
