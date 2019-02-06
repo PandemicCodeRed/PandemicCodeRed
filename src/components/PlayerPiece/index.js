@@ -3,12 +3,13 @@ import React from "react";
 const SVG = ({
   name = "",
   style = {},
+  location = "Atlanta",
   fill = "#000",
-  width = "100%",
+  width = "100px",
   className = "",
-  height = "100%",
+  height = "50px",
   viewBox = "0 0 32 32",
-  transform = "translate(200,2.5)"
+  transform = "translate(120.18181775792004, 135.68592999457962)"
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +18,9 @@ const SVG = ({
     id="svg3128"
     version="1"
     transform={transform}
+    name={name}
+    location={location}
+    viewBox="0 0 150 90"
   >
     <g id="layer1">
       <path

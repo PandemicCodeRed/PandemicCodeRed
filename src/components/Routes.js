@@ -17,14 +17,14 @@ class Routes extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route exact path="/" component={Root} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/lose" component={LoseScreen} />
-          <Route exact path="/win" component={WinScreen} />
-          <Route path="/lobby" render={() => <Lobby />} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={Root} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/lobby" component={Lobby} />
+        <Route exact path="/lose" component={LoseScreen} />
+        <Route exact path="/win" component={WinScreen} />
+      </Switch>
       </div>
     );
   }

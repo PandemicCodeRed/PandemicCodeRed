@@ -675,7 +675,8 @@ const initialState = {
     role: "test",
     location: "Atlanta",
     assigned: false,
-    hand: ["empty"]
+    hand: ["empty"],
+    translate: "translate(120.18181775792004, 135.68592999457962)"
   },
   playerTwo: {
     name: "test",

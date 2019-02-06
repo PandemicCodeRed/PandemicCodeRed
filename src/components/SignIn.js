@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
-import { withStyles } from "@material-ui/core/styles";
-import { SignUpLink } from "./SignUp";
-import { withFirebase } from "./Firebase";
-import * as ROUTES from "../constants/routes";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import { withStyles } from '@material-ui/core/styles';
+import { SignUpLink } from './SignUp';
+import { withFirebase } from './Firebase';
+import * as ROUTES from '../constants/routes';
 
 const SignIn = () => (
   <div>
@@ -53,9 +53,12 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
+        this.props.history.push(ROUTES.LOBBY);
+        this.props.firebase.database().update({
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1
+        });
+    }).catch(error => {
         this.setState({ error });
       });
 
