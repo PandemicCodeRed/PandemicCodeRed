@@ -34,6 +34,9 @@ class PlayerControlNavbar extends Component {
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
   }
+
+  //unsubsribe this in component did unmount
+
   componentDidMount() {
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
@@ -66,27 +69,27 @@ class PlayerControlNavbar extends Component {
 
   handleTreatClose = color => {
     const { cities, playerTurn } = this.state;
-    const selectedVirusStatus = this.state[`${color}Status`]
-    const selectedVirusTotal = this.state[`${color}Remaining`]
+    const selectedVirusStatus = this.state[`${color}Status`];
+    const selectedVirusTotal = this.state[`${color}Remaining`];
     const player = this.state[playerTurn];
-    const currentCity = player.location
-    const selectedVirusCount = cities[currentCity][`${color}Count`]
+    const currentCity = player.location;
+    const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
       let updates = {};
-      if (selectedVirusStatus === 'eradicated') {
+      if (selectedVirusStatus === "eradicated") {
         updates[`/cities/${currentCity}/${color}Count`] = 0;
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
-      }
-      else {
-        updates[`/cities/${currentCity}/${color}Count`] = selectedVirusCount - 1;
+      } else {
+        updates[`/cities/${currentCity}/${color}Count`] =
+          selectedVirusCount - 1;
         updates[`/${color}Remaining`] = selectedVirusTotal + 1;
       }
       this.props.firebase.database().update(updates, () => {
-        this.setState({treatOpen: false, selectedType: color})
+        this.setState({ treatOpen: false, selectedType: color });
       });
     }
-  }
+  };
 
   playerLocationVirusCounts(db) {
     const {activePlayer, cities} = db;

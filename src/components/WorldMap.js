@@ -7,7 +7,7 @@ import {
   Markers,
   Marker
 } from "react-simple-maps";
-import axios from 'axios'
+import axios from "axios";
 import markers from "../constants/cities";
 import PlayerPiece from "./PlayerPiece";
 import BiohazardMarker from "./BioharzardMarker";
@@ -37,11 +37,13 @@ class WorldMap extends Component {
       const db = snapshot.val();
       this.setState(db);
     });
-    
+
+    //set subscription so errors are triggered if component isnt mounted
+    //unsubscribe on componentunmount
+
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db, () => {console.dir(this.state); console.log('lalalala');
-      });
+      this.setState(db);
     });
 
     this.props.firebase.playerOne().on("value", snapshot => {
@@ -50,6 +52,8 @@ class WorldMap extends Component {
         playerOne: { ...playerOne, location: playerOne.location }
       });
     });
+
+    //clean this shizz up
 
     // this.props.firebase.selectedAction().on("value", snapshot => {
     //   const selectedAction = snapshot.val();
@@ -117,6 +121,7 @@ class WorldMap extends Component {
             height: "auto"
           }}
         >
+          {/* rename colors to variables */}
           <ZoomableGroup center={[15, 0]} disablePanning>
             <Geographies geography="/world-50m.json">
               {(geographies, projection) =>

@@ -3,35 +3,47 @@ import { withFirebase } from "./Firebase";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, Grid, ButtonBase, SvgIcon } from "@material-ui/core";
 import initialState from "../constants/inititalState";
+import CureDialog from "./CureDialog";
 
 class CureBoard extends Component {
   constructor() {
     super();
-    this.state = initialState;
+    this.state = { ...initialState, cureOpen: false, colorHand: [] };
     this.handleCure = this.handleCure.bind(this);
   }
   componentDidMount() {
-    this.props.firebase.database().once("value", snapshot => {
-      const db = snapshot.val();
-      this.setState(db);
-    });
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      this.setState(db);
+      this.setState({ ...this.state, ...db });
     });
   }
-  handleCure(color) {
+
+  //triggers cure dialog
+  handleCure(selColor) {
     let activePlayer = this.state.activePlayer;
     let hand = this.state[activePlayer].hand;
-    let colorCards = hand.filter(card => card.color === color);
-    let updates = {};
-    updates[`/${color}Status`] = "cured";
+    let colorCards = hand.filter(card => card.color === selColor);
     if (colorCards.length >= 4) {
-      this.props.firebase.database().update(updates);
+      this.setState({ cureOpen: true, colorHand: colorCards });
     } else {
-      alert(`Not enough ${color} Cards`);
+      alert(`Not enough ${selColor} Cards`);
     }
   }
+  //cure func
+  handleCureClose = (color, discards) => {
+    //discards is an array of the discarded cards from cure dialog
+    let activePlayer = this.state.activePlayer;
+    let newHand = this.state[activePlayer].hand.filter(
+      card => discards.includes(card) != true
+    );
+    let updates = {};
+    updates[`/${activePlayer}/hand`] = newHand;
+    updates[`/${color}Status`] = "cured";
+    updates["/actionCount"] = this.state.actionCount - 1;
+    this.props.firebase.database().update(updates, () => {
+      this.setState({ cureOpen: false, colorHand: [] });
+    });
+  };
   render() {
     return (
       <Card>
@@ -71,6 +83,11 @@ class CureBoard extends Component {
             >
               <img height="42" width="42" src="/assets/yellowCure.png" />
             </ButtonBase>
+            <CureDialog
+              colorHand={this.state.colorHand}
+              open={this.state.cureOpen}
+              onClose={this.handleCureClose}
+            />
           </Grid>
         </Grid>
       </Card>
