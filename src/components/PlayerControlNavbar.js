@@ -18,9 +18,9 @@ const styles = theme => ({
     display: "none"
   }
 });
+
 let disablePlayer1 = false; //To disable, set to true
 let disableMove = false; //To disable, set to true
-let disableTreat = false; //To disable, set to true
 let disableShare = false; //To disable, set to true
 let disableCard = false; //To disable, set to true
 let disableActionCount = false; //To disable, set to true
@@ -29,17 +29,22 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, selectedType: "none" };
+    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none" };
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
+    this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
   }
   componentDidMount() {
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      this.setState({
-        ...this.state,
-        ...db
-      });
+      const virusCounts = this.playerLocationVirusCounts(db);
+      const treatableCity = this.isCityInfected(virusCounts);
+      this.setState(state => ({
+        ...state,
+        ...db,
+        treatableCity
+      })
+      );
     });
   }
 
@@ -50,9 +55,13 @@ class PlayerControlNavbar extends Component {
     });
   }
 
-  //triggers treat dialogue
+  //triggers treat dialog
   handleTreat() {
-    this.setState({treatOpen: true });
+      this.setState({treatOpen: true });
+  }
+
+  dismissTreatDialog() {
+    this.setState({treatOpen: false });
   }
 
   handleTreatClose = color => {
@@ -79,8 +88,21 @@ class PlayerControlNavbar extends Component {
     }
   }
 
+  playerLocationVirusCounts(db) {
+    const {activePlayer, cities} = db;
+    const playerLocation = db[activePlayer].location;
+    const {yellowCount, blackCount, redCount, blueCount} = cities[playerLocation];
+    const virusCounts = {yellowCount, blackCount, redCount, blueCount};
+    return virusCounts;
+  }
+
+  isCityInfected(virusCounts) {
+    return Object.values(virusCounts).some(count => count > 0);
+  }
+
   render() {
-    let { classes } = this.props;
+    const { classes } = this.props;
+    const virusCounts = this.playerLocationVirusCounts(this.state)
     return (
       <div>
         <Button
@@ -108,7 +130,7 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleTreat}
-          disabled={disableTreat}
+          disabled={!this.state.treatableCity}
         >
           TREAT
         </Button>
@@ -116,6 +138,8 @@ class PlayerControlNavbar extends Component {
         <TreatDialog
           open={this.state.treatOpen}
           onClose={this.handleTreatClose}
+          dismiss={this.dismissTreatDialog}
+          virusCounts={virusCounts}
         />
 
         <Button
@@ -156,7 +180,7 @@ class PlayerControlNavbar extends Component {
       </div>
     );
   }
-} //use a button group? rather than div and ul
+}
 
 // PlayerControlNavbar.propTypes = {
 //   classes: PropTypes.object.isRequired
