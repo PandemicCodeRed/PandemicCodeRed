@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
-import { SignUpLink } from '../SignUp';
+import { SignUpLink } from './SignUp';
 import { withFirebase } from './Firebase';
 import * as ROUTES from '../constants/routes';
 
@@ -53,9 +53,38 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
+        this.props.history.push(ROUTES.LOBBY);
+        this.props.firebase.database().update({
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1
+        });
+        //const user = this.props.firebase.auth().currentUser;
+
+/* const user = firebase.auth().currentUser;
+
+const name, email, photoUrl, uid, emailVerified;
+
+if (user != null) {
+  name = user.displayName;
+  email = user.email;
+  photoUrl = user.photoURL;
+  emailVerified = user.emailVerified;
+  uid = user.uid; */
+
+  // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+}
+
+        // GET UID
+        // ASSIGN TO PLAYER SIGNING IN
+        //
+        // pull i snapshot of what you need form the database adn then update
+
+        //put in logic to check for the next player.. if player1.uid = unassigned then set to current uid
+      // then redirect to lobby
+      //update something specificisllu use this syntax:
+    }).catch(error => {
         this.setState({ error });
       });
 

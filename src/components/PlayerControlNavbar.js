@@ -34,7 +34,7 @@ class PlayerControlNavbar extends Component {
     this.handleMove = this.handleMove.bind(this);
   }
   componentDidMount() {
-    this.props.firebase.database().on("value", snapshot => {
+    this.props.firebase.database().on("value", snapshot => { //.on is what's constantly listening to update the database locally (on all of our components)
       const db = snapshot.val();
       this.setState({
         ...this.state,
@@ -64,16 +64,17 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`]
 
     if (selectedVirusCount > 0) {
-      let updates = {};
+      let updates = {}; //modifying an updates object
       if (selectedVirusStatus === 'eradicated') {
-        updates[`/cities/${currentCity}/${color}Count`] = 0;
+        updates[`/cities/${currentCity}/${color}Count`] = 0; //this path structure matches the structure of the database
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       }
       else {
         updates[`/cities/${currentCity}/${color}Count`] = selectedVirusCount - 1;
         updates[`/${color}Remaining`] = selectedVirusTotal + 1;
       }
-      this.props.firebase.database().update(updates, () => {
+      this.props.firebase.database().update(updates, () => //when updates is called here, it is taking the modified updates object and using that to update the database... go to firebase.js causing a total rerender because of the .on listener above
+      {
         this.setState({treatOpen: false, selectedType: color})
       });
     }

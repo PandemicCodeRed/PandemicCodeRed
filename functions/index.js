@@ -1,4 +1,4 @@
-const functions = require('firebase-functions');
+/* const functions = require('firebase-functions');
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -9,7 +9,7 @@ const serviceAccount = require('../secrets.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://pandemicclone.firebaseio.com'
-});
+}); */
 
 // app.get('/api', (req, res) => {
 //   // if (req.query.num) {
@@ -36,20 +36,23 @@ admin.initializeApp({
 //   return admin.database().ref().update({'blackRemaining': 8}).then(() => res.send('lalala'))
 // });
 
-app.get('/api/treat', (req, res) => {
+/* app.get('/api/treat', (req, res) => {
   admin.database().ref('/blackRemaining').once('value').then(snap => {
    return snap.val() - 1;
   }).then(nv => {
     return admin.database().ref().update({'blackRemaining': nv}).then(() => { res.send('lalala')})
   })
-});
+}); */
 
-app.get('/*', function(req, res) {
+/* app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
     if (err) {
       res.status(500).send(err)
     }
   })
-})
+}) */
 
-exports.app = functions.https.onRequest(app);
+//exports.app = functions.https.onRequest(app);
+
+
+//NOTES TO REMOVE: needed the rewrites in firebase, firebase functions needed to not be there, webpack needed to be building and caching   npm run build watch
