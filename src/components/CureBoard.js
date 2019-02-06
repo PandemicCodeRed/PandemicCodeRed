@@ -26,7 +26,7 @@ class CureBoard extends Component {
     if (hand !== undefined) {
       colorCards = hand.filter(card => card.color === selColor);
     }
-    if (colorCards.length >= 4) {
+    if (colorCards.length >= 5) {
       let playerLocation = this.state[activePlayer].location;
       if (this.state.cities[playerLocation].station) {
         this.setState({ cureOpen: true, colorHand: colorCards });

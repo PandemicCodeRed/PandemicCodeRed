@@ -28,7 +28,7 @@ class CureDialog extends React.Component {
       discards.push(discard);
     });
     let cureButtonDisabled = true;
-    if (discards.length >= 4) {
+    if ((discards.length = 5)) {
       cureButtonDisabled = false;
     }
     return (
