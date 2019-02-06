@@ -40,7 +40,7 @@ class PlayerControlNavbar extends Component {
   //unsubsribe this in component did unmount
 
   componentDidMount() {
-    this.props.firebase.database().on("value", snapshot => {
+    this.props.firebase.database().on("value", snapshot => { //.on is what's constantly listening to update the database locally (on all of our components)
       const db = snapshot.val();
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
@@ -78,9 +78,9 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
-      let updates = {};
-      if (selectedVirusStatus === "eradicated") {
-        updates[`/cities/${currentCity}/${color}Count`] = 0;
+      let updates = {}; //modifying an updates object
+      if (selectedVirusStatus === 'eradicated') {
+        updates[`/cities/${currentCity}/${color}Count`] = 0; //this path structure matches the structure of the database
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       } else {
         updates[`/cities/${currentCity}/${color}Count`] =

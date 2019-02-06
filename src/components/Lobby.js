@@ -63,6 +63,7 @@ class Lobby extends Component {
   startGame() {
     console.log("start!");
   }
+  /*eslint-disable*/
   render() {
     let { classes } = this.props;
     let disableGameStart = true;
