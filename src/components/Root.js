@@ -9,6 +9,7 @@ import InfectionBoardNavbar from "./InfectionBoardNavbar";
 import PlayerHand from "./PlayerHand";
 import { withFirebase } from "./Firebase";
 import CureBoard from "./CureBoard";
+import history from "../history";
 
 import initialState from "../constants/inititalState";
 import { DECK_SIZE, EPIDEMIC_COUNT, EVENT_COUNT } from "../constants/deck";
@@ -39,15 +40,18 @@ class Root extends React.Component {
   constructor() {
     super();
     this.state = { ...initialState, spacing: "16" };
+    this.checkStatus = this.checkStatus.bind(this);
+    this.checkDiseaseCounts = this.checkDiseaseCounts.bind(this);
   }
 
   async componentDidMount() {
-    this.props.firebase.database().on("value", snapshot => {
+    await this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
       this.setState(state => ({
         ...state,
         ...db
       }));
+      this.checkDiseaseCounts();
     });
     const snapshot = await this.props.firebase
       .database()
@@ -65,6 +69,26 @@ class Root extends React.Component {
         .update({ playerDeck, infectionDeck, gameStart: false });
     }
   }
+
+  componentDidUpdate() {}
+
+  checkDiseaseCounts = () => {
+    let blues = this.state.blueRemaining;
+    let reds = this.state.redRemaining;
+    let blacks = this.state.blackRemaining;
+    let yellows = this.state.yellowRemaining;
+    if (yellows == 0 || blacks == 0 || reds == 0 || blues == 0) {
+      this.props.firebase.database().update({ gameStatus: "lost" });
+    }
+  };
+
+  checkStatus = () => {
+    if (this.state.gameStatus === "lost") {
+      history.push("/lost");
+    } else if (this.state.gameStatus === "won") {
+      history.push("/won");
+    }
+  };
 
   handleChange = key => (event, value) => {
     this.setState({

@@ -29,7 +29,12 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none" };
+    this.state = {
+      ...initialState,
+      treatOpen: false,
+      treatableCity: false,
+      selectedType: "none"
+    };
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
@@ -46,8 +51,7 @@ class PlayerControlNavbar extends Component {
         ...state,
         ...db,
         treatableCity
-      })
-      );
+      }));
     });
   }
 
@@ -60,11 +64,11 @@ class PlayerControlNavbar extends Component {
 
   //triggers treat dialog
   handleTreat() {
-      this.setState({treatOpen: true });
+    this.setState({ treatOpen: true });
   }
 
   dismissTreatDialog() {
-    this.setState({treatOpen: false });
+    this.setState({ treatOpen: false });
   }
 
   handleTreatClose = color => {
@@ -92,10 +96,12 @@ class PlayerControlNavbar extends Component {
   };
 
   playerLocationVirusCounts(db) {
-    const {activePlayer, cities} = db;
+    const { activePlayer, cities } = db;
     const playerLocation = db[activePlayer].location;
-    const {yellowCount, blackCount, redCount, blueCount} = cities[playerLocation];
-    const virusCounts = {yellowCount, blackCount, redCount, blueCount};
+    const { yellowCount, blackCount, redCount, blueCount } = cities[
+      playerLocation
+    ];
+    const virusCounts = { yellowCount, blackCount, redCount, blueCount };
     return virusCounts;
   }
 
@@ -105,7 +111,7 @@ class PlayerControlNavbar extends Component {
 
   render() {
     const { classes } = this.props;
-    const virusCounts = this.playerLocationVirusCounts(this.state)
+    const virusCounts = this.playerLocationVirusCounts(this.state);
     return (
       <div>
         <Button
