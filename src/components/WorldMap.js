@@ -72,8 +72,10 @@ class WorldMap extends Component {
   }
 
   handleClick(marker, evt) {
+    const {playerOne} = this.state
     // this generates translate number of where city is and will be given to the player piece transform to move it to the correct position
     let pos = `translate(${evt[0]-30},${evt[1]})`;
+
 
     if (this.state.selectedAction == "move") {
       let target = marker.name;
@@ -110,7 +112,7 @@ class WorldMap extends Component {
       }
     }
     // handles if card button was clicked cities and allows user to click to move to related city cards also discards city card to player discard pile
-    else if(this.state.selectedAction == "city"){
+    else if(this.state.selectedAction == "direct"){
       // remaining hand
       let remainingHand = this.state.playerOne.hand.filter((e)=>{
         return e.name !== marker.name
@@ -118,7 +120,40 @@ class WorldMap extends Component {
       let usedCard = this.state.playerOne.hand.find((e)=>{
         return e.name === marker.name
       })
-      console.log(remainingHand, usedCard)
+      if(usedCard){
+        this.setState({
+          translate: pos
+        });
+        //update player piece location and updates player hand
+        this.props.firebase.playerOne().update({
+          location: marker.name,
+          translate: pos,
+          hand: remainingHand
+        });
+        // sets the selected  user action back to none
+        this.props.firebase.database().update({
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1,
+        });
+        // pushes used city card to Player discard pile
+        this.props.firebase.database().child('/playerDiscard/').push(usedCard)
+      }
+      else{
+        alert("Invalid Move");
+      }
+
+    }
+
+    // if charter is picked user is on city and has the city card also
+    else if(this.state.selectedAction == "charter"){
+      // remaining hand filters out current city location card because this is charter
+      let remainingHand = this.state.playerOne.hand.filter((e)=>{
+        return e.name !== playerOne.location
+      })
+      // finds the current city location card of player
+      let usedCard = this.state.playerOne.hand.find((e)=>{
+        return e.name === playerOne.location
+      })
       this.setState({
         translate: pos
       });
@@ -139,7 +174,7 @@ class WorldMap extends Component {
   }
 
   render() {
-    const { cities, playerOne } = this.state;
+    const { cities } = this.state;
     // let pieceOne = <PlayerPiece
     // name="playerOne"
     // transform={playerOne.translate} fill="#ECEFF1"
