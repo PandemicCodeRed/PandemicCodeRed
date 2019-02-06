@@ -28,7 +28,7 @@ class CureDialog extends React.Component {
       discards.push(discard);
     });
     let cureButtonDisabled = true;
-    if ((discards.length = 4)) {
+    if (discards.length >= 4) {
       cureButtonDisabled = false;
     }
     return (
@@ -52,7 +52,10 @@ class CureDialog extends React.Component {
           ))}
           <Button
             disabled={cureButtonDisabled}
-            onClick={() => this.handleCureSubmit(color, discards)}
+            onClick={async () => {
+              await this.handleCureSubmit(color, discards);
+              await this.setState({ discards: new Set([]) });
+            }}
           >
             Cure {color}
           </Button>

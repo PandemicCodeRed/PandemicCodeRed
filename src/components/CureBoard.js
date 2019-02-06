@@ -22,15 +22,23 @@ class CureBoard extends Component {
   handleCure(selColor) {
     let activePlayer = this.state.activePlayer;
     let hand = this.state[activePlayer].hand;
-    let colorCards = hand.filter(card => card.color === selColor);
+    let colorCards = [];
+    if (hand !== undefined) {
+      colorCards = hand.filter(card => card.color === selColor);
+    }
     if (colorCards.length >= 4) {
-      this.setState({ cureOpen: true, colorHand: colorCards });
+      let playerLocation = this.state[activePlayer].location;
+      if (this.state.cities[playerLocation].station) {
+        this.setState({ cureOpen: true, colorHand: colorCards });
+      } else {
+        alert("No station at this location");
+      }
     } else {
       alert(`Not enough ${selColor} Cards`);
     }
   }
   //cure func
-  handleCureClose = (color, discards) => {
+  handleCureClose = async (color, discards) => {
     //discards is an array of the discarded cards from cure dialog
     let activePlayer = this.state.activePlayer;
     let newHand = this.state[activePlayer].hand.filter(
@@ -40,9 +48,14 @@ class CureBoard extends Component {
     updates[`/${activePlayer}/hand`] = newHand;
     updates[`/${color}Status`] = "cured";
     updates["/actionCount"] = this.state.actionCount - 1;
-    this.props.firebase.database().update(updates, () => {
-      this.setState({ cureOpen: false, colorHand: [] });
-    });
+    await this.props.firebase.database().update(updates);
+    await discards.forEach(card =>
+      this.props.firebase
+        .database()
+        .child("/playerDiscard/")
+        .push(card)
+    );
+    await this.setState({ cureOpen: false, colorHand: [] });
   };
   render() {
     return (
