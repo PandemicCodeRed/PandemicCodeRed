@@ -109,19 +109,32 @@ class WorldMap extends Component {
         alert("Invalid Move");
       }
     }
-    // handles if card button was clicked cities also discards hand/city clicked
+    // handles if card button was clicked cities and allows user to click to move to related city cards also discards city card to player discard pile
     else if(this.state.selectedAction == "city"){
+      // remaining hand
+      let remainingHand = this.state.playerOne.hand.filter((e)=>{
+        return e.name !== marker.name
+      })
+      let usedCard = this.state.playerOne.hand.find((e)=>{
+        return e.name === marker.name
+      })
+      console.log(remainingHand, usedCard)
       this.setState({
         translate: pos
       });
+      //update player piece location and updates player hand
       this.props.firebase.playerOne().update({
         location: marker.name,
-        translate: pos
+        translate: pos,
+        hand: remainingHand
       });
+      // sets the selected  user action back to none
       this.props.firebase.database().update({
         selectedAction: "none",
-        actionCount: this.state.actionCount - 1
+        actionCount: this.state.actionCount - 1,
       });
+      // pushes used city card to Player discard pile
+      this.props.firebase.database().child('/playerDiscard/').push(usedCard)
     }
   }
 
