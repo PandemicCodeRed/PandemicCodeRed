@@ -45,7 +45,7 @@ let styles = theme => ({
 class Lobby extends Component {
   constructor() {
     super();
-    this.state = { ...initialState };
+    this.state = initialState;
     this.startGame = this.startGame.bind(this);
   }
 
