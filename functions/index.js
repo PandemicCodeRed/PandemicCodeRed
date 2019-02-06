@@ -42,16 +42,16 @@ admin.initializeApp({
   }).then(nv => {
     return admin.database().ref().update({'blackRemaining': nv}).then(() => { res.send('lalala')})
   })
-}); */
+});
 
-/* app.get('/*', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
     if (err) {
       res.status(500).send(err)
     }
   })
-}) */
-
+})
+ */
 //exports.app = functions.https.onRequest(app);
 
 
