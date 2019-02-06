@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
+import CardDialog from "./CardDialog"
 
 const styles = theme => ({
   button: {
@@ -29,10 +30,11 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none" };
+    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false};
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
+    this.handleCard = this.handleCard.bind(this)
   }
 
   //unsubsribe this in component did unmount
@@ -103,6 +105,46 @@ class PlayerControlNavbar extends Component {
     return Object.values(virusCounts).some(count => count > 0);
   }
 
+  handleCard() {
+    this.setState({cardOpen: true });
+  }
+
+  handleCardClose = async (card) =>{
+    const {playerOne} = this.state
+
+    await this.props.firebase.database().update({
+      selectedAction: card
+    });
+    // // lists cities availble to move to based on city cards in hand
+    let k = playerOne.hand.reduce((acc, cur)=>{
+      acc += cur.name
+      acc += ' '
+      return acc
+    },'')
+    alert(`Cards ${k}`)
+    await this.setState({cardOpen: false})
+     // if charter action picked compare if player has city card player is currently on
+    if(card === "charter"){
+      let userHadCharterCityCard = playerOne.hand.find((e)=> {
+        return e.name === playerOne.location
+      })
+      if(!userHadCharterCityCard){
+        await this.props.firebase.database().update({
+          selectedAction: "none"
+        });
+        alert("You do not have the city card that matches your location charter flight is impossible")
+        await this.setState({cardOpen: false})
+      }
+      else{
+        alert("Charter a flight to any city")
+      }
+    }
+    if(card === "direct"){
+    alert(`Citys/Cards to direct flight to: ${k}`)
+    }
+  }
+
+
   render() {
     const { classes } = this.props;
     const virusCounts = this.playerLocationVirusCounts(this.state)
@@ -159,9 +201,16 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           disabled={disableCard}
+          onClick={this.handleCard}
         >
           CARD
         </Button>
+
+        <CardDialog
+          open={this.state.cardOpen}
+          onClose={this.handleCardClose}
+        />
+
 
         <Button
           variant="contained"

@@ -14,8 +14,10 @@ import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
-import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
+import Tippy from '@tippy.js/react'
+import 'tippy.js/dist/tippy.css'
+
+import BioLab from "./BioLab"
 
 const wrapperStyles = {
   width: "100%",
@@ -26,6 +28,7 @@ const wrapperStyles = {
 class WorldMap extends Component {
   constructor() {
     super();
+    // translate default is atlanta
     this.state = initialState;
 
     this.handleClick = this.handleClick.bind(this);
@@ -69,18 +72,24 @@ class WorldMap extends Component {
   }
 
   handleClick(marker, evt) {
-    let pos = `translate(${evt[0]},${evt[1]})`;
-    // this.setState({
-    //   translate: pos
-    // });
+    const {playerOne} = this.state
+    // this generates translate number of where city is and will be given to the player piece transform to move it to the correct position
+    let pos = `translate(${evt[0]-30},${evt[1]})`;
+
+
     if (this.state.selectedAction == "move") {
       let target = marker.name;
       let currentLocation = this.state.playerOne.location;
       let adjacents = this.state.cities[currentLocation].neighbors;
       //neighbor move
       if (adjacents.hasOwnProperty(target)) {
+        // moves player piece based on translate attribute sets state
+        this.setState({
+          translate: pos
+        });
         this.props.firebase.playerOne().update({
-          location: marker.name
+          location: marker.name,
+          translate: pos
         });
         this.props.firebase.database().update({
           selectedAction: "none",
@@ -102,10 +111,76 @@ class WorldMap extends Component {
         alert("Invalid Move");
       }
     }
+    // handles if card button was clicked cities and allows user to click to move to related city cards also discards city card to player discard pile
+    else if(this.state.selectedAction == "direct"){
+      // remaining hand
+      let remainingHand = this.state.playerOne.hand.filter((e)=>{
+        return e.name !== marker.name
+      })
+      let usedCard = this.state.playerOne.hand.find((e)=>{
+        return e.name === marker.name
+      })
+      if(usedCard){
+        this.setState({
+          translate: pos
+        });
+        //update player piece location and updates player hand
+        this.props.firebase.playerOne().update({
+          location: marker.name,
+          translate: pos,
+          hand: remainingHand
+        });
+        // sets the selected  user action back to none
+        this.props.firebase.database().update({
+          selectedAction: "none",
+          actionCount: this.state.actionCount - 1,
+        });
+        // pushes used city card to Player discard pile
+        this.props.firebase.database().child('/playerDiscard/').push(usedCard)
+      }
+      else{
+        alert("Invalid Move");
+      }
+
+    }
+
+    // if charter is picked user is on city and has the city card also
+    else if(this.state.selectedAction == "charter"){
+      // remaining hand filters out current city location card because this is charter
+      let remainingHand = this.state.playerOne.hand.filter((e)=>{
+        return e.name !== playerOne.location
+      })
+      // finds the current city location card of player
+      let usedCard = this.state.playerOne.hand.find((e)=>{
+        return e.name === playerOne.location
+      })
+      this.setState({
+        translate: pos
+      });
+      //update player piece location and updates player hand
+      this.props.firebase.playerOne().update({
+        location: marker.name,
+        translate: pos,
+        hand: remainingHand
+      });
+      // sets the selected  user action back to none
+      this.props.firebase.database().update({
+        selectedAction: "none",
+        actionCount: this.state.actionCount - 1,
+      });
+      // pushes used city card to Player discard pile
+      this.props.firebase.database().child('/playerDiscard/').push(usedCard)
+    }
   }
 
   render() {
     const { cities } = this.state;
+    // let pieceOne = <PlayerPiece
+    // name="playerOne"
+    // transform={playerOne.translate} fill="#ECEFF1"
+    // location={playerOne.location} />
+
+
     return (
       <div style={wrapperStyles}>
         <ComposableMap
@@ -157,18 +232,31 @@ class WorldMap extends Component {
                 )
               }
             </Geographies>
-            <PlayerPiece transform={this.state.translate} fill="#ECEFF1" />
+            <PlayerPiece
+              name="playerOne"
+              transform={this.state.playerOne.translate} fill="#ECEFF1"
+              location={this.state.playerOne.location} />
+
+              <PlayerPiece
+              name="playerTwo"
+              transform={this.state.playerTwo.translate} fill="purple"
+              location={this.state.playerTwo.location} />
+
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;
-                let researchMarker = null;
                 let curCity = marker.name;
-                //research lab also appears if true
-                if (cities[curCity].station === true) {
-                  researchMarker = <ResearchLab />;
+                //both station and disease present marker is research with biohazard logo
+                if (cities[curCity].station === true &&
+                  (cities[curCity].blackCount > 0 ||
+                  cities[curCity].blueCount > 0 ||
+                  cities[curCity].redCount > 0 ||
+                  cities[curCity].yellowCount > 0)) {
+                  cityMarker = <BioLab />;
                 }
-                // marker is switched to biohazard if any amount of disease count is in city
-                if (
+
+                // if only disease count is present only biohazard marker appears
+               else if (
                   cities[curCity].blackCount > 0 ||
                   cities[curCity].blueCount > 0 ||
                   cities[curCity].redCount > 0 ||
@@ -176,8 +264,13 @@ class WorldMap extends Component {
                 ) {
                   cityMarker = <BiohazardMarker />;
                 }
+                // checking if only research station is present
+                else if(cities[curCity].station === true){
+                  cityMarker = <ResearchLab />
+                }
+
                 // Dont want red marker to show up when research marker is present either
-                else if (!researchMarker) {
+                else if (!cityMarker) {
                   cityMarker = (
                     <circle
                       cx={0}
@@ -191,6 +284,7 @@ class WorldMap extends Component {
                     />
                   );
                 }
+
                 return (
                   <Marker
                     key={i} // if two things swap, react won't see any differences in the key.. use ID
@@ -202,7 +296,7 @@ class WorldMap extends Component {
                       pressed: { fill: "#FF5722" }
                     }}
                   >
-                    {researchMarker}
+
                     {cityMarker}
                     <Tippy
                       content={`Disease Cubes: Black ${

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
-import { withStyles } from "@material-ui/core/styles";
-import { SignUpLink } from "./SignUp";
-import { withFirebase } from "./Firebase";
-import * as ROUTES from "../constants/routes";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import { withStyles } from '@material-ui/core/styles';
+import { SignUpLink } from './SignUp';
+import { withFirebase } from './Firebase';
+import * as ROUTES from '../constants/routes';
 
 const SignIn = () => (
   <div>
