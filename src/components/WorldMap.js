@@ -236,6 +236,12 @@ class WorldMap extends Component {
               name="playerOne"
               transform={this.state.playerOne.translate} fill="#ECEFF1"
               location={this.state.playerOne.location} />
+
+              <PlayerPiece
+              name="playerTwo"
+              transform={this.state.playerTwo.translate} fill="purple"
+              location={this.state.playerTwo.location} />
+
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;

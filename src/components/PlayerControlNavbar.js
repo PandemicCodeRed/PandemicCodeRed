@@ -34,7 +34,6 @@ class PlayerControlNavbar extends Component {
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
-    this.handleCityCard = this.handleCityCard.bind(this)
     this.handleCard = this.handleCard.bind(this)
   }
 
@@ -110,10 +109,10 @@ class PlayerControlNavbar extends Component {
     this.setState({cardOpen: true });
   }
 
-  handleCardClose = card =>{
+  handleCardClose = async (card) =>{
     const {playerOne} = this.state
 
-    this.props.firebase.database().update({
+    await this.props.firebase.database().update({
       selectedAction: card
     });
     // // lists cities availble to move to based on city cards in hand
@@ -122,18 +121,19 @@ class PlayerControlNavbar extends Component {
       acc += ' '
       return acc
     },'')
-    this.setState({cardOpen: false})
+    alert(`Cards ${k}`)
+    await this.setState({cardOpen: false})
      // if charter action picked compare if player has city card player is currently on
     if(card === "charter"){
       let userHadCharterCityCard = playerOne.hand.find((e)=> {
         return e.name === playerOne.location
       })
       if(!userHadCharterCityCard){
-        this.props.firebase.database().update({
+        await this.props.firebase.database().update({
           selectedAction: "none"
         });
         alert("You do not have the city card that matches your location charter flight is impossible")
-        this.setState({cardOpen: false})
+        await this.setState({cardOpen: false})
       }
       else{
         alert("Charter a flight to any city")
