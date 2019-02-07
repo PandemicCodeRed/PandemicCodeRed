@@ -37,19 +37,23 @@ class PlayerControlNavbar extends Component {
     this.handleCard = this.handleCard.bind(this)
   }
 
-  //unsubsribe this in component did unmount
-
   componentDidMount() {
-    this.props.firebase.database().on("value", snapshot => { //.on is what's constantly listening to update the database locally (on all of our components)
+    this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
+      const drawPhase = this.isDrawPhase(db)
       this.setState(state => ({
         ...state,
         ...db,
-        treatableCity
-      }));
+        treatableCity,
+        drawPhase
+      }), () => {console.log('draw phase', this.state.drawPhase)});
     });
+  }
+
+  isDrawPhase = (db) => {
+    return db.drawCount > 0 && db.actionCount === 0
   }
 
   //toggles move action
@@ -116,7 +120,7 @@ class PlayerControlNavbar extends Component {
     await this.props.firebase.database().update({
       selectedAction: card
     });
-    // // lists cities availble to move to based on city cards in hand
+    // // lists cities available to move to based on city cards in hand
     let k = playerOne.hand.reduce((acc, cur)=>{
       acc += cur.name
       acc += ' '
@@ -148,6 +152,7 @@ class PlayerControlNavbar extends Component {
 
   render() {
     const { classes } = this.props;
+    const {drawPhase} = this.state
     const virusCounts = this.playerLocationVirusCounts(this.state);
     return (
       <div>
@@ -165,7 +170,7 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableMove}
+          disabled={drawPhase}
           onClick={this.handleMove}
         >
           MOVE
@@ -176,7 +181,7 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleTreat}
-          disabled={!this.state.treatableCity}
+          disabled={!this.state.treatableCity || drawPhase}
         >
           TREAT
         </Button>
@@ -192,7 +197,7 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableShare}
+          disabled={drawPhase}
         >
           SHARE
         </Button>
@@ -201,7 +206,7 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableCard}
+          disabled={drawPhase}
           onClick={this.handleCard}
         >
           CARD
@@ -226,9 +231,9 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disablePlayerRole}
+          disabled={!drawPhase}
         >
-          PLAYER ROLE
+          DRAW
         </Button>
       </div>
     );
