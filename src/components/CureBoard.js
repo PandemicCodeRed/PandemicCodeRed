@@ -18,6 +18,10 @@ class CureBoard extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.props.firebase.database().off();
+  }
+
   //triggers cure dialog
   handleCure(selColor) {
     let activePlayer = this.state.activePlayer;

@@ -71,6 +71,10 @@ class WorldMap extends Component {
     // });
   }
 
+  componentWillUnmount() {
+    this.props.firebase.database().off();
+  }
+
   handleClick(marker, evt) {
     const {playerOne} = this.state
     // this generates translate number of where city is and will be given to the player piece transform to move it to the correct position

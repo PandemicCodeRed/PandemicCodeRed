@@ -60,6 +60,10 @@ class Lobby extends Component {
       this.setState(db);
     });
   }
+  componentWillUnmount() {
+    this.props.firebase.database().off();
+  }
+
   startGame() {
     console.log("start!");
   }
