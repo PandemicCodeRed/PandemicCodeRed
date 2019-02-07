@@ -1195,5 +1195,6 @@
   "players": ["playerOne", "playerTwo", "playerThree", "playerFour"],
   "actionCount": 4,
   "gameStart": true,
-  "activePlayer": "playerOne"
+  "activePlayer": "playerOne",
+  "drawCount": 2
 }
