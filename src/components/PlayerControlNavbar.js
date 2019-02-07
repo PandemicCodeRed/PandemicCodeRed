@@ -67,6 +67,10 @@ class PlayerControlNavbar extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.props.firebase.database().off();
+  }
+
   //toggles move action
   handleMove() {
     this.props.firebase.database().update({
