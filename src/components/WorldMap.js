@@ -14,10 +14,10 @@ import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
-import Tippy from '@tippy.js/react'
-import 'tippy.js/dist/tippy.css'
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
-import BioLab from "./BioLab"
+import BioLab from "./BioLab";
 
 const wrapperStyles = {
   width: "100%",
@@ -50,7 +50,6 @@ class WorldMap extends Component {
       this.setState(db);
     });
 
-
     //clean this shizz up
 
     // this.props.firebase.selectedAction().on("value", snapshot => {
@@ -66,28 +65,30 @@ class WorldMap extends Component {
     // });
   }
 
+  componentWillUnmount() {
+    this.props.firebase.database().off("value");
+  }
+
   handleClick(marker, evt) {
-    const {activePlayer} = this.state
-    const db = this.state
-    const currentPlayer = db[activePlayer]
+    const { activePlayer } = this.state;
+    const db = this.state;
+    const currentPlayer = db[activePlayer];
     // this generates translate number of where city is and will be given to the player piece transform to move it to the correct position
     //switch adjust position of each player piece so they do not stack if in same city
-    let pos = `translate(${evt[0]-30},${evt[1]})`;
-    switch(activePlayer){
-      case 'playerTwo':
-        pos = `translate(${evt[0]-25},${evt[1]})`;
-        break
-      case 'playerThree':
-        pos = `translate(${evt[0]-20},${evt[1]})`
-        break
-      case 'playerFour':
-        pos = `translate(${evt[0]-15},${evt[1]})`
-        break
+    let pos = `translate(${evt[0] - 30},${evt[1]})`;
+    switch (activePlayer) {
+      case "playerTwo":
+        pos = `translate(${evt[0] - 25},${evt[1]})`;
+        break;
+      case "playerThree":
+        pos = `translate(${evt[0] - 20},${evt[1]})`;
+        break;
+      case "playerFour":
+        pos = `translate(${evt[0] - 15},${evt[1]})`;
+        break;
       default:
-        pos
+        pos;
     }
-
-
 
     if (this.state.selectedAction == "move") {
       let target = marker.name;
@@ -97,7 +98,7 @@ class WorldMap extends Component {
       let updatesPlayer = {};
       updatesPlayer[`/${activePlayer}/location`] = target;
       updatesPlayer[`/${activePlayer}/translate`] = pos;
-      updatesPlayer["/selectedAction"] = "none"
+      updatesPlayer["/selectedAction"] = "none";
       updatesPlayer["/actionCount"] = this.state.actionCount - 1;
 
       //neighbor move
@@ -118,15 +119,15 @@ class WorldMap extends Component {
       }
     }
     // handles if card button was clicked cities and allows user to click to move to related city cards also discards city card to player discard pile
-    else if(this.state.selectedAction == "direct"){
+    else if (this.state.selectedAction == "direct") {
       // remaining hand
-      let remainingHand = currentPlayer.hand.filter((e)=>{
-        return e.name !== marker.name
-      })
-      let usedCard = currentPlayer.hand.find((e)=>{
-        return e.name === marker.name
-      })
-      if(usedCard){
+      let remainingHand = currentPlayer.hand.filter(e => {
+        return e.name !== marker.name;
+      });
+      let usedCard = currentPlayer.hand.find(e => {
+        return e.name === marker.name;
+      });
+      if (usedCard) {
         // this gets the clicked position translate coordinates
         this.setState({
           translate: pos
@@ -135,32 +136,32 @@ class WorldMap extends Component {
         let directMove = {};
         directMove[`/${activePlayer}/location`] = marker.name;
         directMove[`/${activePlayer}/translate`] = pos;
-        directMove["/selectedAction"] = "none"
-        directMove[`/${activePlayer}/hand`] = remainingHand
-        directMove["/actionCount"] =
-        this.state.actionCount - 1;
+        directMove["/selectedAction"] = "none";
+        directMove[`/${activePlayer}/hand`] = remainingHand;
+        directMove["/actionCount"] = this.state.actionCount - 1;
         //update player piece location and updates player hand
         this.props.firebase.database().update(directMove);
 
         // pushes used city card to Player discard pile
-        this.props.firebase.database().child('/playerDiscard/').push(usedCard)
-      }
-      else{
+        this.props.firebase
+          .database()
+          .child("/playerDiscard/")
+          .push(usedCard);
+      } else {
         alert("Invalid Move");
       }
-
     }
 
     // if charter is picked user is on city and has the city card also
-    else if(this.state.selectedAction == "charter"){
+    else if (this.state.selectedAction == "charter") {
       // remaining hand filters out current city location card because this is charter
-      let remainingHand = currentPlayer.hand.filter((e)=>{
-        return e.name !== currentPlayer.location
-      })
+      let remainingHand = currentPlayer.hand.filter(e => {
+        return e.name !== currentPlayer.location;
+      });
       // finds the current city location card of player
-      let usedCard = currentPlayer.hand.find((e)=>{
-        return e.name === currentPlayer.location
-      })
+      let usedCard = currentPlayer.hand.find(e => {
+        return e.name === currentPlayer.location;
+      });
       this.setState({
         translate: pos
       });
@@ -169,14 +170,16 @@ class WorldMap extends Component {
       let charterMove = {};
       charterMove[`/${activePlayer}/location`] = marker.name;
       charterMove[`/${activePlayer}/translate`] = pos;
-      charterMove["/selectedAction"] = "none"
-      charterMove[`/${activePlayer}/hand`] = remainingHand
-      charterMove["/actionCount"] =
-        this.state.actionCount - 1;
+      charterMove["/selectedAction"] = "none";
+      charterMove[`/${activePlayer}/hand`] = remainingHand;
+      charterMove["/actionCount"] = this.state.actionCount - 1;
       //update player piece location and updates player hand
       this.props.firebase.database().update(charterMove);
       // pushes used city card to Player discard pile
-      this.props.firebase.database().child('/playerDiscard/').push(usedCard)
+      this.props.firebase
+        .database()
+        .child("/playerDiscard/")
+        .push(usedCard);
     }
   }
 
@@ -186,7 +189,6 @@ class WorldMap extends Component {
     // name="playerOne"
     // transform={playerOne.translate} fill="#ECEFF1"
     // location={playerOne.location} />
-
 
     return (
       <div style={wrapperStyles}>
@@ -241,39 +243,49 @@ class WorldMap extends Component {
             </Geographies>
             <PlayerPiece
               name="playerOne"
-              transform={this.state.playerOne.translate} fill="#ECEFF1"
-              location={this.state.playerOne.location} />
+              transform={this.state.playerOne.translate}
+              fill="#ECEFF1"
+              location={this.state.playerOne.location}
+            />
 
-              <PlayerPiece
+            <PlayerPiece
               name="playerTwo"
-              transform={this.state.playerTwo.translate} fill="purple"
-              location={this.state.playerTwo.location} />
+              transform={this.state.playerTwo.translate}
+              fill="purple"
+              location={this.state.playerTwo.location}
+            />
 
-              <PlayerPiece
+            <PlayerPiece
               name="playerThree"
-              transform={this.state.playerThree.translate} fill="red"
-              location={this.state.playerThree.location} />
+              transform={this.state.playerThree.translate}
+              fill="red"
+              location={this.state.playerThree.location}
+            />
 
-              <PlayerPiece
+            <PlayerPiece
               name="playerFour"
-              transform={this.state.playerFour.translate} fill="green"
-              location={this.state.playerFour.location} />
+              transform={this.state.playerFour.translate}
+              fill="green"
+              location={this.state.playerFour.location}
+            />
 
             <Markers>
               {markers.map((marker, i) => {
                 let cityMarker = null;
                 let curCity = marker.name;
                 //both station and disease present marker is research with biohazard logo
-                if (cities[curCity].station === true &&
+                if (
+                  cities[curCity].station === true &&
                   (cities[curCity].blackCount > 0 ||
-                  cities[curCity].blueCount > 0 ||
-                  cities[curCity].redCount > 0 ||
-                  cities[curCity].yellowCount > 0)) {
+                    cities[curCity].blueCount > 0 ||
+                    cities[curCity].redCount > 0 ||
+                    cities[curCity].yellowCount > 0)
+                ) {
                   cityMarker = <BioLab />;
                 }
 
                 // if only disease count is present only biohazard marker appears
-               else if (
+                else if (
                   cities[curCity].blackCount > 0 ||
                   cities[curCity].blueCount > 0 ||
                   cities[curCity].redCount > 0 ||
@@ -282,8 +294,8 @@ class WorldMap extends Component {
                   cityMarker = <BiohazardMarker />;
                 }
                 // checking if only research station is present
-                else if(cities[curCity].station === true){
-                  cityMarker = <ResearchLab />
+                else if (cities[curCity].station === true) {
+                  cityMarker = <ResearchLab />;
                 }
 
                 // Dont want red marker to show up when research marker is present either
@@ -313,7 +325,6 @@ class WorldMap extends Component {
                       pressed: { fill: "#FF5722" }
                     }}
                   >
-
                     {cityMarker}
                     <Tippy
                       content={`Disease Cubes: Black ${

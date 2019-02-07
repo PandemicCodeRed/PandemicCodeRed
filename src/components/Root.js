@@ -42,6 +42,7 @@ class Root extends React.Component {
     this.state = { ...initialState, spacing: "16" };
     this.checkStatus = this.checkStatus.bind(this);
     this.checkDiseaseCounts = this.checkDiseaseCounts.bind(this);
+    this.checkTurn = this.checkTurn.bind(this);
   }
 
   async componentDidMount() {
@@ -52,6 +53,8 @@ class Root extends React.Component {
         ...db
       }));
       this.checkDiseaseCounts();
+      this.checkTurn();
+      this.checkStatus();
     });
     const snapshot = await this.props.firebase
       .database()
@@ -70,7 +73,27 @@ class Root extends React.Component {
     }
   }
 
-  componentDidUpdate() {}
+  //honestly not even sure if this is working right
+  componentWillUnmount() {
+    this.props.firebase.database().off("value");
+  }
+
+  checkTurn = () => {
+    if (this.state.actionCount <= 0 && this.state.drawCount <= 0) {
+      let updates = {};
+      let currentPlayer = this.state.activePlayer;
+      let nextPlayer = {
+        playerOne: "playerTwo",
+        playerTwo: "playerThree",
+        playerThree: "playerFour",
+        playerFour: "playerOne"
+      };
+      updates[`/drawCount`] = 2;
+      updates[`/actionCount`] = 4;
+      updates[`/activePlayer`] = nextPlayer[currentPlayer];
+      this.props.firebase.database().update(updates);
+    }
+  };
 
   checkDiseaseCounts = () => {
     let blues = this.state.blueRemaining;
