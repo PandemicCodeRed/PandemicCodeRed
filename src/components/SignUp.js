@@ -53,7 +53,8 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.LOBBY);
+        var user = firebase.auth().currentUser;
       })
       .catch(error => {
         this.setState({ error });
@@ -88,7 +89,7 @@ class SignUpFormBase extends Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="User ID"
+          placeholder="Username"
         />
         <input
           name="email"
