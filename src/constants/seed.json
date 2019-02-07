@@ -1196,5 +1196,6 @@
   "actionCount": 4,
   "gameStart": true,
   "activePlayer": "playerOne",
-  "drawCount": 2
+  "drawCount": 2,
+  "infectComplete": false
 }

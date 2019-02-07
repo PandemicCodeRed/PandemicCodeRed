@@ -81,7 +81,11 @@ class Root extends React.Component {
   }
 
   checkTurn = () => {
-    if (this.state.actionCount <= 0 && this.state.drawCount <= 0) {
+    if (
+      this.state.actionCount <= 0 &&
+      this.state.drawCount <= 0 &&
+      this.state.infectComplete
+    ) {
       let updates = {};
       let currentPlayer = this.state.activePlayer;
       let nextPlayer = {
@@ -93,6 +97,7 @@ class Root extends React.Component {
       updates[`/drawCount`] = 2;
       updates[`/actionCount`] = 4;
       updates[`/activePlayer`] = nextPlayer[currentPlayer];
+      updates[`/infectComplete`] = false;
       this.props.firebase.database().update(updates);
     }
   };
