@@ -111,7 +111,8 @@ class WorldMap extends Component {
         //station move
       } else if (
         this.state.cities[currentLocation].station &&
-        this.state.cities[target].station
+        this.state.cities[target].station &&
+        this.state.cities[target] !== this.state.cities[currentLocation]
       ) {
         this.props.firebase.database().update(updatesPlayer);
       } else {
