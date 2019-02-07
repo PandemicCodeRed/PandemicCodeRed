@@ -111,13 +111,16 @@ class PlayerControlNavbar extends Component {
   }
 
   handleCardClose = async (card) =>{
-    const {playerOne} = this.state
+    const {activePlayer} = this.state
+    const db = this.state
+    const currentPlayer = db[activePlayer]
 
+    // this switches the selected action to direct or charter
     await this.props.firebase.database().update({
       selectedAction: card
     });
     // // lists cities availble to move to based on city cards in hand
-    let k = playerOne.hand.reduce((acc, cur)=>{
+    let k = currentPlayer.hand.reduce((acc, cur)=>{
       acc += cur.name
       acc += ' '
       return acc
@@ -126,8 +129,8 @@ class PlayerControlNavbar extends Component {
     await this.setState({cardOpen: false})
      // if charter action picked compare if player has city card player is currently on
     if(card === "charter"){
-      let userHadCharterCityCard = playerOne.hand.find((e)=> {
-        return e.name === playerOne.location
+      let userHadCharterCityCard = currentPlayer.hand.find((e)=> {
+        return e.name === currentPlayer.location
       })
       if(!userHadCharterCityCard){
         await this.props.firebase.database().update({
