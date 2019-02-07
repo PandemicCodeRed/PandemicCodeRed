@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
-import CardDialog from "./CardDialog"
+import CardDialog from "./CardDialog";
 
 const styles = theme => ({
   button: {
@@ -13,6 +14,13 @@ const styles = theme => ({
     "&$buttonDisabled": {
       color: theme.palette.grey[500]
     }
+  },
+  static: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.primary.main,
+    color: "#ffffff",
+    textAlign: "center",
+    padding: "10px"
   },
   buttonDisabled: {},
   input: {
@@ -30,17 +38,24 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false};
+    this.state = {
+      ...initialState,
+      treatOpen: false,
+      treatableCity: false,
+      selectedType: "none",
+      cardOpen: false
+    };
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
-    this.handleCard = this.handleCard.bind(this)
+    this.handleCard = this.handleCard.bind(this);
   }
 
   //unsubsribe this in component did unmount
 
   componentDidMount() {
-    this.props.firebase.database().on("value", snapshot => { //.on is what's constantly listening to update the database locally (on all of our components)
+    this.props.firebase.database().on("value", snapshot => {
+      //.on is what's constantly listening to update the database locally (on all of our components)
       const db = snapshot.val();
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
@@ -78,7 +93,7 @@ class PlayerControlNavbar extends Component {
 
     if (selectedVirusCount > 0) {
       let updates = {}; //modifying an updates object
-      if (selectedVirusStatus === 'eradicated') {
+      if (selectedVirusStatus === "eradicated") {
         updates[`/cities/${currentCity}/${color}Count`] = 0; //this path structure matches the structure of the database
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       } else {
@@ -107,62 +122,63 @@ class PlayerControlNavbar extends Component {
   }
 
   handleCard() {
-    this.setState({cardOpen: true });
+    this.setState({ cardOpen: true });
   }
 
-  handleCardClose = async (card) =>{
-    const {activePlayer} = this.state
-    const db = this.state
-    const currentPlayer = db[activePlayer]
+  handleCardClose = async card => {
+    const { activePlayer } = this.state;
+    const db = this.state;
+    const currentPlayer = db[activePlayer];
 
     // this switches the selected action to direct or charter
     await this.props.firebase.database().update({
       selectedAction: card
     });
     // // lists cities availble to move to based on city cards in hand
-    let k = currentPlayer.hand.reduce((acc, cur)=>{
-      acc += cur.name
-      acc += ' '
-      return acc
-    },'')
-    alert(`Cards ${k}`)
-    await this.setState({cardOpen: false})
-     // if charter action picked compare if player has city card player is currently on
-    if(card === "charter"){
-      let userHadCharterCityCard = currentPlayer.hand.find((e)=> {
-        return e.name === currentPlayer.location
-      })
-      if(!userHadCharterCityCard){
+    let k = currentPlayer.hand.reduce((acc, cur) => {
+      acc += cur.name;
+      acc += " ";
+      return acc;
+    }, "");
+    alert(`Cards ${k}`);
+    await this.setState({ cardOpen: false });
+    // if charter action picked compare if player has city card player is currently on
+    if (card === "charter") {
+      let userHadCharterCityCard = currentPlayer.hand.find(e => {
+        return e.name === currentPlayer.location;
+      });
+      if (!userHadCharterCityCard) {
         await this.props.firebase.database().update({
           selectedAction: "none"
         });
-        alert("You do not have the city card that matches your location charter flight is impossible")
-        await this.setState({cardOpen: false})
-      }
-      else{
-        alert("Charter a flight to any city")
+        alert(
+          "You do not have the city card that matches your location charter flight is impossible"
+        );
+        await this.setState({ cardOpen: false });
+      } else {
+        alert("Charter a flight to any city");
       }
     }
-    if(card === "direct"){
-    alert(`Citys/Cards to direct flight to: ${k}`)
+    if (card === "direct") {
+      alert(`Citys/Cards to direct flight to: ${k}`);
     }
-  }
-
+  };
 
   render() {
     const { classes } = this.props;
     const virusCounts = this.playerLocationVirusCounts(this.state);
+    let formattedPlayer = `PLAYER ${this.state.activePlayer
+      .substring(6)
+      .toUpperCase()}`;
     return (
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={disablePlayer1}
-          classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-        >
-          PLAYER 1
-        </Button>
+      <div padding="15px">
+        <Card variant="contained" className={classes.static}>
+          {formattedPlayer}
+        </Card>
+
+        <Card variant="contained" className={classes.static}>
+          ACTIONS: {this.state.actionCount}
+        </Card>
 
         <Button
           variant="contained"
@@ -210,29 +226,7 @@ class PlayerControlNavbar extends Component {
           CARD
         </Button>
 
-        <CardDialog
-          open={this.state.cardOpen}
-          onClose={this.handleCardClose}
-        />
-
-
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={disableActionCount}
-        >
-          {this.state.actionCount}
-        </Button>
-
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={disablePlayerRole}
-        >
-          PLAYER ROLE
-        </Button>
+        <CardDialog open={this.state.cardOpen} onClose={this.handleCardClose} />
       </div>
     );
   }

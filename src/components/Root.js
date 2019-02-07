@@ -32,7 +32,9 @@ const styles = theme => ({
   navbar: {
     height: 540,
     width: 120,
-    backgroundColor: "#1A237E"
+    backgroundColor: "#1A237E",
+    paddingTop: "5px",
+    textAlign: "center"
   }
 });
 
