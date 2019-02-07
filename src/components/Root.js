@@ -45,6 +45,7 @@ class Root extends React.Component {
     this.checkStatus = this.checkStatus.bind(this);
     this.checkDiseaseCounts = this.checkDiseaseCounts.bind(this);
     this.checkTurn = this.checkTurn.bind(this);
+    this.infectPhase = this.infectPhase.bind(this);
   }
 
   async componentDidMount() {
@@ -56,6 +57,7 @@ class Root extends React.Component {
       }));
       this.checkDiseaseCounts();
       this.checkTurn();
+      this.infectPhase();
       this.checkStatus();
     });
     const snapshot = await this.props.firebase
@@ -84,7 +86,7 @@ class Root extends React.Component {
     if (
       this.state.actionCount <= 0 &&
       this.state.drawCount <= 0 &&
-      this.state.infectComplete
+      this.state.infectPhase === "complete"
     ) {
       let updates = {};
       let currentPlayer = this.state.activePlayer;
@@ -97,7 +99,7 @@ class Root extends React.Component {
       updates[`/drawCount`] = 2;
       updates[`/actionCount`] = 4;
       updates[`/activePlayer`] = nextPlayer[currentPlayer];
-      updates[`/infectComplete`] = false;
+      updates[`/infectPhase`] = "waiting";
       this.props.firebase.database().update(updates);
     }
   };
@@ -176,6 +178,16 @@ class Root extends React.Component {
     }
     this.props.firebase.database().update(updates);
     return infectionDeck;
+  }
+
+  //infectionPhase will have three cases: waiting, inProgress, and complete
+
+  infectPhase() {
+    if (
+      this.state.actionCount <= 0 &&
+      this.state.infectionPhase === "inProgress"
+    )
+      console.log("ohgodohgodohgod he sneezed");
   }
 
   deal(cityCards) {

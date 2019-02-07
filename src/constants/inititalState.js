@@ -1196,7 +1196,7 @@ const initialState = {
   players: ["playerOne", "playerTwo", "playerThree", "playerFour"],
   activePlayer: "playerOne",
   drawCount: 2,
-  infectComplete: false
+  infectionPhase: "complete"
 };
 
 export default initialState;

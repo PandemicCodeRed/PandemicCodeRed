@@ -1197,5 +1197,5 @@
   "gameStart": true,
   "activePlayer": "playerOne",
   "drawCount": 2,
-  "infectComplete": false
+  "infectionPhase": "complete"
 }
