@@ -42,19 +42,97 @@ class PlayerControlNavbar extends Component {
       const db = snapshot.val();
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
-      const drawPhase = this.isDrawPhase(db)
+      const drawPhase = this.isDrawPhase(db);
+      const {drawCount, playerDeck} = db
       this.setState(state => ({
         ...state,
         ...db,
         treatableCity,
-        drawPhase
+        drawPhase,
+        drawCount,
+        playerDeck
       }), () => {console.log('draw phase', this.state.drawPhase)});
     });
+  //   const snapshot2 = await this.props.firebase
+  //   .database()
+  //   .child("/drawCount")
+  //   .once("value");
+  // const drawCount = snapshot2.val();
+  // console.log('drawCount', drawCount);
   }
 
   isDrawPhase = (db) => {
     return db.drawCount > 0 && db.actionCount === 0
   }
+
+
+  handleDraw = () => {
+    const {firebase} = this.props
+    const {drawCount, playerDeck, activePlayer} = this.state
+    const playerHand = this.state[activePlayer].hand;
+
+    if (!playerDeck) {
+      firebase.database().update({gamestatus: 'lost'})
+    }
+    else if (playerHand && playerHand.length + 1 > 7) {
+      this.setState({discardDialog: true})
+    }
+    else {
+      let updates = {}
+      updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
+      updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
+      updates['/drawCount'] = drawCount - 1
+      firebase.database().update(updates)
+    }
+
+  }
+
+  // drawOne = () => {
+  //   const {firebase} = this.props
+  //   const {drawCount, playerDeck, activePlayer, playerDeck} = this.state
+  //   let updates = {}
+  //   updates[`/${activePlayer}/hand`] = playerDeck[playerDeck.length - 1]
+  //   updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
+  //   updates['/drawCount'] = drawCount - 1
+  //   firebase.database().update(updates)
+  // }
+
+
+
+  //  draw = () => {
+  //   const {actionCount} = this.state
+  //   const db = this.props.firebase.database()
+  //   const playerDeck = db.
+  // }
+
+  //  async draw() {
+  //   const {actionCount} = this.state
+  //   const snapshot = await this.props.firebase
+  //     .database()
+  //     .child("/gameStart")
+  //     .once("value");
+  //   const gameStart = snapshot.val();
+
+  //   // const db = this.props.firebase.database().child('/playerDeck/')
+  //   // const ss = this.getVal().then(snap => snap.val())
+  //   // const playerDeck = db.child('/playerDeck').once('value').then(snap => snap)
+  //   console.log('kjsklajelkjr', gameStart);
+  // }
+
+  // async testDraw() {
+  //   const snapshot2 = await this.props.firebase
+  //   .database()
+  //   .child("/drawCount")
+  //   .once("value");
+  // const drawCount = snapshot2.val();
+  // console.log('drawCount', drawCount);
+  // }
+
+  // getVal = () => {
+  //   this.props.firebase.database().once("value", snapshot => {
+  //     const db = snapshot.val();
+  //   });
+  // }
 
   //toggles move action
   handleMove() {
@@ -232,6 +310,7 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           disabled={!drawPhase}
+          onClick={this.handleDraw}
         >
           DRAW
         </Button>
