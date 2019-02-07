@@ -6,7 +6,8 @@
   "scripts": {
     "start-server": "http-server ./public -c-1",
     "build-client-watch": "webpack -w",
-    "start-dev": "npm run build-client-watch & npm run start-server"
+    "start-dev": "npm run build-client-watch & npm run start-server",
+    "start-fb": "npm run build-client-watch & npx node@6.11.5 ./node_modules/firebase-tools/lib/bin/firebase serve"
   },
   "keywords": [],
   "author": "Team-Pandemic",

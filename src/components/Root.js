@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { array } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -86,7 +86,7 @@ class Root extends React.Component {
     if (
       this.state.actionCount <= 0 &&
       this.state.drawCount <= 0 &&
-      this.state.infectPhase === "complete"
+      this.state.infectionPhase === "complete"
     ) {
       let updates = {};
       let currentPlayer = this.state.activePlayer;
@@ -99,7 +99,7 @@ class Root extends React.Component {
       updates[`/drawCount`] = 2;
       updates[`/actionCount`] = 4;
       updates[`/activePlayer`] = nextPlayer[currentPlayer];
-      updates[`/infectPhase`] = "waiting";
+      updates[`/infectionPhase`] = "waiting";
       this.props.firebase.database().update(updates);
     }
   };
@@ -186,8 +186,28 @@ class Root extends React.Component {
     if (
       this.state.actionCount <= 0 &&
       this.state.infectionPhase === "inProgress"
-    )
-      console.log("ohgodohgodohgod he sneezed");
+    ) {
+      let infectionNum = this.state.infectionRate;
+      let infectionDeck = [...this.state.infectionDeck];
+      let targetCities = [];
+      for (let i = 0; i < infectionNum; i++) {
+        targetCities.push(infectionDeck.pop());
+      }
+      let updates = {};
+      targetCities.forEach(card => {
+        alert(`${card.name} Infected!`);
+        let cityColor = card.color;
+        let cityName = card.name;
+        updates[`/cities/${cityName}/${cityColor}Count`] =
+          this.state.cities[cityName][`${cityColor}Count`] + 1;
+        updates[`/${cityColor}Remaining`] =
+          this.state[`${cityColor}Remaining`] - 1;
+      });
+      updates[`/infectionPhase`] = "complete";
+      updates["/infectionDeck"] = infectionDeck;
+      this.props.firebase.database().update(updates);
+      targetCities = [];
+    }
   }
 
   deal(cityCards) {
