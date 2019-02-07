@@ -5,10 +5,13 @@ import {
   Geographies,
   Geography,
   Markers,
-  Marker
+  Marker,
+  Lines,
+  Line
 } from "react-simple-maps";
 import axios from "axios";
 import markers from "../constants/cities";
+import lines from "../constants/lines"
 import PlayerPiece from "./PlayerPiece";
 import BiohazardMarker from "./BioharzardMarker";
 import ResearchLab from "./ResearchLab";
@@ -184,6 +187,26 @@ class WorldMap extends Component {
     }
   }
 
+  // need to maek one loop
+  renderLines = () => {
+    return lines.map(line => (
+      <Line
+        className="world-map-arc"
+        line={{
+          coordinates: {
+            start: line[0],
+            end: line[1]
+          }
+        }}
+        style={{
+          default: { stroke: "rgba(243, 249, 143, 0.49)" },
+
+        }}
+        strokeWidth="1"
+      />
+));
+  };
+
   render() {
     const { cities } = this.state;
     // let pieceOne = <PlayerPiece
@@ -352,6 +375,7 @@ class WorldMap extends Component {
                 );
               })}
             </Markers>
+            <Lines>{this.renderLines()}</Lines>
           </ZoomableGroup>
         </ComposableMap>
       </div>
