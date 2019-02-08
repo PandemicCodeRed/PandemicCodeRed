@@ -6,8 +6,8 @@ import Card from "@material-ui/core/Card";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
-import DiscardDialog from "./DiscardDialog"
-import CardDialog from "./CardDialog"
+import DiscardDialog from "./DiscardDialog";
+import CardDialog from "./CardDialog";
 
 const styles = theme => ({
   button: {
@@ -39,7 +39,14 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false, discardDialog: false};
+    this.state = {
+      ...initialState,
+      treatOpen: false,
+      treatableCity: false,
+      selectedType: "none",
+      cardOpen: false,
+      discardDialog: false
+    };
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
@@ -52,7 +59,7 @@ class PlayerControlNavbar extends Component {
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
       const drawPhase = this.isDrawPhase(db);
-      const {drawCount, playerDeck, playerHand} = db
+      const { drawCount, playerDeck, playerHand } = db;
       this.setState(state => ({
         ...state,
         ...db,
@@ -65,47 +72,40 @@ class PlayerControlNavbar extends Component {
     });
   }
 
+  isDrawPhase = db => {
+    return db.drawCount > 0 && db.actionCount === 0;
+  };
 
-  isDrawPhase = (db) => {
-    return db.drawCount > 0 && db.actionCount === 0
-  }
-
-  closeDiscardDialog = (drawCount) => {
+  closeDiscardDialog = drawCount => {
     if (drawCount === 0) {
-      this.setState({discardDialog: false})
+      this.setState({ discardDialog: false });
     }
-  }
-
+  };
 
   handleDraw = () => {
-    const {firebase} = this.props
-    const {drawCount, playerDeck, activePlayer} = this.state
+    const { firebase } = this.props;
+    const { drawCount, playerDeck, activePlayer } = this.state;
     const playerHand = this.state[activePlayer].hand;
 
     if (!playerDeck) {
-     
-
-      firebase.database().update({gamestatus: 'lost'})
+      firebase.database().update({ gamestatus: "lost" });
+    } else if (playerHand && playerHand.length === 7) {
+      this.setState({ discardDialog: true });
+    } else {
+      let updates = {};
+      updates[`/${activePlayer}/hand`] = [
+        ...playerHand,
+        playerDeck[playerDeck.length - 1]
+      ];
+      updates["/playerDeck"] = playerDeck.slice(0, playerDeck.length - 1);
+      updates["/drawCount"] = drawCount - 1;
+      updates["/infectionPhase"] = drawCount === 1 ? "inProgress" : "waiting";
+      firebase.database().update(updates);
     }
-    else if (playerHand && playerHand.length === 7) {
-     
-
-      this.setState({discardDialog: true})
-    }
-    else {
-      
-
-      let updates = {}
-      updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
-      updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
-      updates['/drawCount'] = drawCount - 1
-      updates['/infectionPhase'] = drawCount === 1 ? 'inProgress' : 'waiting'
-      firebase.database().update(updates)
-    }
+  };
 
   componentWillUnmount() {
     this.props.firebase.database().off();
-
   }
 
   //toggles move action
@@ -133,16 +133,16 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
-
       let updates = {};
-      if (selectedVirusStatus === 'eradicated') {
+      if (selectedVirusStatus === "eradicated") {
         updates[`/cities/${currentCity}/${color}Count`] = 0;
-
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
+        updates[`/actionCount`] = this.state.actionCount - 1;
       } else {
         updates[`/cities/${currentCity}/${color}Count`] =
           selectedVirusCount - 1;
         updates[`/${color}Remaining`] = selectedVirusTotal + 1;
+        updates[`/actionCount`] = this.state.actionCount - 1;
       }
       this.props.firebase.database().update(updates, () => {
         this.setState({ treatOpen: false, selectedType: color });
@@ -210,7 +210,7 @@ class PlayerControlNavbar extends Component {
 
   render() {
     const { classes } = this.props;
-    const {drawPhase} = this.state
+    const { drawPhase } = this.state;
     const virusCounts = this.playerLocationVirusCounts(this.state);
 
     const activePlayer = this.state.activePlayer;
@@ -285,11 +285,7 @@ class PlayerControlNavbar extends Component {
           CARD
         </Button>
 
-
-        <CardDialog
-          open={this.state.cardOpen}
-          onClose={this.handleCardClose}
-        />
+        <CardDialog open={this.state.cardOpen} onClose={this.handleCardClose} />
 
         <Button
           variant="contained"
@@ -300,7 +296,6 @@ class PlayerControlNavbar extends Component {
         >
           DRAW
         </Button>
-
       </div>
     );
   }
