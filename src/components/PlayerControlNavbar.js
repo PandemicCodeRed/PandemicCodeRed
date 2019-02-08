@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
+import DiscardDialog from "./DiscardDialog"
 import CardDialog from "./CardDialog"
 
 const styles = theme => ({
@@ -30,7 +31,7 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false};
+    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false, discardDialog: false};
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
@@ -43,22 +44,17 @@ class PlayerControlNavbar extends Component {
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
       const drawPhase = this.isDrawPhase(db);
-      const {drawCount, playerDeck} = db
+      const {drawCount, playerDeck, playerHand} = db
       this.setState(state => ({
         ...state,
         ...db,
         treatableCity,
         drawPhase,
         drawCount,
-        playerDeck
-      }), () => {console.log('draw phase', this.state.drawPhase)});
+        playerDeck,
+        playerHand
+      }));
     });
-  //   const snapshot2 = await this.props.firebase
-  //   .database()
-  //   .child("/drawCount")
-  //   .once("value");
-  // const drawCount = snapshot2.val();
-  // console.log('drawCount', drawCount);
   }
 
   isDrawPhase = (db) => {
@@ -72,67 +68,26 @@ class PlayerControlNavbar extends Component {
     const playerHand = this.state[activePlayer].hand;
 
     if (!playerDeck) {
+      console.log('no player deck');
+
       firebase.database().update({gamestatus: 'lost'})
     }
-    else if (playerHand && playerHand.length + 1 > 7) {
+    else if (playerHand && playerHand.length === 7) {
+      console.log('overdraw');
+
       this.setState({discardDialog: true})
     }
     else {
+      console.log(this.state.infectionDeck.length);
+
       let updates = {}
       updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
       updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
       updates['/drawCount'] = drawCount - 1
+      updates['/infectionPhase'] = "inProgress"
       firebase.database().update(updates)
     }
-
   }
-
-  // drawOne = () => {
-  //   const {firebase} = this.props
-  //   const {drawCount, playerDeck, activePlayer, playerDeck} = this.state
-  //   let updates = {}
-  //   updates[`/${activePlayer}/hand`] = playerDeck[playerDeck.length - 1]
-  //   updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
-  //   updates['/drawCount'] = drawCount - 1
-  //   firebase.database().update(updates)
-  // }
-
-
-
-  //  draw = () => {
-  //   const {actionCount} = this.state
-  //   const db = this.props.firebase.database()
-  //   const playerDeck = db.
-  // }
-
-  //  async draw() {
-  //   const {actionCount} = this.state
-  //   const snapshot = await this.props.firebase
-  //     .database()
-  //     .child("/gameStart")
-  //     .once("value");
-  //   const gameStart = snapshot.val();
-
-  //   // const db = this.props.firebase.database().child('/playerDeck/')
-  //   // const ss = this.getVal().then(snap => snap.val())
-  //   // const playerDeck = db.child('/playerDeck').once('value').then(snap => snap)
-  //   console.log('kjsklajelkjr', gameStart);
-  // }
-
-  // async testDraw() {
-  //   const snapshot2 = await this.props.firebase
-  //   .database()
-  //   .child("/drawCount")
-  //   .once("value");
-  // const drawCount = snapshot2.val();
-  // console.log('drawCount', drawCount);
-  // }
-
-  // getVal = () => {
-  //   this.props.firebase.database().once("value", snapshot => {
-  //     const db = snapshot.val();
-  //   });
-  // }
 
   //toggles move action
   handleMove() {
@@ -161,7 +116,7 @@ class PlayerControlNavbar extends Component {
     if (selectedVirusCount > 0) {
       let updates = {}; //modifying an updates object
       if (selectedVirusStatus === 'eradicated') {
-        updates[`/cities/${currentCity}/${color}Count`] = 0; //this path structure matches the structure of the database
+        updates[`/cities/${currentCity}/${color}Count`] = 0;
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       } else {
         updates[`/cities/${currentCity}/${color}Count`] =
@@ -232,6 +187,9 @@ class PlayerControlNavbar extends Component {
     const { classes } = this.props;
     const {drawPhase} = this.state
     const virusCounts = this.playerLocationVirusCounts(this.state);
+    const activePlayer = this.state.activePlayer;
+    const playerHand = this.state[this.state.activePlayer].hand;
+    const playerDeck = this.state.playerDeck;
     return (
       <div>
         <Button
@@ -269,6 +227,14 @@ class PlayerControlNavbar extends Component {
           onClose={this.handleTreatClose}
           dismiss={this.dismissTreatDialog}
           virusCounts={virusCounts}
+        />
+
+        <DiscardDialog
+          open={this.state.discardDialog}
+          playerHand={playerHand}
+          playerDeck={playerDeck}
+          activePlayer={activePlayer}
+          drawCount={this.state.drawCount}
         />
 
         <Button
