@@ -6,7 +6,8 @@ import Card from "@material-ui/core/Card";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
-import CardDialog from "./CardDialog";
+import DiscardDialog from "./DiscardDialog"
+import CardDialog from "./CardDialog"
 
 const styles = theme => ({
   button: {
@@ -38,37 +39,73 @@ let disablePlayerRole = false; //To disable, set to true
 class PlayerControlNavbar extends Component {
   constructor() {
     super();
-    this.state = {
-      ...initialState,
-      treatOpen: false,
-      treatableCity: false,
-      selectedType: "none",
-      cardOpen: false
-    };
+    this.state = { ...initialState, treatOpen: false, treatableCity: false, selectedType: "none", cardOpen: false, discardDialog: false};
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
     this.handleCard = this.handleCard.bind(this);
   }
 
-  //unsubsribe this in component did unmount
-
   componentDidMount() {
     this.props.firebase.database().on("value", snapshot => {
-      //.on is what's constantly listening to update the database locally (on all of our components)
       const db = snapshot.val();
       const virusCounts = this.playerLocationVirusCounts(db);
       const treatableCity = this.isCityInfected(virusCounts);
+      const drawPhase = this.isDrawPhase(db);
+      const {drawCount, playerDeck, playerHand} = db
       this.setState(state => ({
         ...state,
         ...db,
-        treatableCity
+        treatableCity,
+        drawPhase,
+        drawCount,
+        playerDeck,
+        playerHand
       }));
     });
   }
 
+
+  isDrawPhase = (db) => {
+    return db.drawCount > 0 && db.actionCount === 0
+  }
+
+  closeDiscardDialog = (drawCount) => {
+    if (drawCount === 0) {
+      this.setState({discardDialog: false})
+    }
+  }
+
+
+  handleDraw = () => {
+    const {firebase} = this.props
+    const {drawCount, playerDeck, activePlayer} = this.state
+    const playerHand = this.state[activePlayer].hand;
+
+    if (!playerDeck) {
+     
+
+      firebase.database().update({gamestatus: 'lost'})
+    }
+    else if (playerHand && playerHand.length === 7) {
+     
+
+      this.setState({discardDialog: true})
+    }
+    else {
+      
+
+      let updates = {}
+      updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
+      updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
+      updates['/drawCount'] = drawCount - 1
+      updates['/infectionPhase'] = drawCount === 1 ? 'inProgress' : 'waiting'
+      firebase.database().update(updates)
+    }
+
   componentWillUnmount() {
     this.props.firebase.database().off();
+
   }
 
   //toggles move action
@@ -96,9 +133,11 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
-      let updates = {}; //modifying an updates object
-      if (selectedVirusStatus === "eradicated") {
-        updates[`/cities/${currentCity}/${color}Count`] = 0; //this path structure matches the structure of the database
+
+      let updates = {};
+      if (selectedVirusStatus === 'eradicated') {
+        updates[`/cities/${currentCity}/${color}Count`] = 0;
+
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       } else {
         updates[`/cities/${currentCity}/${color}Count`] =
@@ -138,6 +177,7 @@ class PlayerControlNavbar extends Component {
     await this.props.firebase.database().update({
       selectedAction: card
     });
+
     // // lists cities availble to move to based on city cards in hand
     let k = currentPlayer.hand.reduce((acc, cur) => {
       acc += cur.name;
@@ -170,7 +210,13 @@ class PlayerControlNavbar extends Component {
 
   render() {
     const { classes } = this.props;
+    const {drawPhase} = this.state
     const virusCounts = this.playerLocationVirusCounts(this.state);
+
+    const activePlayer = this.state.activePlayer;
+    const playerHand = this.state[this.state.activePlayer].hand;
+    const playerDeck = this.state.playerDeck;
+
     let formattedPlayer = `PLAYER ${this.state.activePlayer
       .substring(6)
       .toUpperCase()}`;
@@ -188,7 +234,7 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableMove}
+          disabled={drawPhase}
           onClick={this.handleMove}
         >
           MOVE
@@ -199,7 +245,7 @@ class PlayerControlNavbar extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleTreat}
-          disabled={!this.state.treatableCity}
+          disabled={!this.state.treatableCity || drawPhase}
         >
           TREAT
         </Button>
@@ -211,11 +257,20 @@ class PlayerControlNavbar extends Component {
           virusCounts={virusCounts}
         />
 
+        <DiscardDialog
+          open={this.state.discardDialog}
+          playerHand={playerHand}
+          playerDeck={playerDeck}
+          activePlayer={activePlayer}
+          drawCount={this.state.drawCount}
+          closeDialog={this.closeDiscardDialog}
+        />
+
         <Button
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableShare}
+          disabled={drawPhase}
         >
           SHARE
         </Button>
@@ -224,13 +279,28 @@ class PlayerControlNavbar extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={disableCard}
+          disabled={drawPhase}
           onClick={this.handleCard}
         >
           CARD
         </Button>
 
-        <CardDialog open={this.state.cardOpen} onClose={this.handleCardClose} />
+
+        <CardDialog
+          open={this.state.cardOpen}
+          onClose={this.handleCardClose}
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          disabled={!drawPhase}
+          onClick={this.handleDraw}
+        >
+          DRAW
+        </Button>
+
       </div>
     );
   }

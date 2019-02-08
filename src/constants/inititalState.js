@@ -1195,8 +1195,10 @@ const initialState = {
   actionCount: 4,
   players: ["playerOne", "playerTwo", "playerThree", "playerFour"],
   activePlayer: "playerOne",
+
   drawCount: 2,
   infectionPhase: "complete"
+
 };
 
 export default initialState;
