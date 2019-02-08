@@ -26,6 +26,7 @@ class DiscardDialog extends React.Component {
       updates[`/${activePlayer}/hand`] = [...this.state.newHand]
       updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
       updates['/drawCount'] = drawCount - 1
+      updates['/infectionPhase'] = drawCount === 1 ? 'inProgress' : 'waiting'
       this.props.firebase.database().update(updates, () => {
         this.props.closeDialog(this.props.drawCount)
       })
