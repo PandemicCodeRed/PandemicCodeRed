@@ -61,6 +61,12 @@ class PlayerControlNavbar extends Component {
     return db.drawCount > 0 && db.actionCount === 0
   }
 
+  closeDiscardDialog = (drawCount) => {
+    if (drawCount === 0) {
+      this.setState({discardDialog: false})
+    }
+  }
+
 
   handleDraw = () => {
     const {firebase} = this.props
@@ -235,6 +241,7 @@ class PlayerControlNavbar extends Component {
           playerDeck={playerDeck}
           activePlayer={activePlayer}
           drawCount={this.state.drawCount}
+          closeDialog={this.closeDiscardDialog}
         />
 
         <Button

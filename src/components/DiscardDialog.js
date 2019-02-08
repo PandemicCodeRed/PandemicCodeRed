@@ -26,15 +26,15 @@ class DiscardDialog extends React.Component {
       updates[`/${activePlayer}/hand`] = [...this.state.newHand]
       updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
       updates['/drawCount'] = drawCount - 1
-      this.props.firebase.database().update(updates)
+      this.props.firebase.database().update(updates, () => {
+        this.props.closeDialog(this.props.drawCount)
+      })
     }
   }
 
   render() {
     const {playerHand, playerDeck} = this.props
     const illegalHand = [...playerHand, playerDeck[playerDeck.length - 1]]
-    console.log(playerHand, 'player handdd');
-
     return (
       <Dialog open={this.props.open}>
         {illegalHand.map(card => {
