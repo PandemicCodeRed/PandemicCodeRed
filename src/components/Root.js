@@ -268,9 +268,9 @@ class Root extends React.Component {
           <Grid item>
             <PlayerHand />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <DiseaseBar />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     );

@@ -20,15 +20,19 @@ class DiseaseBar extends Component {
   render() {
     return (
       <Card>
-        <Grid>
-          <Grid item>Red is: {this.state.redStatus}</Grid>
-          <Grid item>Remaining: {this.state.redRemaining}</Grid>
-          <Grid item>Blue is: {this.state.blueStatus}</Grid>
-          <Grid item>Remaining: {this.state.blueRemaining}</Grid>
-          <Grid item>Black is: {this.state.blackStatus}</Grid>
-          <Grid item>Remaining: {this.state.blackRemaining}</Grid>
-          <Grid item>Yellow is: {this.state.yellowStatus}</Grid>
-          <Grid item>Remainging: {this.state.yellowRemaining}</Grid>
+        <Grid backgroundColor="#">
+          <Grid item>
+            Red: {this.state.redStatus} {this.state.redRemaining}
+          </Grid>
+          <Grid item>
+            Blue: {this.state.blueStatus} {this.state.blueRemaining}
+          </Grid>
+          <Grid item>
+            Black: {this.state.blackStatus} {this.state.blackRemaining}
+          </Grid>
+          <Grid item>
+            Yellow: {this.state.yellowStatus} {this.state.yellowRemaining}
+          </Grid>
         </Grid>
       </Card>
     );
