@@ -49,16 +49,20 @@ class Root extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.firebase.database().on("value", snapshot => {
+    this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      this.setState(state => ({
-        ...state,
-        ...db
-      }));
-      this.checkDiseaseCounts();
-      this.checkTurn();
-      this.infectPhase();
-      this.checkStatus();
+      this.setState(
+        state => ({
+          ...state,
+          ...db
+        }),
+        () => {
+          this.checkDiseaseCounts();
+          this.checkTurn();
+          this.infectPhase();
+          this.checkStatus();
+        }
+      );
     });
     const snapshot = await this.props.firebase
       .database()
@@ -71,7 +75,7 @@ class Root extends React.Component {
       this.deal(cityCards);
       let playerDeck = this.playerDeckShuffle(cityCards);
       infectionDeck = this.infectCities(infectionDeck);
-      this.props.firebase
+      await this.props.firebase
         .database()
         .update({ playerDeck, infectionDeck, gameStart: false });
     }
@@ -193,6 +197,7 @@ class Root extends React.Component {
       for (let i = 0; i < infectionNum; i++) {
         targetCities.push(infectionDeck.pop());
       }
+      console.log(targetCities);
       let updates = {};
       targetCities.forEach(card => {
         alert(`${card.name} Infected!`);
@@ -205,8 +210,8 @@ class Root extends React.Component {
       });
       updates[`/infectionPhase`] = "complete";
       updates["/infectionDeck"] = infectionDeck;
-      this.props.firebase.database().update(updates);
       targetCities = [];
+      this.props.firebase.database().update(updates);
     }
   }
 
