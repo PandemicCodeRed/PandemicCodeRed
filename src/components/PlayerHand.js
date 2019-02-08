@@ -39,7 +39,6 @@ class PlayerHand extends Component {
     this.state = {
       ...initialState,
       cardsImg: [],
-      hadLoaded: false
     };
 
   }
@@ -49,14 +48,14 @@ class PlayerHand extends Component {
     // any database changes are listened too and will rerender the state as the state is updated in relation to any firebase update
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      const cardsImg = this.getImage(db)
+      let cardsImg = this.getImage(db)
+      // console.log(cardsImg, 'cdm cards image')
       // first set state clears last hand of last player and than second set state sets new cards for new turn/player hand
-      this.setState({cardsImg: []})
-      this.setState(state => ({
-        ...state,
+
+      this.setState({
         ...db,
         ...cardsImg
-      }));
+      });
     });
     // load all current player cards here
 
@@ -64,9 +63,9 @@ class PlayerHand extends Component {
 
 
 
-  componentWillUnmount() {
-    this.props.firebase.database().off("value");
-  }
+  // componentWillUnmount() {
+  //   this.props.firebase.database().off();
+  // }
 
   // load each current player hand card images to bottom of screen
   getImage (database) {
@@ -75,21 +74,24 @@ class PlayerHand extends Component {
     const currentPlayer = db[activePlayer];
 
     const storage = firebase.storage()
+    // this.setState({cardsImg: []})
+    let imageList = []
     currentPlayer.hand.forEach((e)=>{
       storage.ref(`/citycards/${e.name.toLowerCase()}.jpeg`).getDownloadURL().then((url) => {
-
+        // imageList.push(url)
         this.setState({cardsImg: [...this.state.cardsImg, url]})
       }).catch((error) => {
         // Handle any errors
-        console.log(error, 'er')
+        console.log(error)
       })
     })
+    // return imageList
 
   }
 
   render(){
     const { classes } = this.props;
-    console.log(this.state.playerOne.hand)
+    console.log(this.state.cardsImg)
   return (
     <div className={classes.root} >
       <Paper className={classes.paper}>
@@ -97,6 +99,7 @@ class PlayerHand extends Component {
   justify="center">
           <Grid >
             {this.state.cardsImg.map((e)=>{
+              console.log(e)
               return(
                 <ButtonBase className={classes.image}>
               <img className={classes.img} alt="complex" src={e} />

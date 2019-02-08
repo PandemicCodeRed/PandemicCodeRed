@@ -66,7 +66,7 @@ class WorldMap extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.database().off("value");
+    this.props.firebase.database().off();
   }
 
   handleClick(marker, evt) {

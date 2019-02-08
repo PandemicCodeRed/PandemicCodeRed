@@ -19,7 +19,7 @@ class CureBoard extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.database().off("value");
+    this.props.firebase.database().off();
   }
 
   //triggers cure dialog
