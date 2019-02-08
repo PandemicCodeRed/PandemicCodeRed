@@ -10,6 +10,7 @@ import PlayerHand from "./PlayerHand";
 import { withFirebase } from "./Firebase";
 import CureBoard from "./CureBoard";
 import history from "../history";
+import DiseaseBar from "./DiseaseBar";
 
 import initialState from "../constants/inititalState";
 import { DECK_SIZE, EPIDEMIC_COUNT, EVENT_COUNT } from "../constants/deck";
@@ -197,7 +198,6 @@ class Root extends React.Component {
       for (let i = 0; i < infectionNum; i++) {
         targetCities.push(infectionDeck.pop());
       }
-      console.log(targetCities);
       let updates = {};
       targetCities.forEach(card => {
         alert(`${card.name} Infected!`);
@@ -268,6 +268,9 @@ class Root extends React.Component {
           <Grid item>
             <PlayerHand />
           </Grid>
+          {/* <Grid item>
+            <DiseaseBar />
+          </Grid> */}
         </Grid>
       </Grid>
     );
