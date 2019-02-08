@@ -55,7 +55,7 @@ const initialState = {
       neighbors: {
         Chennai: true,
         Kolkata: true,
-        "Hong_kong": true,
+        Hong_kong: true,
         Ho_Chi_Minh_City: true,
         Jakarta: true
       }
@@ -1195,7 +1195,10 @@ const initialState = {
   actionCount: 4,
   players: ["playerOne", "playerTwo", "playerThree", "playerFour"],
   activePlayer: "playerOne",
-  drawCount: 1
+
+  drawCount: 2,
+  infectionPhase: "complete"
+
 };
 
 export default initialState;

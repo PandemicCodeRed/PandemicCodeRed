@@ -1,0 +1,183 @@
+[debug] [2019-02-06T23:51:32.882Z] ----------------------------------------------------------------------
+[debug] [2019-02-06T23:51:32.886Z] Command:       /home/david/.npm/_npx/20136/lib/node_modules/node/bin/node /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/bin/firebase serve
+[debug] [2019-02-06T23:51:32.886Z] CLI Version:   6.3.1
+[debug] [2019-02-06T23:51:32.887Z] Platform:      linux
+[debug] [2019-02-06T23:51:32.887Z] Node Version:  v6.11.5
+[debug] [2019-02-06T23:51:32.887Z] Time:          Wed Feb 06 2019 15:51:32 GMT-0800 (PST)
+[debug] [2019-02-06T23:51:32.887Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-06T23:51:32.921Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-06T23:51:32.921Z] > authorizing via signed-in user
+[debug] [2019-02-06T23:51:32.922Z] [iam] checking project pandemic-cr for permissions ["firebase.projects.get"]
+[debug] [2019-02-06T23:51:32.924Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-02-06T23:51:32.924Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-02-06T23:51:33.175Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-06T23:51:33.227Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr:testIamPermissions  
+
+[debug] [2019-02-06T23:51:33.694Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-06T23:51:33.696Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr  
+ 
+[debug] [2019-02-06T23:51:34.310Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/david/PandemicCodeRed'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-06T23:51:36.927Z] Fetching environment
+[debug] [2019-02-06T23:51:37.070Z] Error: EACCES: permission denied, open '/home/david/.config/gcloud/application_default_credentials.json'
+    at Error (native)
+    at Object.fs.openSync (fs.js:642:18)
+    at Object.fs.writeFileSync (fs.js:1348:33)
+    at module.exports (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/ensureDefaultCredentials.js:28:8)
+    at FunctionsEmulator.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/functionsEmulator.js:106:5)
+    at Object.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:13:26)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-02-06T23:53:19.039Z] ----------------------------------------------------------------------
+[debug] [2019-02-06T23:53:19.041Z] Command:       /home/david/.npm/_npx/20326/lib/node_modules/node/bin/node /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/bin/firebase serve
+[debug] [2019-02-06T23:53:19.041Z] CLI Version:   6.3.1
+[debug] [2019-02-06T23:53:19.041Z] Platform:      linux
+[debug] [2019-02-06T23:53:19.042Z] Node Version:  v6.11.5
+[debug] [2019-02-06T23:53:19.042Z] Time:          Wed Feb 06 2019 15:53:19 GMT-0800 (PST)
+[debug] [2019-02-06T23:53:19.042Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-06T23:53:19.050Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-06T23:53:19.050Z] > authorizing via signed-in user
+[debug] [2019-02-06T23:53:19.050Z] [iam] checking project pandemic-cr for permissions ["firebase.projects.get"]
+[debug] [2019-02-06T23:53:19.052Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr:testIamPermissions  
+
+[debug] [2019-02-06T23:53:19.470Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-06T23:53:19.477Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr  
+ 
+[debug] [2019-02-06T23:53:20.015Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/david/PandemicCodeRed'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-06T23:53:20.459Z] Fetching environment
+[debug] [2019-02-06T23:53:20.585Z] Error: EACCES: permission denied, open '/home/david/.config/gcloud/application_default_credentials.json'
+    at Error (native)
+    at Object.fs.openSync (fs.js:642:18)
+    at Object.fs.writeFileSync (fs.js:1348:33)
+    at module.exports (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/ensureDefaultCredentials.js:28:8)
+    at FunctionsEmulator.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/functionsEmulator.js:106:5)
+    at Object.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:13:26)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-02-06T23:53:27.239Z] ----------------------------------------------------------------------
+[debug] [2019-02-06T23:53:27.242Z] Command:       /home/david/.npm/_npx/20409/lib/node_modules/node/bin/node /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/bin/firebase serve
+[debug] [2019-02-06T23:53:27.242Z] CLI Version:   6.3.1
+[debug] [2019-02-06T23:53:27.242Z] Platform:      linux
+[debug] [2019-02-06T23:53:27.242Z] Node Version:  v6.11.5
+[debug] [2019-02-06T23:53:27.242Z] Time:          Wed Feb 06 2019 15:53:27 GMT-0800 (PST)
+[debug] [2019-02-06T23:53:27.242Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-06T23:53:27.252Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-06T23:53:27.252Z] > authorizing via signed-in user
+[debug] [2019-02-06T23:53:27.252Z] [iam] checking project pandemic-cr for permissions ["firebase.projects.get"]
+[debug] [2019-02-06T23:53:27.254Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr:testIamPermissions  
+
+[debug] [2019-02-06T23:53:27.734Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-06T23:53:27.736Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr  
+ 
+[debug] [2019-02-06T23:53:28.048Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/david/PandemicCodeRed'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-06T23:53:28.513Z] Fetching environment
+[debug] [2019-02-06T23:53:28.627Z] Error: EACCES: permission denied, open '/home/david/.config/gcloud/application_default_credentials.json'
+    at Error (native)
+    at Object.fs.openSync (fs.js:642:18)
+    at Object.fs.writeFileSync (fs.js:1348:33)
+    at module.exports (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/ensureDefaultCredentials.js:28:8)
+    at FunctionsEmulator.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/functionsEmulator.js:106:5)
+    at Object.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:13:26)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-02-07T19:54:32.254Z] ----------------------------------------------------------------------
+[debug] [2019-02-07T19:54:32.256Z] Command:       /home/david/.npm/_npx/7543/lib/node_modules/node/bin/node /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/bin/firebase serve
+[debug] [2019-02-07T19:54:32.257Z] CLI Version:   6.3.1
+[debug] [2019-02-07T19:54:32.257Z] Platform:      linux
+[debug] [2019-02-07T19:54:32.257Z] Node Version:  v6.11.5
+[debug] [2019-02-07T19:54:32.257Z] Time:          Thu Feb 07 2019 11:54:32 GMT-0800 (PST)
+[debug] [2019-02-07T19:54:32.257Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-07T19:54:32.268Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-07T19:54:32.268Z] > authorizing via signed-in user
+[debug] [2019-02-07T19:54:32.268Z] [iam] checking project pandemic-cr for permissions ["firebase.projects.get"]
+[debug] [2019-02-07T19:54:32.270Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-02-07T19:54:32.270Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-02-07T19:54:32.510Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-07T19:54:32.514Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr:testIamPermissions  
+
+[debug] [2019-02-07T19:54:32.953Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-07T19:54:32.955Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr  
+ 
+[debug] [2019-02-07T19:54:33.464Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/david/PandemicCodeRed'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-07T19:54:34.048Z] Fetching environment
+[debug] [2019-02-07T19:54:34.155Z] Error: EACCES: permission denied, open '/home/david/.config/gcloud/application_default_credentials.json'
+    at Error (native)
+    at Object.fs.openSync (fs.js:642:18)
+    at Object.fs.writeFileSync (fs.js:1348:33)
+    at module.exports (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/ensureDefaultCredentials.js:28:8)
+    at FunctionsEmulator.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/functionsEmulator.js:106:5)
+    at Object.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:13:26)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-02-07T19:55:48.271Z] ----------------------------------------------------------------------
+[debug] [2019-02-07T19:55:48.273Z] Command:       /home/david/.npm/_npx/7679/lib/node_modules/node/bin/node /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/bin/firebase serve
+[debug] [2019-02-07T19:55:48.273Z] CLI Version:   6.3.1
+[debug] [2019-02-07T19:55:48.273Z] Platform:      linux
+[debug] [2019-02-07T19:55:48.273Z] Node Version:  v6.11.5
+[debug] [2019-02-07T19:55:48.273Z] Time:          Thu Feb 07 2019 11:55:48 GMT-0800 (PST)
+[debug] [2019-02-07T19:55:48.273Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-07T19:55:48.282Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-07T19:55:48.282Z] > authorizing via signed-in user
+[debug] [2019-02-07T19:55:48.282Z] [iam] checking project pandemic-cr for permissions ["firebase.projects.get"]
+[debug] [2019-02-07T19:55:48.284Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr:testIamPermissions  
+
+[debug] [2019-02-07T19:55:48.739Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-07T19:55:48.742Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pandemic-cr  
+ 
+[debug] [2019-02-07T19:55:49.244Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/david/PandemicCodeRed'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-07T19:55:49.638Z] Fetching environment
+[debug] [2019-02-07T19:55:49.791Z] Error: EACCES: permission denied, open '/home/david/.config/gcloud/application_default_credentials.json'
+    at Error (native)
+    at Object.fs.openSync (fs.js:642:18)
+    at Object.fs.writeFileSync (fs.js:1348:33)
+    at module.exports (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/ensureDefaultCredentials.js:28:8)
+    at FunctionsEmulator.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/functionsEmulator.js:106:5)
+    at Object.start (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/home/david/PandemicCodeRed/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/home/david/PandemicCodeRed/node_modules/firebase-tools/lib/serve/index.js:13:26)
+[error] 
+[error] Error: An unexpected error has occurred.

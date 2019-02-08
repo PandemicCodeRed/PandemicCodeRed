@@ -689,7 +689,7 @@
     "location": "Atlanta",
     "assigned": false,
     "hand": ["empty"],
-    "translate": "translate(120.18181775792004, 135.68592999457962)"
+    "translate": "translate(130.18181775792004, 135.68592999457962)"
   },
   "playerFour": {
     "name": "test",
@@ -697,7 +697,7 @@
     "location": "Atlanta",
     "assigned": false,
     "hand": ["empty"],
-    "translate": "translate(120.18181775792004, 135.68592999457962)"
+    "translate": "translate(135.18181775792004, 135.68592999457962)"
   },
   "infectionDeck": [
     {
@@ -1196,5 +1196,6 @@
   "actionCount": 4,
   "gameStart": true,
   "activePlayer": "playerOne",
-  "drawCount": 0
+  "drawCount": 2,
+  "infectionPhase": "complete"
 }

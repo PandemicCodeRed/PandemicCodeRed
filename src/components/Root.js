@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { array } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -32,7 +32,9 @@ const styles = theme => ({
   navbar: {
     height: 540,
     width: 120,
-    backgroundColor: "#1A237E"
+    backgroundColor: "#1A237E",
+    paddingTop: "5px",
+    textAlign: "center"
   }
 });
 
@@ -42,6 +44,8 @@ class Root extends React.Component {
     this.state = { ...initialState, spacing: "16" };
     this.checkStatus = this.checkStatus.bind(this);
     this.checkDiseaseCounts = this.checkDiseaseCounts.bind(this);
+    this.checkTurn = this.checkTurn.bind(this);
+    this.infectPhase = this.infectPhase.bind(this);
   }
 
   async componentDidMount() {
@@ -52,6 +56,9 @@ class Root extends React.Component {
         ...db
       }));
       this.checkDiseaseCounts();
+      this.checkTurn();
+      this.infectPhase();
+      this.checkStatus();
     });
     const snapshot = await this.props.firebase
       .database()
@@ -70,7 +77,32 @@ class Root extends React.Component {
     }
   }
 
-  componentDidUpdate() {}
+  //honestly not even sure if this is working right
+  componentWillUnmount() {
+    this.props.firebase.database().off("value");
+  }
+
+  checkTurn = () => {
+    if (
+      this.state.actionCount <= 0 &&
+      this.state.drawCount <= 0 &&
+      this.state.infectionPhase === "complete"
+    ) {
+      let updates = {};
+      let currentPlayer = this.state.activePlayer;
+      let nextPlayer = {
+        playerOne: "playerTwo",
+        playerTwo: "playerThree",
+        playerThree: "playerFour",
+        playerFour: "playerOne"
+      };
+      updates[`/drawCount`] = 2;
+      updates[`/actionCount`] = 4;
+      updates[`/activePlayer`] = nextPlayer[currentPlayer];
+      updates[`/infectionPhase`] = "waiting";
+      this.props.firebase.database().update(updates);
+    }
+  };
 
   checkDiseaseCounts = () => {
     let blues = this.state.blueRemaining;
@@ -146,6 +178,36 @@ class Root extends React.Component {
     }
     this.props.firebase.database().update(updates);
     return infectionDeck;
+  }
+
+  //infectionPhase will have three cases: waiting, inProgress, and complete
+
+  infectPhase() {
+    if (
+      this.state.actionCount <= 0 &&
+      this.state.infectionPhase === "inProgress"
+    ) {
+      let infectionNum = this.state.infectionRate;
+      let infectionDeck = [...this.state.infectionDeck];
+      let targetCities = [];
+      for (let i = 0; i < infectionNum; i++) {
+        targetCities.push(infectionDeck.pop());
+      }
+      let updates = {};
+      targetCities.forEach(card => {
+        alert(`${card.name} Infected!`);
+        let cityColor = card.color;
+        let cityName = card.name;
+        updates[`/cities/${cityName}/${cityColor}Count`] =
+          this.state.cities[cityName][`${cityColor}Count`] + 1;
+        updates[`/${cityColor}Remaining`] =
+          this.state[`${cityColor}Remaining`] - 1;
+      });
+      updates[`/infectionPhase`] = "complete";
+      updates["/infectionDeck"] = infectionDeck;
+      this.props.firebase.database().update(updates);
+      targetCities = [];
+    }
   }
 
   deal(cityCards) {

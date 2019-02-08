@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import { withFirebase } from "./Firebase";
 import initialState from "../constants/inititalState";
 import TreatDialog from "./treatDialogue";
@@ -14,6 +15,13 @@ const styles = theme => ({
     "&$buttonDisabled": {
       color: theme.palette.grey[500]
     }
+  },
+  static: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.primary.main,
+    color: "#ffffff",
+    textAlign: "center",
+    padding: "10px"
   },
   buttonDisabled: {},
   input: {
@@ -35,7 +43,7 @@ class PlayerControlNavbar extends Component {
     this.handleTreat = this.handleTreat.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.dismissTreatDialog = this.dismissTreatDialog.bind(this);
-    this.handleCard = this.handleCard.bind(this)
+    this.handleCard = this.handleCard.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +65,7 @@ class PlayerControlNavbar extends Component {
     });
   }
 
+
   isDrawPhase = (db) => {
     return db.drawCount > 0 && db.actionCount === 0
   }
@@ -74,17 +83,17 @@ class PlayerControlNavbar extends Component {
     const playerHand = this.state[activePlayer].hand;
 
     if (!playerDeck) {
-      console.log('no player deck');
+     
 
       firebase.database().update({gamestatus: 'lost'})
     }
     else if (playerHand && playerHand.length === 7) {
-      console.log('overdraw');
+     
 
       this.setState({discardDialog: true})
     }
     else {
-      console.log(this.state.infectionDeck.length);
+      
 
       let updates = {}
       updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
@@ -93,6 +102,10 @@ class PlayerControlNavbar extends Component {
       updates['/infectionPhase'] = drawCount === 1 ? 'inProgress' : 'waiting'
       firebase.database().update(updates)
     }
+
+  componentWillUnmount() {
+    this.props.firebase.database().off();
+
   }
 
   //toggles move action
@@ -120,9 +133,11 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
+
       let updates = {};
       if (selectedVirusStatus === 'eradicated') {
         updates[`/cities/${currentCity}/${color}Count`] = 0;
+
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
       } else {
         updates[`/cities/${currentCity}/${color}Count`] =
@@ -150,63 +165,70 @@ class PlayerControlNavbar extends Component {
   }
 
   handleCard() {
-    this.setState({cardOpen: true });
+    this.setState({ cardOpen: true });
   }
 
-  handleCardClose = async (card) =>{
-    const {playerOne} = this.state
+  handleCardClose = async card => {
+    const { activePlayer } = this.state;
+    const db = this.state;
+    const currentPlayer = db[activePlayer];
 
+    // this switches the selected action to direct or charter
     await this.props.firebase.database().update({
       selectedAction: card
     });
-    // // lists cities available to move to based on city cards in hand
-    let k = playerOne.hand.reduce((acc, cur)=>{
-      acc += cur.name
-      acc += ' '
-      return acc
-    },'')
-    alert(`Cards ${k}`)
-    await this.setState({cardOpen: false})
-     // if charter action picked compare if player has city card player is currently on
-    if(card === "charter"){
-      let userHadCharterCityCard = playerOne.hand.find((e)=> {
-        return e.name === playerOne.location
-      })
-      if(!userHadCharterCityCard){
+
+    // // lists cities availble to move to based on city cards in hand
+    let k = currentPlayer.hand.reduce((acc, cur) => {
+      acc += cur.name;
+      acc += " ";
+      return acc;
+    }, "");
+    alert(`Cards ${k}`);
+    await this.setState({ cardOpen: false });
+    // if charter action picked compare if player has city card player is currently on
+    if (card === "charter") {
+      let userHadCharterCityCard = currentPlayer.hand.find(e => {
+        return e.name === currentPlayer.location;
+      });
+      if (!userHadCharterCityCard) {
         await this.props.firebase.database().update({
           selectedAction: "none"
         });
-        alert("You do not have the city card that matches your location charter flight is impossible")
-        await this.setState({cardOpen: false})
-      }
-      else{
-        alert("Charter a flight to any city")
+        alert(
+          "You do not have the city card that matches your location charter flight is impossible"
+        );
+        await this.setState({ cardOpen: false });
+      } else {
+        alert("Charter a flight to any city");
       }
     }
-    if(card === "direct"){
-    alert(`Citys/Cards to direct flight to: ${k}`)
+    if (card === "direct") {
+      alert(`Citys/Cards to direct flight to: ${k}`);
     }
-  }
-
+  };
 
   render() {
     const { classes } = this.props;
     const {drawPhase} = this.state
     const virusCounts = this.playerLocationVirusCounts(this.state);
+
     const activePlayer = this.state.activePlayer;
     const playerHand = this.state[this.state.activePlayer].hand;
     const playerDeck = this.state.playerDeck;
+
+    let formattedPlayer = `PLAYER ${this.state.activePlayer
+      .substring(6)
+      .toUpperCase()}`;
     return (
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={disablePlayer1}
-          classes={{ root: classes.button, disabled: classes.buttonDisabled }}
-        >
-          PLAYER 1
-        </Button>
+      <div padding="15px">
+        <Card variant="contained" className={classes.static}>
+          {formattedPlayer}
+        </Card>
+
+        <Card variant="contained" className={classes.static}>
+          ACTIONS: {this.state.actionCount}
+        </Card>
 
         <Button
           variant="contained"
@@ -263,20 +285,11 @@ class PlayerControlNavbar extends Component {
           CARD
         </Button>
 
+
         <CardDialog
           open={this.state.cardOpen}
           onClose={this.handleCardClose}
         />
-
-
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={disableActionCount}
-        >
-          {this.state.actionCount}
-        </Button>
 
         <Button
           variant="contained"
@@ -287,6 +300,7 @@ class PlayerControlNavbar extends Component {
         >
           DRAW
         </Button>
+
       </div>
     );
   }
