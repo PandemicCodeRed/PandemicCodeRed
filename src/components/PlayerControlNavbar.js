@@ -90,7 +90,7 @@ class PlayerControlNavbar extends Component {
       updates[`/${activePlayer}/hand`] = [...playerHand, playerDeck[playerDeck.length - 1]]
       updates['/playerDeck'] = playerDeck.slice(0, playerDeck.length - 1)
       updates['/drawCount'] = drawCount - 1
-      updates['/infectionPhase'] = "inProgress"
+      updates['/infectionPhase'] = drawCount === 1 ? 'inProgress' : 'waiting'
       firebase.database().update(updates)
     }
   }
@@ -120,7 +120,7 @@ class PlayerControlNavbar extends Component {
     const selectedVirusCount = cities[currentCity][`${color}Count`];
 
     if (selectedVirusCount > 0) {
-      let updates = {}; //modifying an updates object
+      let updates = {};
       if (selectedVirusStatus === 'eradicated') {
         updates[`/cities/${currentCity}/${color}Count`] = 0;
         updates[`/${color}Remaining`] = selectedVirusTotal + selectedVirusCount;
