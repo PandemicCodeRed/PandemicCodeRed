@@ -131,7 +131,6 @@ class PlayerControlNavbar extends Component {
     const player = this.state[playerTurn];
     const currentCity = player.location;
     const selectedVirusCount = cities[currentCity][`${color}Count`];
-
     if (selectedVirusCount > 0) {
       let updates = {};
       if (selectedVirusStatus === "eradicated") {
