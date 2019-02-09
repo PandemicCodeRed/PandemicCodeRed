@@ -199,7 +199,7 @@ class WorldMap extends Component {
           }
         }}
         style={{
-          default: { stroke: "rgba(243, 249, 143, 0.49)" },
+          default: { stroke: "rgba(243, 249, 143, 0.15)" },
 
         }}
         strokeWidth="1"
