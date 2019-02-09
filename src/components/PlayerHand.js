@@ -40,22 +40,21 @@ class PlayerHand extends Component {
       ...initialState,
       cardsImg: [],
     };
-
+    this.getImage = this.getImage.bind(this)
   }
 
   componentDidMount() {
 
     // any database changes are listened too and will rerender the state as the state is updated in relation to any firebase update
+
     this.props.firebase.database().on("value", snapshot => {
       const db = snapshot.val();
-      let cardsImg = this.getImage(db)
-      // console.log(cardsImg, 'cdm cards image')
-      // first set state clears last hand of last player and than second set state sets new cards for new turn/player hand
 
-      this.setState({
-        ...db,
-        ...cardsImg
-      });
+      const imgs = this.getImage(db)
+      // this.setState({cardsImg: []})
+      // first set state clears last hand of last player and than second set state sets new cards for new turn/player hand
+      console.log(imgs)
+      this.setState({...db});
     });
     // load all current player cards here
 
@@ -68,30 +67,40 @@ class PlayerHand extends Component {
   // }
 
   // load each current player hand card images to bottom of screen
-  getImage (database) {
+  async getImage (database) {
     const { activePlayer } = database;
     const db = database;
     const currentPlayer = db[activePlayer];
-
+    // console.log('CURRENTPLAYER',currentPlayer)
     const storage = firebase.storage()
-    // this.setState({cardsImg: []})
     let imageList = []
-    currentPlayer.hand.forEach((e)=>{
-      storage.ref(`/citycards/${e.name.toLowerCase()}.jpeg`).getDownloadURL().then((url) => {
-        // imageList.push(url)
-        this.setState({cardsImg: [...this.state.cardsImg, url]})
-      }).catch((error) => {
-        // Handle any errors
-        console.log(error)
-      })
+    // await currentPlayer.hand.forEach((e)=>{
+    //   storage.ref(`/citycards/${e.name.toLowerCase()}.jpeg`).getDownloadURL().then((url) => {
+    //     imageList.push(url)
+    //     console.log(url, 'IN FOR EACH')
+    //     // this.setState({cardsImg: [...this.state.cardsImg, url]})
+    //   }).catch((error) => {
+    //     // Handle any errors
+    //     console.log(error)
+    //   })
+    // })
+    await currentPlayer.hand.forEach(async (e)=>{
+      let k = await storage.ref(`/citycards/${e.name.toLowerCase()}.jpeg`).getDownloadURL()
+
+      imageList.push(k)
     })
-    // return imageList
+
+    // console.log(imageList, 'iam before') (work)
+    this.setState({cardsImg: imageList})
+    // console.log(this.state.cardsImg, ' i am', imageList)
+    console.log(imageList)
+    return imageList
 
   }
 
   render(){
     const { classes } = this.props;
-    console.log(this.state.cardsImg)
+    console.log(this.state.cardsImg, 'CARD IMAGE')
   return (
     <div className={classes.root} >
       <Paper className={classes.paper}>
@@ -99,7 +108,7 @@ class PlayerHand extends Component {
   justify="center">
           <Grid >
             {this.state.cardsImg.map((e)=>{
-              console.log(e)
+              console.log(e, "DSF")
               return(
                 <ButtonBase className={classes.image}>
               <img className={classes.img} alt="complex" src={e} />
