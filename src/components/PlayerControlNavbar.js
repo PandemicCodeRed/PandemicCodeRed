@@ -125,10 +125,10 @@ class PlayerControlNavbar extends Component {
   }
 
   handleTreatClose = color => {
-    const { cities, playerTurn } = this.state;
+    const { cities, activePlayer } = this.state;
     const selectedVirusStatus = this.state[`${color}Status`];
     const selectedVirusTotal = this.state[`${color}Remaining`];
-    const player = this.state[playerTurn];
+    const player = this.state[activePlayer];
     const currentCity = player.location;
     const selectedVirusCount = cities[currentCity][`${color}Count`];
     if (selectedVirusCount > 0) {
@@ -143,9 +143,8 @@ class PlayerControlNavbar extends Component {
         updates[`/${color}Remaining`] = selectedVirusTotal + 1;
         updates[`/actionCount`] = this.state.actionCount - 1;
       }
-      this.props.firebase.database().update(updates, () => {
-        this.setState({ treatOpen: false, selectedType: color });
-      });
+      this.setState({ treatOpen: false, selectedType: color });
+      this.props.firebase.database().update(updates);
     }
   };
 
