@@ -120,7 +120,7 @@
       "station": false,
       "neighbors": {
         "Mumbai": true,
-        "Dehli": true,
+        "Delhi": true,
         "Kolkata": true,
         "Bangkok": true,
         "Jakarta": true
@@ -141,8 +141,8 @@
         "Atlanta": true
       }
     },
-    "Dehli": {
-      "name": "Dehli",
+    "Delhi": {
+      "name": "Delhi",
       "redCount": 0,
       "blueCount": 0,
       "yellowCount": 0,
@@ -252,7 +252,7 @@
       "neighbors": {
         "Baghdad": true,
         "Tehran": true,
-        "Dehli": true,
+        "Delhi": true,
         "Mumbai": true,
         "Riyadh": true
       }
@@ -292,7 +292,7 @@
       "blackCount": 0,
       "station": false,
       "neighbors": {
-        "Dehli": true,
+        "Delhi": true,
         "Chennai": true,
         "Bangkok": true,
         "Hong_Kong": true
@@ -459,7 +459,7 @@
       "station": false,
       "neighbors": {
         "Karachi": true,
-        "Dehli": true,
+        "Delhi": true,
         "Chennai": true
       }
     },
@@ -633,7 +633,7 @@
       "station": false,
       "neighbors": {
         "Moscow": true,
-        "Dehli": true,
+        "Delhi": true,
         "Baghdad": true,
         "Karachi": true
       }

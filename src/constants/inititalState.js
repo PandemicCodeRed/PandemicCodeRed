@@ -123,7 +123,7 @@ const initialState = {
       station: false,
       neighbors: {
         Mumbai: true,
-        Dehli: true,
+        Delhi: true,
         Kolkata: true,
         Bangkok: true,
         Jakarta: true
@@ -144,8 +144,8 @@ const initialState = {
         Atlanta: true
       }
     },
-    Dehli: {
-      name: "Dehli",
+    Delhi: {
+      name: "Delhi",
       redCount: 0,
       blueCount: 0,
       yellowCount: 0,
@@ -255,7 +255,7 @@ const initialState = {
       neighbors: {
         Baghdad: true,
         Tehran: true,
-        Dehli: true,
+        Delhi: true,
         Mumbai: true,
         Riyadh: true
       }
@@ -295,7 +295,7 @@ const initialState = {
       blackCount: 0,
       station: false,
       neighbors: {
-        Dehli: true,
+        Delhi: true,
         Chennai: true,
         Bangkok: true,
         Hong_Kong: true
@@ -462,7 +462,7 @@ const initialState = {
       station: false,
       neighbors: {
         Karachi: true,
-        Dehli: true,
+        Delhi: true,
         Chennai: true
       }
     },
@@ -636,7 +636,7 @@ const initialState = {
       station: false,
       neighbors: {
         Moscow: true,
-        Dehli: true,
+        Delhi: true,
         Baghdad: true,
         Karachi: true
       }
@@ -1198,7 +1198,6 @@ const initialState = {
 
   drawCount: 2,
   infectionPhase: "complete"
-
 };
 
 export default initialState;
