@@ -73,12 +73,19 @@ class PlayerHand extends Component {
     let imageList = []
 
     // get hand in another array(closure) and initialize state with the new hand array state
-    for(let i = 0; i< currentPlayer.hand.length; i++){
-      let k = await storage.ref(`/citycards/${currentPlayer.hand[i].name.toLowerCase()}.jpeg`).getDownloadURL()
-      imageList.push(k)
+    if(currentPlayer.hand=== undefined){
+      this.setState({cardsImg: []})
     }
+    else{
 
-    this.setState({cardsImg: imageList})
+
+      for(let i = 0; i< currentPlayer.hand.length; i++){
+        let k = await storage.ref(`/citycards/${currentPlayer.hand[i].name.toLowerCase()}.jpeg`).getDownloadURL()
+        imageList.push(k)
+      }
+
+      this.setState({cardsImg: imageList})
+    }
 
   }
 
@@ -91,9 +98,9 @@ class PlayerHand extends Component {
         <Grid container spacing={16} alignItems="center"
   justify="center">
           <Grid >
-            {this.state.cardsImg.map((e)=>{
+            {this.state.cardsImg.map((e, i)=>{
               return(
-                <ButtonBase className={classes.image}>
+                <ButtonBase key={i} className={classes.image}>
               <img className={classes.img} alt="complex" src={e} />
             </ButtonBase>
               )
