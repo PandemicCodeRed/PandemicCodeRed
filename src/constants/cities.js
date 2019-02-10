@@ -45,7 +45,7 @@ const markers = [
   { markerOffset: 0, name: "Sao_Paulo", coordinates: [-46.6333, -23.5505] },
   { markerOffset: 0, name: "Seoul", coordinates: [126.978, 37.5665] },
   { markerOffset: 0, name: "Shanghai", coordinates: [121.4737, 31.2304] },
-  { markerOffset: 0, name: "St_Petersburg", coordinates: [-82.6403, 27.7676] },
+  { markerOffset: 0, name: "St_Petersburg", coordinates: [30.3351, 59.9343] },
   { markerOffset: 0, name: "Sydney", coordinates: [151.2093, -33.8688] },
   { markerOffset: 0, name: "Taipei", coordinates: [121.5654, 25.033] },
   { markerOffset: 0, name: "Tehran", coordinates: [51.389, 35.6892] },
@@ -54,3 +54,4 @@ const markers = [
 ];
 
 export default markers;
+// 30.3351, 59.9343
