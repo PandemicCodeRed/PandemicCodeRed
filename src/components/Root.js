@@ -84,7 +84,7 @@ class Root extends React.Component {
 
   //honestly not even sure if this is working right
   componentWillUnmount() {
-    this.props.firebase.database().off("value");
+    this.props.firebase.database().off();
   }
 
   checkTurn = () => {
