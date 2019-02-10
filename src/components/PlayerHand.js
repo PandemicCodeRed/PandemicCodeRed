@@ -73,19 +73,21 @@ class PlayerHand extends Component {
     let imageList = []
 
     // get hand in another array(closure) and initialize state with the new hand array state
-    if(currentPlayer.hand=== undefined){
       this.setState({cardsImg: []})
-    }
-    else{
 
+      if(!currentPlayer.hand){
+        this.setState({cardsImg: null})
+      }else{
+        for(let i = 0; i< currentPlayer.hand.length; i++){
+          let k = await storage.ref(`/citycards/${currentPlayer.hand[i].name.toLowerCase()}.jpeg`).getDownloadURL()
+          imageList.push(k)
+        }
 
-      for(let i = 0; i< currentPlayer.hand.length; i++){
-        let k = await storage.ref(`/citycards/${currentPlayer.hand[i].name.toLowerCase()}.jpeg`).getDownloadURL()
-        imageList.push(k)
+        this.setState({cardsImg: imageList})
       }
 
-      this.setState({cardsImg: imageList})
-    }
+
+
 
   }
 
